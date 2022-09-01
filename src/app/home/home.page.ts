@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,14 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
-
+  constructor(private navCtrl: NavController,) { }
+  onMenuClick(btnType) {
+    if (btnType === 'material') {
+      this.navCtrl.navigateRoot('materials');
+    } else if (btnType === 'amount') {
+      this.navCtrl.navigateRoot('amounts');
+    } else if (btnType === 'projects') {
+      this.navCtrl.navigateRoot('projects');
+    }
+  }
 }

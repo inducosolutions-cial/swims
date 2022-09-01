@@ -1,0 +1,26 @@
+.record {
+  font-size: 0.8rem;
+  padding: 5px !important;
+  margin: 4px 0px !important;
+  ion-card-content {
+    padding: 0px !important;
+    .innerRow {
+      padding: 2px !important;
+    }
+  }
+  .title {
+    font-weight: 600;
+    padding: 2px !important;
+  }
+  .value {
+    font-weight: 400;
+    padding: 2px !important;
+  }
+  .notes {
+    background-color: #f1f1f1;
+  }
+  .flow {
+    display: flex;
+    align-items: center;
+  }
+}

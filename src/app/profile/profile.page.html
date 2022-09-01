@@ -1,0 +1,59 @@
+<ion-content>
+  <ion-row>
+    <ion-col size="12" class="title">
+      Profile
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <table class="userinfo">
+        <tr>
+          <td class="title">First Name</td>
+          <td class="value">AshoK Alluri</td>
+        </tr>
+        <tr>
+          <td class="title">Email</td>
+          <td class="value">ashokalluri@gmail.com</td>
+        </tr>
+        <tr>
+          <td class="title">Mobile</td>
+          <td class="value">9999999999</td>
+        </tr>
+        <tr>
+          <td class="title">Site Location</td>
+          <td class="value">Corprate Office, Hyderabad</td>
+        </tr>
+      </table>
+    </ion-col>
+    <ion-col size="12">
+      <ion-row class="changePassword">
+        <ion-col size="12" class="header">
+          Change Password
+        </ion-col>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">Old Password*</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">New Password*</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating">Confirm Password*</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12" style="text-align: center;">
+          <ion-button type="button" color="primary" (click)="changePassword()">
+            Change Password
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-content>
