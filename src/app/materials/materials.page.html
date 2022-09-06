@@ -22,28 +22,39 @@
                 <ion-icon name="add"></ion-icon>&nbsp;Record
               </ion-button>
             </div>
-            <table>
-              <thead>
-                <tr>
-                  <th class="leftAlign">Date</th>
-                  <th class="leftAlign">Marterial</th>
-                  <th class="leftAlign">Vendor</th>
-                  <th class="rightAlign">Qty</th>
-                </tr>
-              </thead>
-              <tbody>
-                <ng-container *ngFor="let item of inbondRecords">
-                  <tr type="button" (click)="showDetails(item)">
-                    <td class="leftAlign">{{item.date}}</td>
-                    <td class="leftAlign">{{item.materialName}}</td>
-                    <td class="leftAlign">{{item.vendor}}</td>
-                    <td class="rightAlign">{{item.weight}}</td>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">Date</th>
+                    <th class="leftAlign">Marterial</th>
+                    <th class="leftAlign">Vendor</th>
+                    <th class="rightAlign">Qty</th>
                   </tr>
-                </ng-container>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let item of inbondRecords">
+                    <tr type="button" (click)="showDetails(item)">
+                      <td class="leftAlign">{{item.date}}</td>
+                      <td class="leftAlign">{{item.materialName}}</td>
+                      <td class="leftAlign">{{item.vendor}}</td>
+                      <td class="rightAlign">{{item.weight}}</td>
+                    </tr>
+                  </ng-container>
 
-              </tbody>
-            </table>
-            <div *ngIf="inbondRecords.length === 0" style="text-align: center; font-size:'12px'">No Records Added Today
+                </tbody>
+              </table>
+              <div *ngIf="inbondRecords.length === 0" style="text-align: center; font-size:'12px'">No Records Added
+                Today
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <ion-button size="small" color="dark">
+                <ion-icon name="caret-back-outline"></ion-icon>
+              </ion-button>
+              <ion-button size="small" color="dark">
+                <ion-icon name="caret-forward-outline"></ion-icon>
+              </ion-button>
             </div>
           </div>
         </ion-accordion>
@@ -58,28 +69,39 @@
                 <ion-icon name="add"></ion-icon>&nbsp;Record
               </ion-button>
             </div>
-            <table>
-              <thead>
-                <tr>
-                  <th class="leftAlign">Date</th>
-                  <th class="leftAlign">Marterial</th>
-                  <th class="leftAlign">Vendor</th>
-                  <th class="rightAlign">Qty</th>
-                </tr>
-              </thead>
-              <tbody>
-                <ng-container *ngFor="let item of outbondRecords">
-                  <tr type="button" (click)="showDetails(item)">
-                    <td class="leftAlign">{{item.date}}</td>
-                    <td class="leftAlign">{{item.materialName}}</td>
-                    <td class="leftAlign">{{item.vendor}}</td>
-                    <td class="rightAlign">{{item.weight}}</td>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">Date</th>
+                    <th class="leftAlign">Marterial</th>
+                    <th class="leftAlign">Vendor</th>
+                    <th class="rightAlign">Qty</th>
                   </tr>
-                </ng-container>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let item of outbondRecords">
+                    <tr type="button" (click)="showDetails(item)">
+                      <td class="leftAlign">{{item.date}}</td>
+                      <td class="leftAlign">{{item.materialName}}</td>
+                      <td class="leftAlign">{{item.vendor}}</td>
+                      <td class="rightAlign">{{item.weight}}</td>
+                    </tr>
+                  </ng-container>
 
-              </tbody>
-            </table>
-            <div *ngIf="inbondRecords.length === 0" style="text-align: center; font-size:'12px'">No Records Added Today
+                </tbody>
+              </table>
+              <div *ngIf="outbondRecords.length === 0" style="text-align: center; font-size:'12px'">No Records Added
+                Today
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <ion-button size="small" color="dark">
+                <ion-icon name="caret-back-outline"></ion-icon>
+              </ion-button>
+              <ion-button size="small" color="dark">
+                <ion-icon name="caret-forward-outline"></ion-icon>
+              </ion-button>
             </div>
           </div>
         </ion-accordion>
