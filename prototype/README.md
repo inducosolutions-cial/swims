@@ -1,1 +1,1 @@
-# This is SWIMS App Front End IONIC Prototype. 
+# This is Front End Prototype for SWIMS App
