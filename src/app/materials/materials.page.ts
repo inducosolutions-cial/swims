@@ -54,7 +54,7 @@ export class MaterialsPage implements OnInit {
       project: 'Collection & Transportation',
       date: '21-08-2022',
       materialName: 'Wet waste',
-      weight: '1.2',
+      weight: '1.3',
       weightInd: 'tons',
       flow: 'Inbound',
       vendor: 'City Muncipality',
