@@ -50,6 +50,10 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'recordpreview',
+    loadChildren: () => import('./recordpreview/recordpreview.module').then( m => m.RecordpreviewPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,7 +1,9 @@
 <ion-content>
   <ion-row>
     <ion-col size="12" class="title">
-      Profile
+      <ion-button class="transparent-but-start" color="light" type="button" size="small" (click)="onBackBtnClick()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>Profile
     </ion-col>
   </ion-row>
   <ion-row>
@@ -21,6 +23,10 @@
         </tr>
         <tr>
           <td class="title">Site Location</td>
+          <td class="value">Corprate Office, Hyderabad</td>
+        </tr>
+        <tr>
+          <td class="title">Allocated Project</td>
           <td class="value">Corprate Office, Hyderabad</td>
         </tr>
       </table>

@@ -1,0 +1,29 @@
+.headerblock {
+  background-color: #14b310;
+  color: #fff;
+  font-weight: 600;
+}
+ion-content {
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  ion-row {
+    margin-bottom: 6px;
+    margin-top: 6px;
+  }
+  .title {
+    font-weight: 600 !important;
+    font-size: 0.8rem !important;
+    color: #096907;
+    text-align: left;
+    display: flex;
+    align-items: center;
+  }
+  .content {
+    font-weight: 400 !important;
+    font-size: 0.8rem !important;
+    color: #333;
+    text-align: left;
+  }
+}

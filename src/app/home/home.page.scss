@@ -36,3 +36,14 @@ ion-card {
     text-align: left;
   }
 }
+.image-con {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  img {
+    height: auto;
+    width: 64px;
+    margin: 10px;
+  }
+}

@@ -1,64 +1,105 @@
 <ion-content>
   <ion-row *ngIf="currentView === 'grid'">
-    <ion-col size="6">
-      <ion-button type="button" color="dark" size="small" (click)="onBackBtnClick()">
-        <ion-icon name="arrow-back"></ion-icon>&nbsp;Back
-      </ion-button>
+    <ion-col size="6" class="title">
+      <ion-button class="transparent-but-start" color="light" type="button" size="small" (click)="onBackBtnClick()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>Process
     </ion-col>
     <ion-col size="6" style="text-align: right;">
-      <ion-button type="button" color="dark" size="small" (click)="onAddRecordClick()">
-        <ion-icon name="add"></ion-icon>&nbsp;Add Record
-      </ion-button>
     </ion-col>
   </ion-row>
   <ion-row *ngIf="currentView === 'grid'">
-    <ion-col size="12" class="title">
-      Material Records
-    </ion-col>
-  </ion-row>
-  <ion-row *ngIf="currentView === 'grid'">
-    <ion-col size="12" *ngIf="records.length > 0">
-      <ion-card *ngFor="let item of records" class="record">
-        <ion-card-content>
-          <ion-row>
-            <ion-col size="12">
-              <ion-row class="innerRow">
-                <ion-col size="3" class="title">Project</ion-col>
-                <ion-col size="9" class="value">{{item.project}}</ion-col>
-              </ion-row>
-              <ion-row class="innerRow">
-                <ion-col size="3" class="title">Material</ion-col>
-                <ion-col size="9" class="value">{{item.materialName}}</ion-col>
-              </ion-row>
-              <ion-row class="innerRow">
-                <ion-col size="3" class="title">Weight</ion-col>
-                <ion-col size="9" class="value">{{item.weight}}&nbsp;{{item.weightInd}}</ion-col>
-              </ion-row>
-            </ion-col>
-            <ion-col size="12" class="notes">
-              <span style="font-weight: 600;">Notes : </span> {{item.notes}}
-            </ion-col>
-            <ion-col size="4" class="flow">
-              <div *ngIf="item.flow === 'Outbound'">
-                <ion-icon name="arrow-back"></ion-icon>
-              </div>
-              <div *ngIf="item.flow === 'Inbound'">
-                <ion-icon name="arrow-forward"></ion-icon>
-              </div> &nbsp;{{item.flow}}
-            </ion-col>
-            <ion-col size="8" style="text-align: right;">
-              <ion-button type="button" color="secondary" (click)="editRecord(item)">
-                <ion-icon name="pencil"></ion-icon>
+    <ion-col size="12">
+      <ion-accordion-group>
+        <ion-accordion value="first">
+          <ion-item slot="header" color="light">
+            <ion-label>INCOMING</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div style="width:100%; text-align: right;">
+              <ion-button type="button" class="transparent-but-end" color="light" size="small"
+                (click)="onAddRecordClick()">
+                <ion-icon name="add"></ion-icon>&nbsp;Record
               </ion-button>
-              <ion-button type="button" color="danger" (click)="deleteRecord(item)">
-                <ion-icon name="trash"></ion-icon>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th class="leftAlign">Date</th>
+                  <th class="leftAlign">Marterial</th>
+                  <th class="leftAlign">Vendor</th>
+                  <th class="rightAlign">Qty</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of inbondRecords">
+                  <tr type="button" (click)="showDetails(item)">
+                    <td class="leftAlign">{{item.date}}</td>
+                    <td class="leftAlign">{{item.materialName}}</td>
+                    <td class="leftAlign">{{item.vendor}}</td>
+                    <td class="rightAlign">{{item.weight}}</td>
+                  </tr>
+                </ng-container>
+
+              </tbody>
+            </table>
+            <div *ngIf="inbondRecords.length === 0" style="text-align: center; font-size:'12px'">No Records Added Today
+            </div>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="second">
+          <ion-item slot="header" color="light">
+            <ion-label>OUTGOING</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div style="width:100%; text-align: right;">
+              <ion-button type="button" class="transparent-but-end" color="light" size="small"
+                (click)="onAddRecordClick()">
+                <ion-icon name="add"></ion-icon>&nbsp;Record
               </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col size="12" *ngIf="records.length === 0" style="text-align: center; font-size:'12px'">No Records Added Today
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th class="leftAlign">Date</th>
+                  <th class="leftAlign">Marterial</th>
+                  <th class="leftAlign">Vendor</th>
+                  <th class="rightAlign">Qty</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of outbondRecords">
+                  <tr type="button" (click)="showDetails(item)">
+                    <td class="leftAlign">{{item.date}}</td>
+                    <td class="leftAlign">{{item.materialName}}</td>
+                    <td class="leftAlign">{{item.vendor}}</td>
+                    <td class="rightAlign">{{item.weight}}</td>
+                  </tr>
+                </ng-container>
+
+              </tbody>
+            </table>
+            <div *ngIf="inbondRecords.length === 0" style="text-align: center; font-size:'12px'">No Records Added Today
+            </div>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="third">
+          <ion-item slot="header" color="light">
+            <ion-label>MAN POWER</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+
+          </div>
+        </ion-accordion>
+        <ion-accordion value="third">
+          <ion-item slot="header" color="light">
+            <ion-label>MACHINERY</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
     </ion-col>
   </ion-row>
   <ion-row *ngIf="currentView === 'form'">

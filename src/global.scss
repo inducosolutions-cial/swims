@@ -42,15 +42,31 @@ table {
   th {
     background-color: #3d3d3d;
     color: #fff;
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  td {
+    font-size: 0.7rem;
+    font-weight: 400;
   }
   .title {
     color: #333 !important;
+    font-weight: 600 !important;
+    font-size: 0.8rem !important;
+    text-align: left;
   }
   .value {
-    font-size: 0.9rem !important;
+    font-size: 0.8rem !important;
     text-align: left;
+  }
+  .leftAlign {
+    text-align: left;
+  }
+  .centerAlign {
+    text-align: center;
+  }
+  .rightAlign {
+    text-align: end;
   }
 }
 .mobiletable {
@@ -62,6 +78,18 @@ table {
     font-weight: 500;
   }
 }
+ion-item {
+  --min-height: 30px;
+  ion-label {
+    font-size: 0.8rem !important;
+  }
+  input {
+    --padding-start: 5px;
+    --padding-end: 5px;
+    --padding-top: 5px;
+    --padding-bottom: 5px;
+  }
+}
 ion-searchbar {
   margin: 0px !important;
 }
@@ -70,7 +98,32 @@ ion-segment-button {
 }
 .title {
   font-weight: 600 !important;
-  font-size: 0.9rem !important;
+  font-size: 1rem !important;
   color: #096907;
   text-align: left;
+  display: flex;
+  align-items: center;
+}
+.content {
+  font-weight: 400 !important;
+  font-size: 1rem !important;
+  color: #333;
+  text-align: left;
+}
+
+.transparent-but-start {
+  --background-color: transparent !important;
+  --ion-color-base: #ffffff !important;
+  --box-shadow: #fff !important;
+  font-weight: 600 !important;
+  --padding-start: 0px;
+  --padding-end: 5px;
+}
+.transparent-but-end {
+  --background-color: transparent !important;
+  --ion-color-base: #ffffff !important;
+  --box-shadow: #fff !important;
+  font-weight: 600 !important;
+  --padding-start: 5px;
+  --padding-end: 0px;
 }
