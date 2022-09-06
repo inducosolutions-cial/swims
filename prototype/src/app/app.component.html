@@ -1,0 +1,99 @@
+<ion-app>
+  <ion-header class="ion-no-border" *ngIf="this.apiService.isUserLoggedIn === true">
+    <ion-toolbar>
+      <ion-row>
+        <ion-col size="auto"><img src="assets/images/cubebioEnergy1.png" style="height: 50px; width:auto"></ion-col>
+        <ion-col class="quote-sec">Integrated waste management services</ion-col>
+      </ion-row>
+    </ion-toolbar>
+    <ion-row class="header2" *ngIf="this.apiService.isAdminRole === false">
+      <ion-col class="wel-content">Welcome Ashok Alluri</ion-col>
+      <a (click)="viewProfile()" *ngIf="this.router.url !== '/profile'">My Profile</a>
+      <a (click)="logout()" style="display: flex; align-items:center; color: #333;">
+        <ion-icon name="log-out" style="font-size:18px;"></ion-icon>&nbsp;Logout
+      </a>
+    </ion-row>
+    <ion-row *ngIf="this.apiService.isAdminRole === false">
+      <ion-col size=" 12">
+        <table class="userinfo">
+          <tr>
+            <td class="value">
+              <ion-icon name="location"></ion-icon>&nbsp;Hyderabad
+            </td>
+            <td class="value">
+              <ion-icon name="layers"></ion-icon>&nbsp;Projects
+            </td>
+          </tr>
+        </table>
+      </ion-col>
+    </ion-row>
+  </ion-header>
+  <ion-content>
+    <div class="loader-container" *ngIf="isAppReady === false">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <img src="assets/images/cubebioEnergy1.png" style="max-width: 300px; width: 90%; height:auto"><br><br>
+            <ion-spinner name="circles" color="dark"></ion-spinner><br>
+            Initialising App, Please Wait..
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="login-container" *ngIf="isAppReady === true && this.apiService.isUserLoggedIn === false">
+      <ion-router-outlet></ion-router-outlet>
+    </div>
+    <div class="desktop-container"
+      *ngIf="isAppReady === true && this.apiService.isAdminRole === true && this.apiService.isUserLoggedIn === true">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="menu-container" size="2">
+            <ion-list>
+              <ion-item [color]="selectedMenu === 'admin'? 'primary' : 'dark'" (click)="onMenuClick('admin')">
+                <ion-icon name="home"></ion-icon>&nbsp;
+                <ion-label>Home</ion-label>
+              </ion-item>
+              <ion-item [color]="selectedMenu === 'users'? 'primary' : 'dark'" (click)="onMenuClick('users')">
+                <ion-icon name="people"></ion-icon>&nbsp;
+                <ion-label>User Management</ion-label>
+              </ion-item>
+              <ion-item [color]="selectedMenu === 'managesites'? 'primary' : 'dark'"
+                (click)="onMenuClick('managesites')">
+                <ion-icon name="locate"></ion-icon>&nbsp;
+                <ion-label>Site Management</ion-label>
+              </ion-item>
+              <ion-item [color]="selectedMenu === 'manageprojects'? 'primary' : 'dark'"
+                (click)="onMenuClick('manageprojects')">
+                <ion-icon name="grid"></ion-icon>&nbsp;
+                <ion-label>Project Management</ion-label>
+              </ion-item>
+              <ion-item [color]="selectedMenu === 'managemeterial'? 'primary' : 'dark'"
+                (click)="onMenuClick('managemeterial')">
+                <ion-icon name="extension-puzzle"></ion-icon>&nbsp;
+                <ion-label>Material Management</ion-label>
+              </ion-item>
+              <ion-item [color]="selectedMenu === 'reports'? 'primary' : 'dark'" (click)="onMenuClick('reports')">
+                <ion-icon name="layers"></ion-icon>&nbsp;
+                <ion-label>Reports</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col class="content-container" size="10">
+            <ion-router-outlet></ion-router-outlet>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div
+      *ngIf="isAppReady === true && this.apiService.isAdminRole === false && this.apiService.isUserLoggedIn === true">
+      <ion-router-outlet></ion-router-outlet>
+    </div>
+    <!--
+    <div *ngIf="isAppReady === true && isAdminRole === true">
+      <div>rqwer eqwr </div>
+      <div>
+        <ion-router-outlet></ion-router-outlet>
+      </div>
+    </div>-->
+  </ion-content>
+</ion-app>

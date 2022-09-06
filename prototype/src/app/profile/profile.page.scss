@@ -1,0 +1,16 @@
+.changePassword {
+  border: 1px solid #333;
+  border-radius: 0px;
+  margin: 0px;
+  padding: 0px;
+  .header {
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+}
+ion-content {
+  --padding-start: 5px;
+  --padding-end: 5px;
+}

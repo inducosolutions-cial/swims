@@ -1,0 +1,216 @@
+<ion-content>
+  <ion-grid>
+    <ion-row *ngIf="this.currentView === 'grid'">
+      <ion-col size="12">
+        <ion-toolbar>
+          <ion-segment [(ngModel)]="selectedMenu" (ionChange)="onMenuChange($event)">
+            <ion-segment-button value="c&t" checked="true">
+              <ion-label>Collection & Transportation (C&T)</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="p&d">
+              <ion-label>Processing & Disposal (P&D)</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="bio">
+              <ion-label>Biomining</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="mrf">
+              <ion-label>Material Recovery Facility (MRF)</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-toolbar>
+      </ion-col>
+      <ion-col size="12" *ngIf="this.selectedMenu === 'c&t'">
+        <ion-row>
+          <ion-col size="3">
+            <ion-item>
+              <ion-label position="floating">Operation Name *</ion-label>
+              <ion-input [(ngModel)]="this.newOperationName" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="2">
+            <ion-item>
+              <ion-label position="floating">Weight in *</ion-label>
+              <ion-input [(ngModel)]="this.newOperationWeightInd" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1" style="padding-top: 15px;">
+            <ion-button type="button" color="primary" (click)="addCTProjectField()">
+              <ion-icon name="add"></ion-icon>&nbsp;Add
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Operation Name</th>
+                  <th style="text-align: left;">Measure Indicator</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of ctProject">
+                  <td style="text-align: left;">{{item.name}}</td>
+                  <td style="text-align: left;">{{item.weightInd}}</td>
+                  <td>
+                    <ion-button type="button" color="secondary" (click)="editCTProjectField(item)">
+                      <ion-icon name="pencil"></ion-icon>
+                    </ion-button>
+                    <ion-button type="button" color="danger" (click)="deleteCTProjectField(item.id)">
+                      <ion-icon name="trash"></ion-icon>
+                    </ion-button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12" *ngIf="this.selectedMenu === 'p&d'">
+        <ion-row>
+          <ion-col size="3">
+            <ion-item>
+              <ion-label position="floating">Operation Name *</ion-label>
+              <ion-input [(ngModel)]="this.newOperationName" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="2">
+            <ion-item>
+              <ion-label position="floating">Weight in *</ion-label>
+              <ion-input [(ngModel)]="this.newOperationWeightInd" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1" style="padding-top: 15px;">
+            <ion-button type="button" color="primary" (click)="addPDProjectField()">
+              <ion-icon name="add"></ion-icon>&nbsp;Add
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Operation Name</th>
+                  <th style="text-align: left;">Measure Indicator</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of pdProject">
+                  <td style="text-align: left;">{{item.name}}</td>
+                  <td style="text-align: left;">{{item.weightInd}}</td>
+                  <td>
+                    <ion-button type="button" color="secondary" (click)="editPDProjectField(item)">
+                      <ion-icon name="pencil"></ion-icon>
+                    </ion-button>
+                    <ion-button type="button" color="danger" (click)="deletePDProjectField(item.id)">
+                      <ion-icon name="trash"></ion-icon>
+                    </ion-button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12" *ngIf="this.selectedMenu === 'bio'">
+        <ion-row>
+          <ion-col size="3">
+            <ion-item>
+              <ion-label position="floating">Operation Name *</ion-label>
+              <ion-input [(ngModel)]="this.newOperationName" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="2">
+            <ion-item>
+              <ion-label position="floating">Weight in *</ion-label>
+              <ion-input [(ngModel)]="this.newOperationWeightInd" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1" style="padding-top: 15px;">
+            <ion-button type="button" color="primary" (click)="addBIOProjectField()">
+              <ion-icon name="add"></ion-icon>&nbsp;Add
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Operation Name</th>
+                  <th style="text-align: left;">Measure Indicator</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of bioProject">
+                  <td style="text-align: left;">{{item.name}}</td>
+                  <td style="text-align: left;">{{item.weightInd}}</td>
+                  <td>
+                    <ion-button type="button" color="secondary" (click)="editBIOProjectField(item)">
+                      <ion-icon name="pencil"></ion-icon>
+                    </ion-button>
+                    <ion-button type="button" color="danger" (click)="deleteBIOProjectField(item.id)">
+                      <ion-icon name="trash"></ion-icon>
+                    </ion-button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12" *ngIf="this.selectedMenu === 'mrf'">
+        <ion-row>
+          <ion-col size="3">
+            <ion-item>
+              <ion-label position="floating">Operation Name *</ion-label>
+              <ion-input [(ngModel)]="this.newOperationName" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="2">
+            <ion-item>
+              <ion-label position="floating">Weight in *</ion-label>
+              <ion-input [(ngModel)]="this.newOperationWeightInd" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1" style="padding-top: 15px;">
+            <ion-button type="button" color="primary" (click)="addMRFProjectField()">
+              <ion-icon name="add"></ion-icon>&nbsp;Add
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Operation Name</th>
+                  <th style="text-align: left;">Measure Indicator</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of mrfProject">
+                  <td style="text-align: left;">{{item.name}}</td>
+                  <td style="text-align: left;">{{item.weightInd}}</td>
+                  <td>
+                    <ion-button type="button" color="secondary" (click)="editMRFProjectField(item)">
+                      <ion-icon name="pencil"></ion-icon>
+                    </ion-button>
+                    <ion-button type="button" color="danger" (click)="deleteMRFProjectField(item.id)">
+                      <ion-icon name="trash"></ion-icon>
+                    </ion-button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

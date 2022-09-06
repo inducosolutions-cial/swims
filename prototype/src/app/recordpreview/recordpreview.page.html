@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeWin()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-row class="headerContent">
+      <ion-col size="12">Record Details</ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col size="6" class="title">Incoming/Outgoing</ion-col>
+    <ion-col size="6" class="content">{{this.recordData.flow}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="6" class="title">Date</ion-col>
+    <ion-col size="6" class="content">{{this.recordData.date}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="6" class="title">Project</ion-col>
+    <ion-col size="6" class="content">{{this.recordData.project}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="6" class="title">Material</ion-col>
+    <ion-col size="6" class="content">{{this.recordData.materialName}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="6" class="title">Weight</ion-col>
+    <ion-col size="6" class="content">{{this.recordData.weight}}&nbsp;{{this.recordData.weightInd}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="6" class="title">Vendor</ion-col>
+    <ion-col size="6" class="content">{{this.recordData.vendor}}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12" class="title">Description</ion-col>
+    <ion-col size="12" class="content">{{this.recordData.notes}}</ion-col>
+  </ion-row>
+</ion-content>
