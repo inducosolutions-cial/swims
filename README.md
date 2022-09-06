@@ -1,2 +1,1 @@
-# swims
-SWIMS - Solid Waste Information Management System
+# SWIMS - Solid Waste Information Management System
