@@ -16,6 +16,25 @@ export class ApicommunicatorService {
   isDesktop = false;
   isUserLoggedIn = false;
   isAdminRole = false;
+  loginData = {
+    'admin@cubebioenergy.co.in': { role: 'admin', password: '123456' },
+    'ashokalluri@cubebioenergy.co.in': {
+      role: 'supervisor',
+      password: '123456',
+    },
+    'umamaheswar@cubebioenergy.co.in': {
+      role: 'supervisor',
+      password: '123456',
+    },
+    'ram@cubebioenergy.co.in': {
+      role: 'supervisor',
+      password: '123456',
+    },
+    'srinadha@cubebioenergy.co.in': {
+      role: 'supervisor',
+      password: '123456',
+    },
+  };
   constructor(
     private storage: Storage,
     private network: Network,
@@ -61,10 +80,33 @@ export class ApicommunicatorService {
       }
     });
   }
-  async login(username, password) {
-    this.isAdminRole = this.isDesktop;
-    this.isUserLoggedIn = true;
-    this.isLocalDataAvailable.emit(true);
+  login(username, password) {
+    console.log(this.loginData[username]);
+    if (this.loginData[username] === undefined) {
+      return { success: false, message: 'Invalid UserID' };
+    } else if (this.loginData[username].password !== password) {
+      return { success: false, message: 'Incorrect Username / Password' };
+    } else {
+      if (
+        this.loginData[username].role === 'admin' &&
+        this.isDesktop === false
+      ) {
+        return { success: false, message: 'Admin can login in desktop only' };
+      } else if (
+        this.loginData[username].role === 'supervisor' &&
+        this.isDesktop === true
+      ) {
+        return {
+          success: false,
+          message: 'Supervisor can login in Device only',
+        };
+      } else {
+        this.isAdminRole = this.isDesktop;
+        this.isUserLoggedIn = true;
+        this.isLocalDataAvailable.emit(true);
+        return { success: true };
+      }
+    }
   }
   checkSession() {
     console.log('Checking session');

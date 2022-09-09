@@ -8,6 +8,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class RecordpreviewPage implements OnInit {
   @Input() recordData;
+  isFormEditMode = false;
   constructor(private modalController: ModalController) {}
 
   ngOnInit() {
@@ -15,5 +16,14 @@ export class RecordpreviewPage implements OnInit {
   }
   closeWin() {
     this.modalController.dismiss();
+  }
+  editForm() {
+    this.isFormEditMode = true;
+  }
+  saveForm() {
+    this.isFormEditMode = false;
+  }
+  cancelForm() {
+    this.isFormEditMode = false;
   }
 }
