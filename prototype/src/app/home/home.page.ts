@@ -7,15 +7,39 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  constructor(private navCtrl: NavController,) { }
+  menuData = [
+    {
+      title: 'Collection & Transportation',
+      type: 'collection',
+      className: 'btn-con gray-block',
+    },
+    {
+      title: 'Processing & Disposal',
+      type: 'processing',
+      className: 'btn-con red-block',
+    },
+    {
+      title: 'Biomining',
+      type: 'biomining',
+      className: 'btn-con brown-block',
+    },
+    {
+      title: 'Material Recovery Facilities',
+      type: 'recovery',
+      className: 'btn-con green-block',
+    },
+    { title: 'Reports', type: 'report', className: 'btn-con leaf-block' },
+  ];
+  constructor(private navCtrl: NavController) {}
   onMenuClick(btnType) {
-    if (btnType === 'material') {
-      this.navCtrl.navigateRoot('materials');
+    if (btnType === 'collection') {
+      this.navCtrl.navigateRoot('collection');
     } else if (btnType === 'amount') {
       this.navCtrl.navigateRoot('amounts');
     } else if (btnType === 'projects') {
       this.navCtrl.navigateRoot('projects');
+    } else {
+      this.navCtrl.navigateRoot(btnType);
     }
   }
 }

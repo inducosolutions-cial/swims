@@ -1,5 +1,7 @@
 ion-header {
-  padding: 5px;
+  ion-toolbar {
+    --background: #70ad47;
+  }
   .header2 {
     display: flex;
     background-color: #f0f3ed;
@@ -62,4 +64,10 @@ ion-header {
       }
     }
   }
+}
+.menu-item {
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
 }

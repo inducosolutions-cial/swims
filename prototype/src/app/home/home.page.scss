@@ -1,5 +1,5 @@
 ion-card {
-  margin: 5px !important;
+  margin: 10px !important;
   ion-card-header,
   ion-row,
   ion-col {
@@ -11,16 +11,30 @@ ion-card {
   justify-content: center;
 }
 .btn-con {
-  padding: 10px !important;
-
+  padding: 20px !important;
+  display: flex;
+  justify-content: center;
   .title {
     font-weight: 600;
-    font-size: 1rem;
-  }
-  .desc {
-    margin-top: 5px;
     font-size: 0.8rem;
+    color: #fff;
+    text-align: center;
   }
+}
+.gray-block {
+  background-color: #a5a5a5;
+}
+.red-block {
+  background-color: #c55a11;
+}
+.brown-block {
+  background-color: #bf9000;
+}
+.green-block {
+  background-color: #548235;
+}
+.leaf-block {
+  background-color: #92d050;
 }
 ion-card {
   cursor: pointer;

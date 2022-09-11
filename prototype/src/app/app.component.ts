@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { ApicommunicatorService } from './services/apicommunicator.service';
 @Component({
   selector: 'app-root',
@@ -13,7 +13,8 @@ export class AppComponent implements OnInit {
   constructor(
     public apiService: ApicommunicatorService,
     private navCtrl: NavController,
-    public router: Router
+    public router: Router,
+    public menu: MenuController
   ) {}
   ngOnInit(): void {
     this.apiService.isLocalDataAvailable.subscribe((flag) => {
@@ -34,12 +35,15 @@ export class AppComponent implements OnInit {
     this.navCtrl.navigateRoot(item);
   }
   viewProfile() {
+    this.menu.toggle();
     this.navCtrl.navigateRoot('profile');
   }
   viewHome() {
+    this.menu.toggle();
     this.navCtrl.navigateRoot('home');
   }
   logout() {
+    this.menu.toggle();
     this.apiService.isUserLoggedIn = false;
     this.navCtrl.navigateRoot('login');
   }

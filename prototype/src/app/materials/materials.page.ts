@@ -6,7 +6,7 @@ import {
   ModalController,
   NavController,
 } from '@ionic/angular';
-import { RecordpreviewPage } from '../recordpreview/recordpreview.page';
+import { RecordpreviewPage } from '../views/recordpreview/recordpreview.page';
 
 @Component({
   selector: 'app-materials',
