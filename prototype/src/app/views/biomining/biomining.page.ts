@@ -28,12 +28,12 @@ export class BiominingPage implements OnInit {
       type: 'cash',
       className: 'btn-con gray-block',
     },
-    { title: 'User Charges', type: 'user', className: 'btn-con gray-block' },
-    {
-      title: 'Complaints Redressal',
-      type: 'complaints',
+    { title: 'Process', type: 'process', className: 'btn-con gray-block' },
+     /*{
+      title: 'Process MRF',
+      type: 'processmrf',
       className: 'btn-con gray-block',
-    },
+    },*/
   ];
   currentStep = 1;
   selectedMenu = '';

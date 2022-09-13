@@ -9,31 +9,25 @@ import { NavController } from '@ionic/angular';
 export class ReportPage implements OnInit {
   menuData = [
     {
-      title: 'Material',
-      type: 'material',
+      title: 'C&T',
+      type: 'ct',
       className: 'btn-con gray-block',
     },
     {
-      title: 'Manpower',
-      type: 'manpower',
+      title: 'P&D',
+      type: 'pd',
       className: 'btn-con gray-block',
     },
     {
-      title: 'Vehicles',
-      type: 'vehicles',
+      title: 'Bio mining',
+      type: 'bio',
       className: 'btn-con gray-block',
     },
     {
-      title: 'Cash',
-      type: 'cash',
+      title: 'MRF',
+      type: 'mrf',
       className: 'btn-con gray-block',
-    },
-    { title: 'User Charges', type: 'user', className: 'btn-con gray-block' },
-    {
-      title: 'Complaints Redressal',
-      type: 'complaints',
-      className: 'btn-con gray-block',
-    },
+    }
   ];
   currentStep = 1;
   selectedMenu = '';

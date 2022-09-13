@@ -29,11 +29,11 @@ export class ProcessingPage implements OnInit {
       className: 'btn-con gray-block',
     },
     { title: 'Process', type: 'process', className: 'btn-con gray-block' },
-    {
+    /*{
       title: 'Process MRF',
       type: 'processmrf',
       className: 'btn-con gray-block',
-    },
+    },*/
   ];
   currentStep = 1;
   selectedMenu = '';

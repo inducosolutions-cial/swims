@@ -29,11 +29,11 @@ export class CollectionPage implements OnInit {
       className: 'btn-con gray-block',
     },
     { title: 'User Charges', type: 'user', className: 'btn-con gray-block' },
-    {
-      title: 'Complaints Redressal',
-      type: 'complaints',
+     /*{
+      title: 'Process MRF',
+      type: 'processmrf',
       className: 'btn-con gray-block',
-    },
+    },*/
   ];
   currentStep = 1;
   selectedMenu = '';

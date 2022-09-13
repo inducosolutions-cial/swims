@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content overflow-scroll="true">
   <div *ngIf="currentStep === 1">
     <ion-row class="content-area">
       <ion-col size="12" class="title">
@@ -114,7 +114,7 @@
                   <ion-input type="text" value=""></ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-label position="floating">Consumption</ion-label>
+                  <ion-label position="floating">Fuel Consumption</ion-label>
                   <ion-input type="text" value=""></ion-input>
                 </ion-item>
               </ion-list>
@@ -146,7 +146,7 @@
         <ion-list>
           <ion-item>
             <ion-label position="floating">Category</ion-label>
-            <ion-select placeholder="Select Material Type">
+            <ion-select placeholder="Select Category">
               <ion-select-option value="Project Head">Project Head</ion-select-option>
               <ion-select-option value="Operation Head">Operation Head</ion-select-option>
               <ion-select-option value="Supervisor">Supervisor</ion-select-option>
@@ -335,7 +335,7 @@
                 </ion-item>
                 <ion-item>
                   <ion-label position="floating">Type</ion-label>
-                  <ion-select placeholder="Select Material Type">
+                  <ion-select placeholder="Select Type">
                     <ion-select-option value="Resident">Resident</ion-select-option>
                     <ion-select-option value="Commercial">Commercial</ion-select-option>
                   </ion-select>
@@ -362,7 +362,7 @@
                 </ion-item>
                 <ion-item>
                   <ion-label position="floating">Mode</ion-label>
-                  <ion-select placeholder="Select Material Type">
+                  <ion-select placeholder="Select Mode">
                     <ion-select-option value="Cash">Cash</ion-select-option>
                     <ion-select-option value="UPI">UPI</ion-select-option>
                     <ion-select-option value="UPI">Card</ion-select-option>
