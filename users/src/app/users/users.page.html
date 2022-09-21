@@ -1,0 +1,138 @@
+<ion-content>
+  <ion-grid>
+    <ion-row *ngIf="this.currentView === 'grid'">
+      <ion-col size="6" class="title">
+        Users
+      </ion-col>
+      <ion-col size="6" style="text-align: right;">
+        <ion-button type="button" color="dark" (click)="addUserClick()">
+          <ion-icon name="add"></ion-icon>&nbsp;Add New User
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="this.currentView === 'grid'">
+      <ion-col size="12">
+        <ion-row>
+          <ion-col size="9"></ion-col>
+          <ion-col size="3" style="padding: 0px">
+            <ion-searchbar></ion-searchbar>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">ID</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Mobile</th>
+              <th scope="col">City</th>
+              <th scope="col">Status</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>CBE0001</td>
+              <td>Ashok</td>
+              <td>Alluri</td>
+              <td>@ashok.alluri@cubebioenery.in</td>
+              <td>9999999999</td>
+              <td>Hyderabad</td>
+              <td>Active</td>
+              <td>
+                <ion-button type="button" color="dark" (click)="editUser()">
+                  <ion-icon name="pencil"></ion-icon>
+                </ion-button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="this.currentView === 'form'">
+      <ion-col size="12" class="title">
+        Create a New User
+      </ion-col>
+      <ion-col size="12">
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">First Name *</ion-label>
+              <ion-input formControlName="firstname" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Last Name *</ion-label>
+              <ion-input formControlName="lastname" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Email *</ion-label>
+              <ion-input formControlName="email" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Mobile *</ion-label>
+              <ion-input formControlName="mobile" type="number"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Address *</ion-label>
+              <ion-textarea rows="2"></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Site Location *</ion-label>
+              <ion-select>
+                <ion-select-option value="Andhra Pradesh">Site 1</ion-select-option>
+                <ion-select-option value="Telangana">Site 2</ion-select-option>
+                <ion-select-option value="Tamil Nadu">Site 3</ion-select-option>
+                <ion-select-option value="Karnataka">Site 4</ion-select-option>
+                <ion-select-option value="Kerala">Site 5</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Projects *</ion-label>
+              <ion-select multiple="true">
+                <ion-select-option value="Collection & Transportation">Collection & Transportation</ion-select-option>
+                <ion-select-option value="Processing & Disposal">Processing & Disposal</ion-select-option>
+                <ion-select-option value="Biomining">Biomining</ion-select-option>
+                <ion-select-option value="Material Recovery Facility">Material Recovery Facility</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12" style="text-align: right;">
+            <ion-button type="button" color="dark" (click)="cancelUser()">
+              <ion-icon name="add"></ion-icon>&nbsp;Cancel
+            </ion-button>
+            <ion-button type="button" color="primary" (click)="addUser()">
+              <ion-icon name="add"></ion-icon>&nbsp;Create User
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,110 @@
+<ion-content>
+  <ion-row>
+    <ion-col size="12" style="justify-content: end;">
+      <ion-button color="dark" size="small" (click)="editForm()" *ngIf="this.isFormEditMode === false">Edit</ion-button>
+      <ion-button color="dark" size="small" (click)="cancelForm()" *ngIf="this.isFormEditMode === true">Cancel
+      </ion-button>
+      <ion-button color="dark" size="small" (click)="saveForm()" *ngIf="this.isFormEditMode === true">Save</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="6">
+      <div class="title">Date:</div>
+      <div class="content">16/09/2022</div>
+    </ion-col>
+    <ion-col size="6">
+      <div class="title">Time:</div>
+      <div class="content">10:30 AM</div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <div class="title">Vendor:</div>
+      <div [ngClass]="isFormEditMode === true ? 'content edit-content' : 'content'">
+        <ion-input type="text" value="Madhupur Municipal Corporation" [readonly]="!isFormEditMode"></ion-input>
+      </div>
+    </ion-col>
+    <ion-col size="6">
+      <div class="title">Bill No:</div>
+      <div class="content">123</div>
+    </ion-col>
+    <ion-col size="6">
+      <div class="title">Date:</div>
+      <div class="content">16/09/2022</div>
+    </ion-col>
+    <ion-col size="12">
+      <div class="title">Material:</div>
+      <div [ngClass]="isFormEditMode === true ? 'content edit-content' : 'content'">
+        <ion-select value="Mixed waste" style="width: 100%;" [disabled]="!isFormEditMode">
+          <ion-select-option value="Mixed waste">Mixed waste</ion-select-option>
+          <ion-select-option value="Dry waste">Dry waste</ion-select-option>
+          <ion-select-option value="Wet waste">Wet waste</ion-select-option>
+          <ion-select-option value="Diesel">Diesel</ion-select-option>
+          <ion-select-option value="EM solution">EM solution</ion-select-option>
+        </ion-select>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="2" class="title col-block">Weights:</ion-col>
+    <ion-col size="3" class="title col-block">Gross Wt.</ion-col>
+    <ion-col size="4" class="title col-block">Tare Wt.</ion-col>
+    <ion-col size="3" class="title col-block">Net Wt.</ion-col>
+    <ion-col size="2" class="content">
+      <ion-input type="text" value="" disabled="true"></ion-input>
+    </ion-col>
+    <ion-col size="3" [ngClass]="isFormEditMode === true ? 'content edit-content' : 'content'">
+      <ion-input type="text" value="26333 kg" [readonly]="!isFormEditMode"></ion-input>
+    </ion-col>
+    <ion-col size="4" [ngClass]="isFormEditMode === true ? 'content edit-content' : 'content'">
+      <ion-input type="text" value="8111 Kg" [readonly]="!isFormEditMode"></ion-input>
+    </ion-col>
+    <ion-col size="3" [ngClass]="isFormEditMode === true ? 'content edit-content' : 'content'">
+      <ion-input type="text" value="18222 Kg" [readonly]="!isFormEditMode"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="2" class="title col-block">Vehicle:</ion-col>
+    <ion-col size="3" class="title col-block">Reg. No</ion-col>
+    <ion-col size="4" class="title col-block">Driver Name</ion-col>
+    <ion-col size="3" class="title col-block">Contact</ion-col>
+    <ion-col size="2" class="content">
+      <ion-input type="text" value="" disabled="true"></ion-input>
+    </ion-col>
+    <ion-col size="3" [ngClass]="isFormEditMode === true ? 'content edit-content' : 'content'">
+      <ion-input type="text" value="AP09XZ1234" [readonly]="!isFormEditMode"></ion-input>
+    </ion-col>
+    <ion-col size="4" [ngClass]="isFormEditMode === true ? 'content edit-content' : 'content'">
+      <ion-input type="text" value="G Rama Rao" [readonly]="!isFormEditMode"></ion-input>
+    </ion-col>
+    <ion-col size="3" [ngClass]="isFormEditMode === true ? 'content edit-content' : 'content'">
+      <ion-input type="text" value="9812345678" [readonly]="!isFormEditMode"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="2" class="title col-block">Receiver: </ion-col>
+    <ion-col size="3" class="title col-block">At</ion-col>
+    <ion-col size="4" class="title col-block">Name</ion-col>
+    <ion-col size="3" class="title col-block">Contact</ion-col>
+    <ion-col size="2" class="content">
+      <ion-input type="text" value="" disabled="true"></ion-input>
+    </ion-col>
+    <ion-col size="3" [ngClass]="isFormEditMode === true ? 'content edit-content' : 'content'">
+      <ion-input type="text" value="Dump Yard" [readonly]="!isFormEditMode"></ion-input>
+    </ion-col>
+    <ion-col size="4" [ngClass]="isFormEditMode === true ? 'content edit-content' : 'content'">
+      <ion-input type="text" value="D Pavan Kumar" [readonly]="!isFormEditMode"></ion-input>
+    </ion-col>
+    <ion-col size="3" [ngClass]="isFormEditMode === true ? 'content edit-content' : 'content'">
+      <ion-input type="text" value="9998884444" [readonly]="!isFormEditMode"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12" class="title  col-block">Description</ion-col>
+    <ion-col size="12" [ngClass]="isFormEditMode === true ? 'content edit-content' : 'content'">
+      <ion-textarea rows="2" [readonly]="!isFormEditMode"
+        value="Non enim in adipisicing ex ullamco veniam laborum magna cupidatat sint do. Duis ad qui irure ea cillum aute consectetur nostrud. Minim tempor voluptate aliqua sint. Adipisicing magna qui ut id ea pariatur culpa aliquip nostrud enim esse anim. Amet irure veniam ut amet reprehenderit deserunt consectetur consectetur eiusmod sunt. Duis culpa do voluptate cillum ad laborum commodo veniam velit sint eu Lorem consequat. Ipsum aute ut culpa veniam cillum.">
+      </ion-textarea>
+    </ion-col>
+  </ion-row>
+</ion-content>

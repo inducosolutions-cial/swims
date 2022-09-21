@@ -1,0 +1,234 @@
+<ion-content>
+  <ion-grid>
+    <ion-row *ngIf="this.currentView === 'grid'">
+      <ion-col size="12">
+        <ion-toolbar>
+          <ion-segment [(ngModel)]="selectedMenu" (ionChange)="onMenuChange($event)">
+            <ion-segment-button value="mir" checked="true">
+              <ion-label>Material Inbound Report</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="mor">
+              <ion-label>Material Outbound Report</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="or">
+              <ion-label>Operations Report</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="pr">
+              <ion-label>Payment Report</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-toolbar>
+      </ion-col>
+      <ion-col size="12" *ngIf="this.selectedMenu === 'mir'">
+        <ion-row>
+          <ion-col size="2.5">
+            <ion-item>
+              <ion-label>Start date</ion-label>
+              <input type="date">
+            </ion-item>
+          </ion-col>
+          <ion-col size="2.5">
+            <ion-item>
+              <ion-label>End date</ion-label>
+              <input type="date">
+            </ion-item>
+          </ion-col>
+          <ion-col size="2">
+            <ion-item>
+              <ion-label>Select Site</ion-label>
+              <ion-select>
+                <ion-select-option value="Site 1">Site 1</ion-select-option>
+                <ion-select-option value="Site 2">Site 2</ion-select-option>
+                <ion-select-option value="Site 3">Site 3</ion-select-option>
+                <ion-select-option value="Site 4">Site 4</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1" style="padding-top: 15px;">
+            <ion-button type="button" color="primary">
+              Search
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Material Type</th>
+                  <th style="text-align: left;">Site Name</th>
+                  <th style="text-align: left;">User Name</th>
+                  <th style="text-align: left;">Quantity</th>
+                  <th style="text-align: left;">Date & Time</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12" *ngIf="this.selectedMenu === 'mor'">
+        <ion-row>
+          <ion-col size="2.5">
+            <ion-item>
+              <ion-label>Start date</ion-label>
+              <input type="date">
+            </ion-item>
+          </ion-col>
+          <ion-col size="2.5">
+            <ion-item>
+              <ion-label>End date</ion-label>
+              <input type="date">
+            </ion-item>
+          </ion-col>
+          <ion-col size="2">
+            <ion-item>
+              <ion-label>Select Site</ion-label>
+              <ion-select>
+                <ion-select-option value="Site 1">Site 1</ion-select-option>
+                <ion-select-option value="Site 2">Site 2</ion-select-option>
+                <ion-select-option value="Site 3">Site 3</ion-select-option>
+                <ion-select-option value="Site 4">Site 4</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1" style="padding-top: 15px;">
+            <ion-button type="button" color="primary">
+              Search
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Material Type</th>
+                  <th style="text-align: left;">Site Name</th>
+                  <th style="text-align: left;">User Name</th>
+                  <th style="text-align: left;">Quantity</th>
+                  <th style="text-align: left;">Date & Time</th>
+                  <th style="text-align: left;">Edit/Delete</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12" *ngIf="this.selectedMenu === 'or'">
+        <ion-row>
+          <ion-col size="2.5">
+            <ion-item>
+              <ion-label>Start date</ion-label>
+              <input type="date">
+            </ion-item>
+          </ion-col>
+          <ion-col size="2.5">
+            <ion-item>
+              <ion-label>End date</ion-label>
+              <input type="date">
+            </ion-item>
+          </ion-col>
+          <ion-col size="2">
+            <ion-item>
+              <ion-label>Select Site</ion-label>
+              <ion-select>
+                <ion-select-option value="Site 1">Site 1</ion-select-option>
+                <ion-select-option value="Site 2">Site 2</ion-select-option>
+                <ion-select-option value="Site 3">Site 3</ion-select-option>
+                <ion-select-option value="Site 4">Site 4</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="2">
+            <ion-item>
+              <ion-label>Select Operation</ion-label>
+              <ion-select>
+                <ion-select-option value="Windrows">Windrows</ion-select-option>
+                <ion-select-option value="Turning">Turning</ion-select-option>
+                <ion-select-option value="D2D">D2D</ion-select-option>
+                <ion-select-option value="Screening">Screening</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1" style="padding-top: 15px;">
+            <ion-button type="button" color="primary">
+              Search
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Operation Type</th>
+                  <th style="text-align: left;">Site Name</th>
+                  <th style="text-align: left;">Particulars</th>
+                  <th style="text-align: left;">Quantity</th>
+                  <th style="text-align: left;">Date & Time</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12" *ngIf="this.selectedMenu === 'pr'">
+        <ion-row>
+          <ion-col size="2.5">
+            <ion-item>
+              <ion-label>Start date</ion-label>
+              <input type="date">
+            </ion-item>
+          </ion-col>
+          <ion-col size="2.5">
+            <ion-item>
+              <ion-label>End date</ion-label>
+              <input type="date">
+            </ion-item>
+          </ion-col>
+          <ion-col size="2">
+            <ion-item>
+              <ion-label>Payment Mode</ion-label>
+              <ion-select>
+                <ion-select-option value="Site 1">Received</ion-select-option>
+                <ion-select-option value="Site 2">Payable</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1" style="padding-top: 15px;">
+            <ion-button type="button" color="primary">
+              Search
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Date & Time</th>
+                  <th style="text-align: left;">Amount</th>
+                  <th style="text-align: left;">Particulars/Description</th>
+                  <th style="text-align: left;">Mode of Payment</th>
+                  <th style="text-align: left;">Remarks</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

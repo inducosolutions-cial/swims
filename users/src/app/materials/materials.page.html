@@ -1,0 +1,270 @@
+<ion-content>
+  <ion-row *ngIf="currentView === 'grid'">
+    <ion-col size="6" class="title">
+      <ion-button class="transparent-but-start" color="light" type="button" size="small" (click)="onBackBtnClick()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>Process
+    </ion-col>
+    <ion-col size="6" style="text-align: right;">
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="currentView === 'grid'">
+    <ion-col size="12">
+      <ion-accordion-group>
+        <ion-accordion value="first">
+          <ion-item slot="header" color="light">
+            <ion-label>INCOMING</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div style="width:100%; text-align: right;">
+              <ion-button type="button" color="dark" size="small" (click)="onAddRecordClick()">
+                <ion-icon name="add"></ion-icon>&nbsp;Record
+              </ion-button>
+            </div>
+            <div class="search-block">
+              <div class="title-block">
+                Search By
+              </div>
+              <div class="select-block">
+                <ion-select value="material">
+                  <ion-select-option value="material">Material</ion-select-option>
+                  <ion-select-option value="vendor">Vendor</ion-select-option>
+                </ion-select>
+              </div>
+              <div class="input-block">
+                <ion-input type="text"></ion-input>
+              </div>
+              <div class="button-block">
+                <ion-button color="dark" size="small">
+                  <ion-icon name="search"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">Date</th>
+                    <th class="leftAlign">Marterial</th>
+                    <th class="leftAlign">Vendor</th>
+                    <th class="rightAlign">Qty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let item of inbondRecords">
+                    <tr type="button" (click)="showDetails(item)">
+                      <td class="leftAlign">{{item.date}}</td>
+                      <td class="leftAlign">{{item.materialName}}</td>
+                      <td class="leftAlign">{{item.vendor}}</td>
+                      <td class="rightAlign">{{item.weight}}</td>
+                    </tr>
+                  </ng-container>
+
+                </tbody>
+              </table>
+              <div *ngIf="inbondRecords.length === 0" style="text-align: center; font-size:'12px'">No Records Added
+                Today
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <ion-button size="small" color="dark">
+                <ion-icon name="caret-back-outline"></ion-icon>
+              </ion-button>
+              <ion-button size="small" color="dark">
+                <ion-icon name="caret-forward-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="second">
+          <ion-item slot="header" color="light">
+            <ion-label>OUTGOING</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div style="width:100%; text-align: right;">
+              <ion-button type="button" color="dark" size="small" (click)="onAddRecordClick()">
+                <ion-icon name="add"></ion-icon>&nbsp;Record
+              </ion-button>
+            </div>
+            <div class="search-block">
+              <div class="title-block">
+                Search By
+              </div>
+              <div class="select-block">
+                <ion-select value="material">
+                  <ion-select-option value="material">Material</ion-select-option>
+                  <ion-select-option value="vendor">Vendor</ion-select-option>
+                </ion-select>
+              </div>
+              <div class="input-block">
+                <ion-input type="text"></ion-input>
+              </div>
+              <div class="button-block">
+                <ion-button color="dark" size="small">
+                  <ion-icon name="search"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">Date</th>
+                    <th class="leftAlign">Marterial</th>
+                    <th class="leftAlign">Vendor</th>
+                    <th class="rightAlign">Qty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let item of outbondRecords">
+                    <tr type="button" (click)="showDetails(item)">
+                      <td class="leftAlign">{{item.date}}</td>
+                      <td class="leftAlign">{{item.materialName}}</td>
+                      <td class="leftAlign">{{item.vendor}}</td>
+                      <td class="rightAlign">{{item.weight}}</td>
+                    </tr>
+                  </ng-container>
+
+                </tbody>
+              </table>
+              <div *ngIf="outbondRecords.length === 0" style="text-align: center; font-size:'12px'">No Records Added
+                Today
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <ion-button size="small" color="dark">
+                <ion-icon name="caret-back-outline"></ion-icon>
+              </ion-button>
+              <ion-button size="small" color="dark">
+                <ion-icon name="caret-forward-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="third">
+          <ion-item slot="header" color="light">
+            <ion-label>MAN POWER</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div style="width:100%; text-align: right;">
+              <ion-button type="button" color="dark" size="small" (click)="onAddRecordClick()">
+                <ion-icon name="add"></ion-icon>&nbsp;Record
+              </ion-button>
+            </div>
+            <div class="search-block">
+              <div class="title-block">
+                Search By
+              </div>
+              <div class="select-block">
+                <ion-select value="material">
+                  <ion-select-option value="material">Material</ion-select-option>
+                  <ion-select-option value="vendor">Vendor</ion-select-option>
+                </ion-select>
+              </div>
+              <div class="input-block">
+                <ion-input type="text"></ion-input>
+              </div>
+              <div class="button-block">
+                <ion-button color="dark" size="small">
+                  <ion-icon name="search"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+
+          </div>
+        </ion-accordion>
+        <ion-accordion value="fourth">
+          <ion-item slot="header" color="light">
+            <ion-label>MACHINERY</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div style="width:100%; text-align: right;">
+              <ion-button type="button" color="dark" size="small" (click)="onAddRecordClick()">
+                <ion-icon name="add"></ion-icon>&nbsp;Record
+              </ion-button>
+            </div>
+            <div class="search-block">
+              <div class="title-block">
+                Search By
+              </div>
+              <div class="select-block">
+                <ion-select value="material">
+                  <ion-select-option value="material">Material</ion-select-option>
+                  <ion-select-option value="vendor">Vendor</ion-select-option>
+                </ion-select>
+              </div>
+              <div class="input-block">
+                <ion-input type="text"></ion-input>
+              </div>
+              <div class="button-block">
+                <ion-button color="dark" size="small">
+                  <ion-icon name="search"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="currentView === 'form'">
+    <ion-col size="12">
+      Create a Material Record
+    </ion-col>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label position="floating">Select Project *</ion-label>
+        <ion-select>
+          <ion-select-option value="Collection & Transportation">Collection & Transportation</ion-select-option>
+          <ion-select-option value="Processing & Disposal">Processing & Disposal</ion-select-option>
+          <ion-select-option value="Biomining">Biomining</ion-select-option>
+          <ion-select-option value="Material Recovery Facility">Material Recovery Facility</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label position="floating">Inbound/Outbound *</ion-label>
+        <ion-select>
+          <ion-select-option value="Inbound">Inbound</ion-select-option>
+          <ion-select-option value="Outbound">Outbound</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label position="floating">Select Material *</ion-label>
+        <ion-select>
+          <ion-select-option value="Mixed waste">Mixed waste</ion-select-option>
+          <ion-select-option value="Dry waste">Dry waste</ion-select-option>
+          <ion-select-option value="Wet waste">Wet waste</ion-select-option>
+          <ion-select-option value="Diesel">Diesel</ion-select-option>
+          <ion-select-option value="EM solution">EM solution</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col size="10">
+      <ion-item>
+        <ion-label position="floating">Weight *</ion-label>
+        <ion-input type="numbers"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col size="2" style="display: flex; align-items:center">
+      tons
+    </ion-col>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label position="floating">Notes</ion-label>
+        <ion-textarea rows="2"></ion-textarea>
+      </ion-item>
+    </ion-col>
+    <ion-col size="12" style="text-align: center;">
+      <ion-button type="button" color="dark" (click)="cancelRecord()">
+        <ion-icon name="add"></ion-icon>&nbsp;Cancel
+      </ion-button>
+      <ion-button type="button" color="primary" (click)="addRecod()">
+        <ion-icon name="add"></ion-icon>&nbsp;Create Record
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
