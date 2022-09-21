@@ -1,0 +1,41 @@
+
+<div class="container-fluid app-container">
+  <div class="p-2 main-header">
+    <img src="assets/cubebioEnergy.jpeg" />
+  </div>
+  <div class="p-2 main-content">
+    <div class="menu-block">
+      <ul>
+        <li  (click)="onMenuClick('admin')">
+          <div name="home"></div>&nbsp;
+          <div>Home</div>
+        </li>
+        <li (click)="onMenuClick('users')">
+          <div name="people"></div>&nbsp;
+          <div>User Management</div>
+        </li>
+        <li
+          (click)="onMenuClick('managesites')">
+          <div name="locate"></div>&nbsp;
+          <div>Site Management</div>
+        </li>
+        <li
+          (click)="onMenuClick('manageprojects')">
+          <div name="grid"></div>&nbsp;
+          <div>Project Management</div>
+        </li>
+        <li
+          (click)="onMenuClick('managemeterial')">
+          <div name="extension-puzzle"></div>&nbsp;
+          <div>Material Management</div>
+        </li>
+        <li (click)="onMenuClick('reports')">
+          <div name="layers"></div>&nbsp;
+          <div>Reports</div>
+        </li>
+      </ul>
+    </div>
+    <div class="content-block"><router-outlet></router-outlet></div>
+  </div>
+</div>
+
