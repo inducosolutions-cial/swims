@@ -1,0 +1,48 @@
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 10px;
+  ion-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .headerTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .logoSec {
+    padding: 10px;
+    text-align: center;
+  }
+  .loginBlock {
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid #dedede;
+    margin-bottom: 5px;
+    ion-grid {
+      margin: 0px !important;
+      ion-item {
+        margin: 0px !important;
+      }
+    }
+  }
+  .forgotPass {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 5px 0px;
+    text-align: center;
+  }
+  .termPolicyCon {
+    margin: 5px 0px;
+    text-align: center;
+  }
+  .footer {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}

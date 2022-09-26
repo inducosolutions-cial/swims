@@ -1,0 +1,217 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>Welcome Ashok Alluri</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="blocks-container">
+        <ion-card class="info-block">
+          <ion-card-header>
+            <ion-card-title>Sitewise Amounts Received</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <table>
+              <thead>
+                <tr>
+                  <th>Site Name</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Site1</td>
+                  <td>2,50,000/-</td>
+                </tr>
+                <tr>
+                  <td>Site2</td>
+                  <td>50,000/-</td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="info-block">
+          <ion-card-header>
+            <ion-card-title>Sitewise Amounts Paid</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <table>
+              <thead>
+                <tr>
+                  <th>Site Name</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Site1</td>
+                  <td>5,50,000/-</td>
+                </tr>
+                <tr>
+                  <td>Site2</td>
+                  <td>1,50,000/-</td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="blocks-container">
+        <ion-card class="info-block">
+          <ion-card-header>
+            <ion-card-title>Material Inbound Data</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <table>
+              <thead>
+                <tr>
+                  <th>Site Name</th>
+                  <th>Material</th>
+                  <th>Qty</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Site1</td>
+                  <td>Mixed waste</td>
+                  <td>5 tons</td>
+                </tr>
+                <tr>
+                  <td>Site2</td>
+                  <td>Dry waste</td>
+                  <td>3 tons</td>
+                </tr>
+                <tr>
+                  <td>Site2</td>
+                  <td>Diesel</td>
+                  <td>10 liters</td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="info-block">
+          <ion-card-header>
+            <ion-card-title>Material Outbound Data</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <table>
+              <thead>
+                <tr>
+                  <th>Site Name</th>
+                  <th>Material</th>
+                  <th>Qty</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Site1</td>
+                  <td>Compost</td>
+                  <td>4 tons</td>
+                </tr>
+                <tr>
+                  <td>Site2</td>
+                  <td>Plastic </td>
+                  <td>1 tons</td>
+                </tr>
+                <tr>
+                  <td>Site1</td>
+                  <td>Metals</td>
+                  <td>1 ton</td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-title>Operations Wise Data</ion-title>
+      </ion-col>
+      <ion-col size="2.5">
+        <ion-item>
+          <ion-label>Start date</ion-label>
+          <input type="date">
+        </ion-item>
+      </ion-col>
+      <ion-col size="2.5">
+        <ion-item>
+          <ion-label>End date</ion-label>
+          <input type="date">
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item>
+          <ion-label>Select Project</ion-label>
+          <ion-select>
+            <ion-select-option value="Collection & Transportation">Collection & Transportation</ion-select-option>
+            <ion-select-option value="Processing & Disposal">Processing & Disposal</ion-select-option>
+            <ion-select-option value="Biomining">Biomining</ion-select-option>
+            <ion-select-option value="Material Recovery Facility">Material Recovery Facility</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item>
+          <ion-label>Select Site</ion-label>
+          <ion-select>
+            <ion-select-option value="Site 1">Site 1</ion-select-option>
+            <ion-select-option value="Site 2">Site 2</ion-select-option>
+            <ion-select-option value="Site 3">Site 3</ion-select-option>
+            <ion-select-option value="Site 4">Site 4</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button>Search</ion-button>
+      </ion-col>
+      <ion-col size="12">
+        <table>
+          <thead>
+            <tr>
+              <th>Site Name</th>
+              <th>Project Name</th>
+              <th>Operation</th>
+              <th>Weight</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Site1</td>
+              <td>Collection & Transportation</td>
+              <td>Windrows</td>
+              <td>5 tons</td>
+            </tr>
+            <tr>
+              <td>Site1</td>
+              <td>Collection & Transportation</td>
+              <td>Windrows</td>
+              <td>5 tons</td>
+            </tr>
+            <tr>
+              <td>Site1</td>
+              <td>Collection & Transportation</td>
+              <td>Windrows</td>
+              <td>5 tons</td>
+            </tr>
+            <tr>
+              <td>Site1</td>
+              <td>Collection & Transportation</td>
+              <td>Windrows</td>
+              <td>5 tons</td>
+            </tr>
+            <tr>
+              <td>Site1</td>
+              <td>Collection & Transportation</td>
+              <td>Windrows</td>
+              <td>5 tons</td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

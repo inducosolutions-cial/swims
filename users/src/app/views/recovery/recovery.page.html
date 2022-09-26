@@ -1,0 +1,401 @@
+<ion-content>
+  <div *ngIf="currentStep === 1">
+    <ion-row class="content-area">
+      <ion-col size="12" class="title">
+        <ion-button type="button" size="small" color="dark" fill="clear" (click)="backToHome()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>Material Recovery Facilities
+      </ion-col>
+    </ion-row>
+    <ion-row class="content-area">
+      <ion-col size="12">
+        <ion-card (click)="this.onMenuClick(item)" *ngFor="let item of menuData">
+          <ion-card-header>
+            <ion-row>
+              <ion-col size="12" [ngClass]="item.className">
+                <div class="title">{{item.title}}</div>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!--STEP 2 ------------------------------- -->
+  <div *ngIf="currentStep === 2 && selectedMenu === 'material'">
+    <ion-row class="content-area">
+      <ion-col size="12" class="title">
+        <ion-button type="button" size="small" color="dark" fill="clear" (click)="previousStep()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>Material Recovery Facilities
+      </ion-col>
+    </ion-row>
+    <ion-row style="align-items: center;">
+      <ion-col size="6" class="title" style="text-align: left;">
+        {{this.selectedMenuLabel}}
+      </ion-col>
+      <ion-col size="6" style="text-align: right;">
+        <ion-button color="dark" size="small">Save</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="content-area">
+      <ion-col size="12">
+        <ion-accordion-group>
+          <ion-accordion value="first">
+            <ion-item slot="header" color="secondary">
+              <ion-label>In Put</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item>
+                  <ion-label position="floating">Type</ion-label>
+                  <ion-select placeholder="Select Material Type">
+                    <ion-select-option value="Mixed waste">Mixed waste</ion-select-option>
+                    <ion-select-option value="Dry waste">Dry waste</ion-select-option>
+                    <ion-select-option value="Wet waste">Wet waste</ion-select-option>
+                    <ion-select-option value="Diesel">Diesel</ion-select-option>
+                    <ion-select-option value="EM solution">EM solution</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Quantity</ion-label>
+                  <ion-input type="text" value="0"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Source</ion-label>
+                  <ion-input type="text" value=""></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Reference</ion-label>
+                  <ion-input type="text" value=""></ion-input>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="second">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Out Put</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item>
+                  <ion-label position="floating">Type</ion-label>
+                  <ion-select placeholder="Select Material Type">
+                    <ion-select-option value="Compost">Compost</ion-select-option>
+                    <ion-select-option value="RDF">RDF</ion-select-option>
+                    <ion-select-option value="Plastic">Plastic</ion-select-option>
+                    <ion-select-option value="Paper">Paper</ion-select-option>
+                    <ion-select-option value="Metals">Metals</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Quantity</ion-label>
+                  <ion-input type="text" value="0"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Source</ion-label>
+                  <ion-input type="text" value=""></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Reference</ion-label>
+                  <ion-input type="text" value=""></ion-input>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="third">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Consumption</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item>
+                  <ion-label position="floating">Vehicle Number</ion-label>
+                  <ion-input type="text" value=""></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Fuel Consumption</ion-label>
+                  <ion-input type="text" value=""></ion-input>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-col>
+
+    </ion-row>
+  </div>
+  <div *ngIf="currentStep === 2 && selectedMenu === 'manpower'">
+    <ion-row class="content-area">
+      <ion-col size="12" class="title">
+        <ion-button type="button" size="small" color="dark" fill="clear" (click)="previousStep()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>Material Recovery Facilities
+      </ion-col>
+    </ion-row>
+    <ion-row style="align-items: center;">
+      <ion-col size="6" class="title" style="text-align: left;">
+        {{this.selectedMenuLabel}}
+      </ion-col>
+      <ion-col size="6" style="text-align: right;">
+        <ion-button color="dark" size="small">Save</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="content-area">
+      <ion-col size="12">
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Category</ion-label>
+            <ion-select placeholder="Select Category">
+              <ion-select-option value="Project Head">Project Head</ion-select-option>
+              <ion-select-option value="Operation Head">Operation Head</ion-select-option>
+              <ion-select-option value="Supervisor">Supervisor</ion-select-option>
+              <ion-select-option value="Tricycle Operator">Tricycle Operator</ion-select-option>
+              <ion-select-option value="Drivers">Drivers</ion-select-option>
+              <ion-select-option value="Helpers">Helpers</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Name</ion-label>
+            <ion-input type="text" value=""></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+
+    </ion-row>
+  </div>
+  <div *ngIf="currentStep === 2 && selectedMenu === 'vehicles'">
+    <ion-row class="content-area">
+      <ion-col size="12" class="title">
+        <ion-button type="button" size="small" color="dark" fill="clear" (click)="previousStep()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>Material Recovery Facilities
+      </ion-col>
+    </ion-row>
+    <ion-row style="align-items: center;">
+      <ion-col size="6" class="title" style="text-align: left;">
+        {{this.selectedMenuLabel}}
+      </ion-col>
+      <ion-col size="6" style="text-align: right;">
+        <ion-button color="dark" size="small">Save</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="content-area">
+      <ion-col size="12">
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Select Type</ion-label>
+            <ion-select>
+              <ion-select-option value="Primary">Primary</ion-select-option>
+              <ion-select-option value="Secondary">Secondary</ion-select-option>
+              <ion-select-option value="Tertiary">Tertiary</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Select Type Value</ion-label>
+            <ion-select>
+              <ion-select-option value="Primary">EV Vehicles</ion-select-option>
+              <ion-select-option value="Secondary">CNG Vehicles</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Total Vehicles</ion-label>
+            <ion-input type="text" value=""></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Running</ion-label>
+            <ion-input type="text" value=""></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Waiting</ion-label>
+            <ion-input type="text" value=""></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Idle</ion-label>
+            <ion-input type="text" value=""></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Breakdown</ion-label>
+            <ion-input type="text" value=""></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Inactive</ion-label>
+            <ion-input type="text" value=""></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="currentStep === 2 && selectedMenu === 'cash'">
+    <ion-row class="content-area">
+      <ion-col size="12" class="title">
+        <ion-button type="button" size="small" color="dark" fill="clear" (click)="previousStep()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>Material Recovery Facilities
+      </ion-col>
+    </ion-row>
+    <ion-row style="align-items: center;">
+      <ion-col size="6" class="title" style="text-align: left;">
+        {{this.selectedMenuLabel}}
+      </ion-col>
+      <ion-col size="6" style="text-align: right;">
+        <ion-button color="dark" size="small">Save</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="content-area">
+      <ion-col size="12">
+        <ion-accordion-group>
+          <ion-accordion value="first">
+            <ion-item slot="header" color="secondary">
+              <ion-label>In Put</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item>
+                  <ion-label position="floating">Product</ion-label>
+                  <ion-input type="text" value=""></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Quantity</ion-label>
+                  <ion-input type="text" value="0"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Reference</ion-label>
+                  <ion-input type="text" value=""></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Document details</ion-label>
+                  <ion-input type="text" value=""></ion-input>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="second">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Out Put</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-list>
+                  <ion-item>
+                    <ion-label position="floating">Purpose</ion-label>
+                    <ion-input type="text" value=""></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label position="floating">Details</ion-label>
+                    <ion-input type="text" value=""></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label position="floating">Amount</ion-label>
+                    <ion-input type="text" value=""></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label position="floating">Voucher number</ion-label>
+                    <ion-input type="text" value=""></ion-input>
+                  </ion-item>
+                </ion-list>
+              </ion-list>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-col>
+
+    </ion-row>
+  </div>
+  <div *ngIf="currentStep === 2 && selectedMenu === 'process'">
+    <ion-row class="content-area">
+      <ion-col size="12" class="title">
+        <ion-button type="button" size="small" color="dark" fill="clear" (click)="previousStep()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>Material Recovery Facilities
+      </ion-col>
+    </ion-row>
+    <ion-row style="align-items: center;">
+      <ion-col size="6" class="title" style="text-align: left;">
+        {{this.selectedMenuLabel}}
+      </ion-col>
+      <ion-col size="6" style="text-align: right;">
+        <ion-button color="dark" size="small">Save</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="content-area">
+      <ion-col size="12" style="overflow-y: auto;">
+        <ion-col size="12">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Activity</ion-label>
+              <ion-select placeholder="Select Process">
+                <ion-select-option value="Windrow Formation">Windrow Formation</ion-select-option>
+                <ion-select-option value="Screening">Screening</ion-select-option>
+                <ion-select-option value="Turning">Turning</ion-select-option>
+                <ion-select-option value="Inoculum Spraying">Inoculum Spraying</ion-select-option>
+                <ion-select-option value="Shredding">Shredding</ion-select-option>
+                <ion-select-option value="Segregation">Segregation</ion-select-option>
+                <ion-select-option value="Baling">Baling</ion-select-option>
+                <ion-select-option value="Packing">Packing</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Quantity</ion-label>
+              <ion-input type="text" value=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Fleet (km)</ion-label>
+              <ion-input type="text" value=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Machinery (hrs)</ion-label>
+              <ion-input type="text" value=""></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="currentStep === 2 && selectedMenu === 'processmrf'">
+    <ion-row class="content-area">
+      <ion-col size="12" class="title">
+        <ion-button type="button" size="small" color="dark" fill="clear" (click)="previousStep()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>Material Recovery Facilities
+      </ion-col>
+    </ion-row>
+    <ion-row style="align-items: center;">
+      <ion-col size="6" class="title" style="text-align: left;">
+        {{this.selectedMenuLabel}}
+      </ion-col>
+      <ion-col size="6" style="text-align: right;">
+        <ion-button color="dark" size="small">Save</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="content-area">
+      <ion-col size="12" style="overflow-y: auto;">
+        <ion-col size="12">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Activity</ion-label>
+              <ion-select placeholder="Select Process">
+                <ion-select-option value="Shredding">Shredding</ion-select-option>
+                <ion-select-option value="Segregation">Segregation</ion-select-option>
+                <ion-select-option value="Baling">Baling</ion-select-option>
+                <ion-select-option value="Packing">Packing</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Quantity</ion-label>
+              <ion-input type="text" value=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Fleet (km)</ion-label>
+              <ion-input type="text" value=""></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Machinery (hrs)</ion-label>
+              <ion-input type="text" value=""></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

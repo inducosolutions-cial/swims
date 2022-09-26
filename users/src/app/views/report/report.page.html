@@ -1,0 +1,585 @@
+<ion-content>
+  <div *ngIf="currentStep === 1">
+    <ion-row class="content-area">
+      <ion-col size="12" class="title">
+        <ion-button type="button" size="small" color="dark" fill="clear" (click)="backToHome()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>Reports
+      </ion-col>
+    </ion-row>
+    <ion-row class="content-area">
+      <ion-col size="12">
+        <ion-card (click)="this.onMenuClick(item)" *ngFor="let item of menuData">
+          <ion-card-header>
+            <ion-row>
+              <ion-col size="12" [ngClass]="item.className">
+                <div class="title">{{item.title}}</div>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!--STEP 2 ------------------------------- -->
+  <div *ngIf="currentStep === 2 && selectedMenu === 'ct'">
+    <ion-row class="content-area">
+      <ion-col size="12" class="title">
+        <ion-button type="button" size="small" color="dark" fill="clear" (click)="previousStep()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>Reports
+      </ion-col>
+    </ion-row>
+    <ion-row style="align-items: center;">
+      <ion-col size="6" class="title" style="text-align: left;">
+        {{this.selectedMenuLabel}}
+      </ion-col>
+      <ion-col size="6" style="text-align: right;">
+
+      </ion-col>
+    </ion-row>
+    <ion-row class="content-area">
+      <ion-col size="12">
+        <ion-accordion-group>
+          <ion-accordion value="first">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Revenue</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <div class="search-block">
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div> - </div>
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div class="button-block">
+                  <ion-button color="dark" size="small">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">QTY</th>
+                    <th class="leftAlign">Revenue</th>
+                    <th class="leftAlign">Recyclables</th>
+                    <th class="leftAlign">User charges​</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="second">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Material</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <div class="search-block">
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div> - </div>
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div class="button-block">
+                  <ion-button color="dark" size="small">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">Open Stock</th>
+                    <th class="leftAlign">Closing Stock​</th>
+                    <th class="leftAlign">Inward​</th>
+                    <th class="leftAlign">Outward​​</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="third">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Operations</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <div class="search-block">
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div> - </div>
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div class="button-block">
+                  <ion-button color="dark" size="small">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">Manpower</th>
+                    <th class="leftAlign">Vehicles​</th>
+                    <th class="leftAlign">Cash</th>
+                    <th class="leftAlign">Complaint</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="currentStep === 2 && selectedMenu === 'pd'">
+    <ion-row class="content-area">
+      <ion-col size="12" class="title">
+        <ion-button type="button" size="small" color="dark" fill="clear" (click)="previousStep()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>Reports
+      </ion-col>
+    </ion-row>
+    <ion-row style="align-items: center;">
+      <ion-col size="6" class="title" style="text-align: left;">
+        {{this.selectedMenuLabel}}
+      </ion-col>
+      <ion-col size="6" style="text-align: right;">
+
+      </ion-col>
+    </ion-row>
+    <ion-row class="content-area">
+      <ion-col size="12">
+        <ion-accordion-group>
+          <ion-accordion value="first">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Revenue</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <div class="search-block">
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div> - </div>
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div class="button-block">
+                  <ion-button color="dark" size="small">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">QTY</th>
+                    <th class="leftAlign">Revenue</th>
+                    <th class="leftAlign">Recyclables</th>
+                    <th class="leftAlign">User charges​</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="second">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Material</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <div class="search-block">
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div> - </div>
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div class="button-block">
+                  <ion-button color="dark" size="small">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">Open Stock</th>
+                    <th class="leftAlign">Closing Stock​</th>
+                    <th class="leftAlign">Inward​</th>
+                    <th class="leftAlign">Outward​​</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="third">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Operations</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <div class="search-block">
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div> - </div>
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div class="button-block">
+                  <ion-button color="dark" size="small">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">Manpower</th>
+                    <th class="leftAlign">Vehicles​</th>
+                    <th class="leftAlign">Cash</th>
+                    <th class="leftAlign">Complaint</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="currentStep === 2 && selectedMenu === 'bio'">
+    <ion-row class="content-area">
+      <ion-col size="12" class="title">
+        <ion-button type="button" size="small" color="dark" fill="clear" (click)="previousStep()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>Reports
+      </ion-col>
+    </ion-row>
+    <ion-row style="align-items: center;">
+      <ion-col size="6" class="title" style="text-align: left;">
+        {{this.selectedMenuLabel}}
+      </ion-col>
+      <ion-col size="6" style="text-align: right;">
+
+      </ion-col>
+    </ion-row>
+    <ion-row class="content-area">
+      <ion-col size="12">
+        <ion-accordion-group>
+          <ion-accordion value="first">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Revenue</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <div class="search-block">
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div> - </div>
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div class="button-block">
+                  <ion-button color="dark" size="small">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">QTY</th>
+                    <th class="leftAlign">Revenue</th>
+                    <th class="leftAlign">Recyclables</th>
+                    <th class="leftAlign">User charges​</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="second">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Material</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <div class="search-block">
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div> - </div>
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div class="button-block">
+                  <ion-button color="dark" size="small">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">Open Stock</th>
+                    <th class="leftAlign">Closing Stock​</th>
+                    <th class="leftAlign">Inward​</th>
+                    <th class="leftAlign">Outward​​</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="third">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Operations</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <div class="search-block">
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div> - </div>
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div class="button-block">
+                  <ion-button color="dark" size="small">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">Manpower</th>
+                    <th class="leftAlign">Vehicles​</th>
+                    <th class="leftAlign">Cash</th>
+                    <th class="leftAlign">Complaint</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="currentStep === 2 && selectedMenu === 'mrf'">
+    <ion-row class="content-area">
+      <ion-col size="12" class="title">
+        <ion-button type="button" size="small" color="dark" fill="clear" (click)="previousStep()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>Reports
+      </ion-col>
+    </ion-row>
+    <ion-row style="align-items: center;">
+      <ion-col size="6" class="title" style="text-align: left;">
+        {{this.selectedMenuLabel}}
+      </ion-col>
+      <ion-col size="6" style="text-align: right;">
+
+      </ion-col>
+    </ion-row>
+    <ion-row class="content-area">
+      <ion-col size="12">
+        <ion-accordion-group>
+          <ion-accordion value="first">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Revenue</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <div class="search-block">
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div> - </div>
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div class="button-block">
+                  <ion-button color="dark" size="small">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">QTY</th>
+                    <th class="leftAlign">Revenue</th>
+                    <th class="leftAlign">Recyclables</th>
+                    <th class="leftAlign">User charges​</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="second">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Material</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <div class="search-block">
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div> - </div>
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div class="button-block">
+                  <ion-button color="dark" size="small">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">Open Stock</th>
+                    <th class="leftAlign">Closing Stock​</th>
+                    <th class="leftAlign">Inward​</th>
+                    <th class="leftAlign">Outward​​</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="third">
+            <ion-item slot="header" color="secondary">
+              <ion-label>Operations</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <div class="search-block">
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div> - </div>
+                <div class="input-block">
+                  <ion-input type="date"></ion-input>
+                </div>
+                <div class="button-block">
+                  <ion-button color="dark" size="small">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="leftAlign">Manpower</th>
+                    <th class="leftAlign">Vehicles​</th>
+                    <th class="leftAlign">Cash</th>
+                    <th class="leftAlign">Complaint</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                    <td class="leftAlign"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
