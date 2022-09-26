@@ -1,0 +1,112 @@
+@startuml
+
+object Address {
+    id : UUID
+    house : String
+    street : String
+    area : String
+    city : String
+    state : String
+    pin : Long 
+}
+
+object Role {
+    id : UUID
+    name : String
+    code : String
+    permissions: String
+}
+object Staff {
+  id : UUID
+  firstName : String
+  lastName : String
+  mobile : integer 
+  aadhar : integer
+  supervisor : UUID 
+  doj : Date
+  address: Address
+  role: Role
+} 
+
+object HouseUnit {
+  id : UUID
+  address : UUID
+  unit: integer
+  block: String   
+} 
+
+object Customer {
+    id : UUID
+    houseUnit : UUID
+    type: String
+    firstName : String
+    lastName : String
+    mobile : integer 
+    email: String
+    idProofType : String
+    idProofNumber: String
+    addressProofType : String
+    addressProofNumber : String
+}
+
+object Route {
+    id : UUID
+    name: String
+    mapData : byteCode
+    ward : UUID
+}
+
+object Ward {
+    id : UUID
+    name: String
+    mapData : byteCode
+    collectionCenter : UUID
+}
+
+object CollectionCenter {
+    id : UUID
+    name: String
+    latitude : double
+    longitude : double
+    processingCenter : UUID
+}
+
+object ProcessingCenter {
+    id : UUID
+    name: String
+    latitude : double
+    longitude : double
+    Project : UUID
+}
+
+object Project {
+    id : UUID
+    nameOfWork : String
+    shortName : String
+    location : UUID
+    latitude : double
+    longitude : double
+    ProjectManager : UUID
+}
+
+object Vehicle {
+    id : UUID
+    regNo : String
+    brand : String
+    model : String
+    engineNumber : String
+    chasisNumber : String
+    tareWeight : String
+    grossWeight : String
+    weightCapacity : integer
+    weightCapacityUOM : String
+    volumeCapacity : integer
+    volumeCapacityUOM : String
+    regValidityDate : Date
+    pollutionCertificate : boolean
+    pollutionExpiryDate : Date
+    insuranceCertificate: boolean
+    insuranceExpiryDate: Date
+}
+
+@enduml
