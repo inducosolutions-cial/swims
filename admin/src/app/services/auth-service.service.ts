@@ -6,7 +6,10 @@ import { Injectable } from '@angular/core';
 export class AuthServiceService {
   isAuthenticated:Boolean = true;
   tokenVal = "fasdfas"
-  constructor() { }
+  constructor() {
+
+
+   }
   getAuthStatus():Boolean{
     return this.isAuthenticated;
   }
