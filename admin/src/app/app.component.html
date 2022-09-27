@@ -1,40 +1,25 @@
 
-<div class="container-fluid app-container">
-  <div class="p-2 main-header">
-    <img src="assets/cubebioEnergy.jpeg" />
-  </div>
-  <div class="p-2 main-content">
-    <div class="menu-block">
+<div class="container-fluid app-container" *ngIf="this.authService.getAuthStatus() === true">
+  <div class="menu-block">
+    <div class="logo-container">
+      <img src="assets/cubebioEnergy.jpeg" />
+    </div>
+    <div class="menu-container">
       <ul>
-        <li  (click)="onMenuClick('admin')">
-          <div name="home"></div>&nbsp;
-          <div>Home</div>
-        </li>
-        <li (click)="onMenuClick('users')">
-          <div name="people"></div>&nbsp;
-          <div>User Management</div>
-        </li>
-        <li
-          (click)="onMenuClick('managesites')">
-          <div name="locate"></div>&nbsp;
-          <div>Site Management</div>
-        </li>
-        <li
-          (click)="onMenuClick('manageprojects')">
-          <div name="grid"></div>&nbsp;
-          <div>Project Management</div>
-        </li>
-        <li
-          (click)="onMenuClick('managemeterial')">
-          <div name="extension-puzzle"></div>&nbsp;
-          <div>Material Management</div>
-        </li>
-        <li (click)="onMenuClick('reports')">
-          <div name="layers"></div>&nbsp;
-          <div>Reports</div>
-        </li>
+        <ng-container *ngFor="let menuObj of this.menuData">
+          <li [ngClass]="{'menu-item-active':this.selectedMenu === menuObj.value,  'menu-item':this.selectedMenu !== menuObj.value}"  (click)="onMenuClick(menuObj.value)">
+            <div [innerHtml]="menuObj.icon"></div>&nbsp;&nbsp;<div class="title">{{menuObj.menuTitle}}</div>
+          </li>
+        </ng-container>
       </ul>
     </div>
+  </div>
+  <div class="main-content">
+    <div class="content-block"><router-outlet></router-outlet></div>
+  </div>
+</div>
+<div class="container-fluid login-container" *ngIf="this.authService.getAuthStatus() === false">
+  <div class="p-2 main-content">
     <div class="content-block"><router-outlet></router-outlet></div>
   </div>
 </div>

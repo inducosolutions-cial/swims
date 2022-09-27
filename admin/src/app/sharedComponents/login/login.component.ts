@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService:AuthServiceService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authService.getAuthStatus() === true){
+      this.router.navigate(['/']);
+    }
   }
+  forgotAlertPrompt(){
 
+  }
 }

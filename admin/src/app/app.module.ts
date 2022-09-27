@@ -5,9 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { LoginComponent } from './sharedComponents/login/login.component';
+import { AuthgaurdGuard } from './services/authgaurd.guard';
+import { AuthServiceService } from './services/auth-service.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Interceptor } from './services/interceptor';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthgaurdGuard] },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
@@ -21,7 +26,10 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    AuthServiceService,
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
+  ],
   exports: [RouterModule],
   bootstrap: [AppComponent]
 })
