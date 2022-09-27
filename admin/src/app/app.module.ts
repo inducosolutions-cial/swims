@@ -19,6 +19,7 @@ import { ChargesComponent } from './views/charges/charges.component';
 import { PaymentsComponent } from './views/payments/payments.component';
 import { ComplaintsComponent } from './views/complaints/complaints.component';
 import { SettingsComponent } from './views/settings/settings.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -54,7 +55,8 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgbModule
   ],
   providers: [
     AuthServiceService,

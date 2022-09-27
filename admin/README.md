@@ -1,6 +1,5 @@
 # Installations
 ng add @ng-bootstrap/ng-bootstrap@12.1.2
-npm i angular-font-awesome --save
 
 # Saved
 npm install bootstrap bootstrap-icons --save
