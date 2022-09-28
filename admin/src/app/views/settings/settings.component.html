@@ -1,1 +1,357 @@
-<p>settings works!</p>
+<div class="row page-container">
+  <div class="col-12 page-header">
+    <div class="col-12 nav-block">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="row" style="width: 100%; padding: 0px; margin: 0px">
+          <div class="col-6 d-flex align-items-center">
+            <div class="breadcrumbs" style="width: 100%">Settings</div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="row m-4 page-container">
+    <div class="col-12 my-4 page-content">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button
+            class="nav-link active"
+            id="nav-state-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-state"
+            type="button"
+            role="tab"
+            aria-controls="nav-state"
+            aria-selected="true"
+          >
+            State and City
+          </button>
+          <button
+            class="nav-link"
+            id="nav-category-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-category"
+            type="button"
+            role="tab"
+            aria-controls="nav-category"
+            aria-selected="false"
+          >
+            Category
+          </button>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="nav-state"
+          role="tabpanel"
+          aria-labelledby="nav-state-tab"
+        >
+          <div class="d-flex justify-content-center mt-5">
+            <div class="col-6 stateContainer">
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-success btn-sm mb-2">
+                  Add State
+                </button>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  id="state"
+                  class="form-control my-3"
+                  placeholder="Enter State Name"
+                />
+              </div>
+              <div class="statePage p-3">
+                <div
+                  class="border rounded border-dark d-flex justify-content-between p-1"
+                >
+                  <div>
+                    <span><i class="bi bi-caret-down-fill"></i></span>
+                    <span class="ms-2">State</span>
+                  </div>
+                  <div>
+                    <span>add</span><span class="mx-3">edit</span
+                    ><span>del</span>
+                  </div>
+                </div>
+                <div
+                  class="border rounded border-dark border-top-0 d-flex justify-content-between p-1 ms-2"
+                >
+                  <div>
+                    <span><i class="bi bi-caret-right-fill"></i></span>
+                    <span class="ms-2">City</span>
+                  </div>
+                  <div><span class="mx-3">edit</span><span>del</span></div>
+                </div>
+              </div>
+              <!-- <div class="row mt-3">
+                <div class="col-6">
+                  <div class="col-10">
+                    <div class="form-group">
+                      <label for="state" class="form-label">Create State</label>
+                      <input
+                        type="text"
+                        id="state"
+                        class="form-control"
+                        placeholder="Enter State Name"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-10 d-flex justify-content-end mt-2">
+                    <button class="btn btn-secondary btn-sm">Create</button>
+                  </div>
+                  <div class="col-8 mt-2">
+                    <div class="p-2 stateDashboard">
+                      <div><b>Available States</b></div>
+                      <ol>
+                        <li>Telangana</li>
+                        <li>Andhra Pradesh</li>
+                        <li>Telangana</li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="col-10">
+                    <label for="selState" class="form-label">State</label>
+                    <select class="form-select" id="selState">
+                      <option selected>Select State</option>
+                      <option value="1">Telangana</option>
+                      <option value="2">Andhra Pradesh</option>
+                      <option value="3">Tamil Nadu</option>
+                    </select>
+                  </div>
+                  <div class="col-10 my-3">
+                    <div class="form-group">
+                      <label for="city" class="form-label">Create City</label>
+                      <input
+                        type="text"
+                        id="city"
+                        class="form-control"
+                        placeholder="Enter City Name"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-10 d-flex justify-content-end mt-2">
+                    <button class="btn btn-secondary btn-sm">Create</button>
+                  </div>
+                </div>
+                <div class="col-12 d-flex gap-3 mt-2">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="checkState"
+                    />
+                    <label class="form-check-label" for="checkState"> State </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="checkCity"
+                    />
+                    <label class="form-check-label" for="checkCity"> City </label>
+                  </div>
+                </div>
+                <div class="col-11 mt-4">
+                  <table class="table">
+                    <thead class="table-dark">
+                      <tr>
+                        <th scope="col">SNo</th>
+                        <th scope="col">State/City</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Telangana</td>
+                        <td></td>
+                        <td>
+                          <button class="btn btn-secondary btn-sm me-3">
+                            <i class="bi bi-pencil-square"></i></button
+                          ><button class="btn btn-secondary btn-sm">
+                            <i class="bi bi-archive"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Andhra Pradesh</td>
+                        <td></td>
+                        <td>
+                          <button class="btn btn-secondary btn-sm me-3">
+                            <i class="bi bi-pencil-square"></i></button
+                          ><button class="btn btn-secondary btn-sm">
+                            <i class="bi bi-archive"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>Tamil Nadu</td>
+                        <td></td>
+                        <td>
+                          <button class="btn btn-secondary btn-sm me-3">
+                            <i class="bi bi-pencil-square"></i></button
+                          ><button class="btn btn-secondary btn-sm">
+                            <i class="bi bi-archive"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>-->
+            </div>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="nav-category"
+            role="tabpanel"
+            aria-labelledby="nav-category-tab"
+          >
+            <div class="row mt-3">
+              <div class="col-6">
+                <div class="col-10">
+                  <div class="form-group">
+                    <label for="category" class="form-label"
+                      >Create Category</label
+                    >
+                    <input
+                      type="text"
+                      id="category"
+                      class="form-control"
+                      placeholder="Enter Category"
+                    />
+                  </div>
+                </div>
+                <div class="col-10 d-flex justify-content-end mt-2">
+                  <button class="btn btn-secondary btn-sm">Create</button>
+                </div>
+                <div class="col-8 mt-2">
+                  <div class="p-2 stateDashboard">
+                    <div><b>Available Categories</b></div>
+                    <ol>
+                      <li>Commercial</li>
+                      <li>Health Care</li>
+                      <li>E-Waste</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="col-10">
+                  <label for="selCategory" class="form-label"
+                    >Sub Category</label
+                  >
+                  <select class="form-select" id="selCategory">
+                    <option selected>Select Category</option>
+                    <option value="1">Commercial</option>
+                    <option value="2">Health Care</option>
+                    <option value="3">E-Waste</option>
+                  </select>
+                </div>
+                <div class="col-10 my-3">
+                  <div class="form-group">
+                    <label for="city" class="form-label"
+                      >Create Sub Category</label
+                    >
+                    <input
+                      type="text"
+                      id="subCategory"
+                      class="form-control"
+                      placeholder="Enter Sub Category Name"
+                    />
+                  </div>
+                </div>
+                <div class="col-10 d-flex justify-content-end mt-2">
+                  <button class="btn btn-secondary btn-sm">Create</button>
+                </div>
+              </div>
+              <div class="col-12 d-flex gap-3 mt-2">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="checkState"
+                  />
+                  <label class="form-check-label" for="checkState">
+                    category
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="checkCity"
+                  />
+                  <label class="form-check-label" for="checkCity">
+                    Sub Category
+                  </label>
+                </div>
+              </div>
+              <div class="col-11 mt-4">
+                <table class="table">
+                  <thead class="table-dark">
+                    <tr>
+                      <th scope="col">SNo</th>
+                      <th scope="col">Category/Sub Category</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Commercial</td>
+                      <td></td>
+                      <td>
+                        <button class="btn btn-secondary btn-sm me-3">
+                          <i class="bi bi-pencil-square"></i></button
+                        ><button class="btn btn-secondary btn-sm">
+                          <i class="bi bi-archive"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Health Care</td>
+                      <td></td>
+                      <td>
+                        <button class="btn btn-secondary btn-sm me-3">
+                          <i class="bi bi-pencil-square"></i></button
+                        ><button class="btn btn-secondary btn-sm">
+                          <i class="bi bi-archive"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>E-Waste</td>
+                      <td></td>
+                      <td>
+                        <button class="btn btn-secondary btn-sm me-3">
+                          <i class="bi bi-pencil-square"></i></button
+                        ><button class="btn btn-secondary btn-sm">
+                          <i class="bi bi-archive"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
