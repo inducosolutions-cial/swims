@@ -38,12 +38,14 @@
             class="btn btn-primary forgotPassBtn"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
+            data-backdrop=""
           >
             Forgot Password?
           </button>
 
           <div
-            class="modal fade"
+            class="modal"
+            data-backdrop="false"
             id="staticBackdrop"
             data-bs-backdrop="static"
             data-bs-keyboard="false"
@@ -71,7 +73,13 @@
                   >
                     Cancel
                   </button>
-                  <button type="button" class="btn btn-success">OK</button>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    (click)="navigateToResetPassword()"
+                  >
+                    OK
+                  </button>
                 </div>
               </div>
             </div>

@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthServiceService {
-  isAuthenticated: Boolean = true;
+  isAuthenticated: Boolean = false;
   tokenVal = 'fasdfas';
   constructor() {}
   getAuthStatus(): Boolean {

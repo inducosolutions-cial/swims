@@ -12,15 +12,19 @@
         font-weight: 600;
       }      
   }
-  /*.stateDashboard{
-    background-color: #e9e7fc;
-    border: none;
-    border-radius: 5px;;
-  }*/
-
+  
   .statePage{
-    background-color: #d3d4d6;
+   border: 3px solid #e1e3ed;
     border-radius: 5px;
+  }
+
+  .stateList{
+    background-color: #fafafa;
+  }
+
+  .reportInfoBlockType{
+    font-weight: 700;
+    font-size: 20px;
   }
 }
 
