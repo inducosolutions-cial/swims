@@ -1,14 +1,8 @@
-ion-card {
-  margin: 10px !important;
-  ion-card-header,
-  ion-row,
-  ion-col {
-    padding: 0px;
-  }
-}
+
 .content-area {
   display: flex;
   justify-content: center;
+
 }
 .btn-con {
   padding: 20px !important;
@@ -36,9 +30,43 @@ ion-card {
 .leaf-block {
   background-color: #92d050;
 }
-ion-card {
-  cursor: pointer;
+.default-block{
+  background-color: #f7f8fa;
+  border: solid .5px #d9d9d9;
+  border-radius: 5px;
 }
+.card-container{
+  display: flex;
+  ion-card {
+    margin: 3px !important;
+    cursor: pointer;
+    width: 200px;
+    ion-card-header,
+    ion-row,
+    ion-col {
+      padding: 0px;
+    }
+    .holder{
+      display: block;
+      text-align: center;
+      .title {
+        width: 100%;
+        font-weight: 600;
+        font-size: 0.7rem;
+        color: #096907;
+        text-align: center;
+      }
+      .icon {
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: #333;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
+
 .userinfo {
   .title {
     font-size: 0.8rem;

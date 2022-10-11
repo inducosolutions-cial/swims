@@ -22,9 +22,7 @@ export class AppComponent implements OnInit {
       if (flag === false) {
         this.navCtrl.navigateRoot('login');
       } else {
-        if (this.apiService.isAdminRole === true) {
-          this.navCtrl.navigateRoot('admin');
-        } else {
+        if (this.apiService.isAdminRole === false) {
           this.navCtrl.navigateRoot('home');
         }
       }

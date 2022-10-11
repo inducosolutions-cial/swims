@@ -9,7 +9,7 @@ export class AuthServiceService {
   constructor() {
 
 
-   }
+  }
   getAuthStatus():Boolean{
     return this.isAuthenticated;
   }

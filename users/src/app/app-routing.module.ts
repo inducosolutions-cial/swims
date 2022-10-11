@@ -108,6 +108,15 @@ const routes: Routes = [
     loadChildren: () =>
       import('./views/report/report.module').then((m) => m.ReportPageModule),
   },
+  {
+    path: 'registration',
+    loadChildren: () => import('./views/registration/registration.module').then( m => m.RegistrationPageModule)
+  },
+  {
+    path: 'payment',
+    loadChildren: () => import('./views/payment/payment.module').then( m => m.PaymentPageModule)
+  },
+
 ];
 
 @NgModule({

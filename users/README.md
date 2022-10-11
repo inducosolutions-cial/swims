@@ -9,3 +9,7 @@
    ionic cordova build android
 5. For website - ionic build --prod
 6. for debug - ionic cordova run android --device -l --debug
+
+
+# Installations
+npm i ionic-selectable

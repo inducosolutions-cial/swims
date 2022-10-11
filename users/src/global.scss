@@ -36,7 +36,6 @@ td {
   border: 0.5px solid #d2d2d2;
   padding: 5px;
   text-align: center;
-  height: 30px;
 }
 table {
   width: 100%;
@@ -49,12 +48,14 @@ table {
   td {
     font-size: 0.7rem;
     font-weight: 400;
+    border: 0.5px solid #d2d2d2;
   }
   .title {
     color: #333 !important;
     font-weight: 600 !important;
     font-size: 0.8rem !important;
     text-align: left;
+    background-color: #edefed;
   }
   .value {
     font-size: 0.8rem !important;

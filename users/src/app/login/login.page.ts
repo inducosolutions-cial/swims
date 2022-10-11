@@ -91,7 +91,6 @@ export class LoginPage implements OnInit {
         this.loginForm.get('userId').value,
         this.loginForm.get('password').value
       );
-      console.log(response['success']);
       if (response['success'] === false) {
         this.showAlert(response['message']);
       }

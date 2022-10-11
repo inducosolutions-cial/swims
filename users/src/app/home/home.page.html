@@ -13,8 +13,16 @@
               <td class="value leftAlign">Supervisor</td>
             </tr>
             <tr>
-              <td class="title leftAlign">Location</td>
+              <td class="title leftAlign">Ward</td>
+              <td class="value leftAlign">102</td>
+            </tr>
+            <tr>
+              <td class="title leftAlign">City</td>
               <td class="value leftAlign">Hyderabad</td>
+            </tr>
+            <tr>
+              <td class="title leftAlign">State</td>
+              <td class="value leftAlign">Telangana</td>
             </tr>
           </tbody>
         </table>
@@ -22,11 +30,17 @@
     </ion-row>
     <ion-row class="content-area">
       <ion-col size="12">
+
+      </ion-col>
+      <ion-col class="card-container" size="12">
         <ion-card (click)="this.onMenuClick(item.type)" *ngFor="let item of menuData">
           <ion-card-header>
             <ion-row>
               <ion-col size="12" [ngClass]="item.className">
-                <div class="title">{{item.title}}</div>
+                <div class="holder">
+                  <div class="icon" [innerHtml]="item.icon"></div>
+                  <div class="title">{{item.title}}</div>
+                </div>
               </ion-col>
             </ion-row>
           </ion-card-header>

@@ -9,37 +9,26 @@ import { NavController } from '@ionic/angular';
 export class HomePage {
   menuData = [
     {
-      title: 'Collection & Transportation',
-      type: 'collection',
-      className: 'btn-con gray-block',
+      title: 'Payments',
+      type: 'payment',
+      icon: '<i class="bi bi-currency-rupee"></i>',
+      className: 'btn-con default-block',
     },
     {
-      title: 'Processing & Disposal',
-      type: 'processing',
-      className: 'btn-con red-block',
+      title: 'Registration',
+      type: 'registration',
+      icon: '<i class="bi bi-journal-plus"></i>',
+      className: 'btn-con default-block',
     },
     {
-      title: 'Biomining',
-      type: 'biomining',
-      className: 'btn-con brown-block',
+      title: 'Reports',
+      type: 'report',
+      icon: '<i class="bi bi-table"></i>',
+      className: 'btn-con default-block',
     },
-    {
-      title: 'Material Recovery Facilities',
-      type: 'recovery',
-      className: 'btn-con green-block',
-    },
-    { title: 'Reports', type: 'report', className: 'btn-con leaf-block' },
   ];
   constructor(private navCtrl: NavController) {}
   onMenuClick(btnType) {
-    if (btnType === 'collection') {
-      this.navCtrl.navigateRoot('collection');
-    } else if (btnType === 'amount') {
-      this.navCtrl.navigateRoot('amounts');
-    } else if (btnType === 'projects') {
-      this.navCtrl.navigateRoot('projects');
-    } else {
-      this.navCtrl.navigateRoot(btnType);
-    }
+    this.navCtrl.navigateRoot(btnType);
   }
 }
