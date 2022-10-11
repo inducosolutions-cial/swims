@@ -1,0 +1,30 @@
+.page-container {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    .page-header {
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      padding: 0px 5px;
+      border-bottom: 3px solid #e1e3ed;
+      .breadcrumbs {
+        font-weight: 600;
+      }      
+  }
+  
+  .statePage{
+   border: 3px solid #e1e3ed;
+    border-radius: 5px;
+  }
+
+  .stateList{
+    background-color: #fafafa;
+  }
+
+  .reportInfoBlockType{
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+

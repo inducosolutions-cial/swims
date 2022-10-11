@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
@@ -20,20 +21,57 @@ import { PaymentsComponent } from './views/payments/payments.component';
 import { ComplaintsComponent } from './views/complaints/complaints.component';
 import { SettingsComponent } from './views/settings/settings.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+<<<<<<< HEAD
+=======
+import { ResetpasswordComponent } from './sharedComponents/resetpassword/resetpassword.component';
+>>>>>>> 91e470385302d9e13ac7cba6f684c2b7b8c425b3
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthgaurdGuard] },
-  { path: 'attendence', component: AttendenceComponent, canActivate: [AuthgaurdGuard] },
+  { path: 'resetpassword', component: ResetpasswordComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthgaurdGuard],
+  },
+  {
+    path: 'attendence',
+    component: AttendenceComponent,
+    canActivate: [AuthgaurdGuard],
+  },
   { path: 'users', component: UsersComponent, canActivate: [AuthgaurdGuard] },
   { path: 'sites', component: SitesComponent, canActivate: [AuthgaurdGuard] },
-  { path: 'customers', component: CustomersComponent, canActivate: [AuthgaurdGuard] },
+  {
+    path: 'customers',
+    component: CustomersComponent,
+    canActivate: [AuthgaurdGuard],
+  },
   { path: 'routes', component: RoutesComponent, canActivate: [AuthgaurdGuard] },
-  { path: 'vehicles', component: VehiclesComponent, canActivate: [AuthgaurdGuard] },
-  { path: 'charges', component: ChargesComponent, canActivate: [AuthgaurdGuard] },
-  { path: 'payments', component: PaymentsComponent, canActivate: [AuthgaurdGuard] },
-  { path: 'complaints', component: ComplaintsComponent, canActivate: [AuthgaurdGuard] },
-  { path: 'settings', component: SettingsComponent, canActivate: [AuthgaurdGuard] },
+  {
+    path: 'vehicles',
+    component: VehiclesComponent,
+    canActivate: [AuthgaurdGuard],
+  },
+  {
+    path: 'charges',
+    component: ChargesComponent,
+    canActivate: [AuthgaurdGuard],
+  },
+  {
+    path: 'payments',
+    component: PaymentsComponent,
+    canActivate: [AuthgaurdGuard],
+  },
+  {
+    path: 'complaints',
+    component: ComplaintsComponent,
+    canActivate: [AuthgaurdGuard],
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    canActivate: [AuthgaurdGuard],
+  },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
@@ -42,6 +80,7 @@ const routes: Routes = [
     AppComponent,
     DashboardComponent,
     LoginComponent,
+    ResetpasswordComponent,
     UsersComponent,
     AttendenceComponent,
     SitesComponent,
@@ -51,18 +90,24 @@ const routes: Routes = [
     ChargesComponent,
     PaymentsComponent,
     ComplaintsComponent,
-    SettingsComponent
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
+<<<<<<< HEAD
     NgbModule
+=======
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+>>>>>>> 91e470385302d9e13ac7cba6f684c2b7b8c425b3
   ],
   providers: [
     AuthServiceService,
-    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
   ],
   exports: [RouterModule],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
