@@ -21,14 +21,12 @@ import { PaymentsComponent } from './views/payments/payments.component';
 import { ComplaintsComponent } from './views/complaints/complaints.component';
 import { SettingsComponent } from './views/settings/settings.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-<<<<<<< HEAD
-=======
 import { ResetpasswordComponent } from './sharedComponents/resetpassword/resetpassword.component';
->>>>>>> 91e470385302d9e13ac7cba6f684c2b7b8c425b3
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'resetpassword', component: ResetpasswordComponent },
+  //{ path: 'login', component: LoginComponent },
+  //{ path: 'resetpassword', component: ResetpasswordComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -95,13 +93,10 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-<<<<<<< HEAD
-    NgbModule
-=======
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
->>>>>>> 91e470385302d9e13ac7cba6f684c2b7b8c425b3
+    HttpClientModule,
   ],
   providers: [
     AuthServiceService,

@@ -10,332 +10,170 @@
       </nav>
     </div>
   </div>
-  <div class="row m-4 page-container">
+  <div class="row m-2 page-container">
     <div class="col-12 my-4 page-content">
       <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <button
-            class="nav-link active"
-            id="nav-state-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#nav-state"
-            type="button"
-            role="tab"
-            aria-controls="nav-state"
-            aria-selected="true"
-          >
-            State and City
+          <button class="nav-link active" id="nav-state-tab" data-bs-toggle="tab" data-bs-target="#nav-state"
+            type="button" role="tab" aria-controls="nav-state" aria-selected="true">
+            State, City and Wards
           </button>
-          <button
-            class="nav-link"
-            id="nav-category-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#nav-category"
-            type="button"
-            role="tab"
-            aria-controls="nav-category"
-            aria-selected="false"
-          >
+          <button class="nav-link" id="nav-category-tab" data-bs-toggle="tab" data-bs-target="#nav-category"
+            type="button" role="tab" aria-controls="nav-category" aria-selected="false">
             Category
           </button>
         </div>
       </nav>
+      <div class="alert alert-info my-2" role="alert">
+        Note
+      </div>
       <div class="tab-content" id="nav-tabContent">
-        <div
-          class="tab-pane fade show active"
-          id="nav-state"
-          role="tabpanel"
-          aria-labelledby="nav-state-tab"
-        >
-          <div class="d-flex justify-content-center mt-5">
-            <div class="row">
-              <div class="col-10 p-0">
-                <form [formGroup]="stateForm">
-                  <input
-                    type="text"
-                    id="state"
-                    class="form-control my-3"
-                    placeholder="Enter State Name"
-                    (keyup)="onKeyUp($event)"
-                    formControlName="state_name"
-                    [class.is-invalid]="
-                      this.stateForm.get('state_name').touched &&
-                      this.stateForm.get('state_name').invalid
-                    "
-                  />
-                </form>
+        <!-- States cities and wards -->
+        <div class="tab-pane fade show active" id="nav-state" role="tabpanel" aria-labelledby="nav-state-tab">
+          <div class="row d-flex my-3">
+            <div class="col-4 block">
+              <div class="block-title mb-2">States</div>
+              <div class="block-form d-flex mb-2">
+                <input type="text" class="form-control" placeholder="Enter New State" [(ngModel)]="this.newState">
+                <button type="button" class="btn btn-dark" (click)="createState()"
+                  [disabled]="this.newState.trim() === ''">Add</button>
               </div>
-              <div style="text-align: end" class="col-2 p-0 mt-3">
-                <button
-                  type="submit"
-                  class="btn btn-success btn-sm mt-1"
-                  [disabled]="this.stateForm.invalid"
-                  (click)="onClickAddStateBtn()"
-                >
-                  Add State
-                </button>
+              <div class="block-content">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.statesData.length === 0">
+                  No States Added
+                </div>
+                <div class="list-group" *ngIf="this.statesData.length > 0">
+                  <a type="button" (click)="onStateSelect(stateObj)"
+                    [ngClass]="this.selectedState['name'] === stateObj['name'] ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action'"
+                    *ngFor="let stateObj of this.statesData">
+                    <div class="d-flex justify-content-between align-items-center">
+                      {{stateObj['name']}} <button type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal"
+                      data-bs-target="#editModal" (click)="showEditModal(); $event.stopPropagation()"><i class="bi bi-pencil-square"></i></button>
+                    </div>
+                  </a>
+                </div>
               </div>
-              <div class="statePage p-3">
-                <div *ngFor="let stateObj of this.stateData">
-                  <div
-                    class="border rounded border-dark d-flex justify-content-between p-1"
-                  >
-                    <div>
-                      <span><i class="bi bi-caret-down-fill"></i></span>
-                      <span class="ms-2">{{ stateObj.state }}</span>
-                    </div>
-                    <div>
-                      <span
-                        ><button type="button" class="btn btn-success btn-sm">
-                          <i class="bi bi-plus"></i>City
-                        </button></span
-                      ><span class="mx-1"
-                        ><button type="button" class="btn btn-secondary btn-sm">
-                          <i class="bi bi-pencil-square"></i></button></span
-                      ><span
-                        ><button type="button" class="btn btn-danger btn-sm">
-                          <i class="bi bi-archive"></i></button
-                      ></span>
-                    </div>
-                  </div>
-                  <div
-                    *ngFor="let cityObj of stateObj.city"
-                    class="border rounded border-dark border-top-0 d-flex justify-content-between p-1 ms-2"
-                  >
-                    <div>
-                      <span><i class="bi bi-caret-right-fill"></i></span>
-                      <span class="ms-2">{{ cityObj.name }}</span>
-                    </div>
-                    <div>
-                      <span class="mx-1"
-                        ><button type="button" class="btn btn-secondary btn-sm">
-                          <i class="bi bi-pencil-square"></i></button></span
-                      ><span
-                        ><button type="button" class="btn btn-danger btn-sm">
-                          <i class="bi bi-archive"></i></button
-                      ></span>
-                    </div>
-                  </div>
+            </div>
+            <div class="col-4">
+              <div class="block-title mb-2">Cities/Towns</div>
+              <div class="block-form d-flex mb-2">
+                <input type="text" class="form-control" placeholder="Enter New City/Town" [(ngModel)]="this.newCity">
+                <button type="button" class="btn btn-dark" (click)="createCity()"
+                  [disabled]="this.selectedState === null || this.newCity.trim() === ''">Add</button>
+              </div>
+              <div class="block-content">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.citiesData.length === 0">
+                  No Cities/Towns Added
+                </div>
+                <div class="list-group" *ngIf="this.citiesData.length > 0">
+                  <a type="button" (click)="onCitySelect(cityObj)"
+                    [ngClass]="this.selectedCity['name'] === cityObj['name'] ? 'list-group-item list-group-item-action active':'list-group-item list-group-item-action'"
+                    *ngFor="let cityObj of this.citiesData">
+                    {{cityObj['name']}}
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="block-title mb-2">Wards</div>
+              <div class="block-form d-flex mb-2">
+                <input type="text" class="form-control" placeholder="Enter New Ward" [(ngModel)]="this.newWard">
+                <button type="button" class="btn btn-dark" (click)="createWard()"
+                  [disabled]="this.selectedState === null || this.selectedCity === null || this.newWard.trim() === ''">Add</button>
+              </div>
+              <div class="block-content">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.wardsData.length === 0">
+                  No Wards Added
+                </div>
+                <div class="list-group" *ngIf="this.wardsData.length > 0">
+                  <a type="button" (click)="onWardSelect(wardObj)"
+                    [ngClass]="this.selectedWard['name'] === wardObj['name'] ? 'list-group-item list-group-item-action active': 'list-group-item list-group-item-action'"
+                    *ngFor="let wardObj of this.wardsData">
+                    {{wardObj['name']}}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Categories and Sub Catigories -->
+        <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">
+          <div class="row d-flex my-3">
+            <div class="col-5 block">
+              <div class="block-title mb-2">Categories</div>
+              <div class="block-form d-flex mb-2">
+                <input type="text" class="form-control" placeholder="Enter New Category" [(ngModel)]="this.newCategory">
+                <button type="button" class="btn btn-dark" (click)="createCategory()"
+                  [disabled]="this.newCategory.trim() === ''">Add</button>
+              </div>
+              <div class="block-content">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.categoriesData.length === 0">
+                  No Categories Added
+                </div>
+                <div class="list-group" *ngIf="this.categoriesData.length > 0">
+                  <a type="button" (click)="onCategorySelect(catObj)"
+                    [ngClass]="this.selectedCategory['name'] === catObj['name'] ? 'list-group-item list-group-item-action active': 'list-group-item list-group-item-action'"
+                    *ngFor="let catObj of this.categoriesData">
+                    {{catObj['name']}}
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-5">
+              <div class="block-title mb-2">Sub Catigories</div>
+              <div class="block-form d-flex mb-2">
+                <input type="text" class="form-control" placeholder="Enter New Sub Category"
+                  [(ngModel)]="this.newSubCategory">
+                <button type="button" class="btn btn-dark" (click)="createSubCategory()"
+                  [disabled]="this.selectedCategory === null ||  this.newSubCategory.trim() === ''">Add</button>
+              </div>
+              <div class="block-content">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.subCategoriesData.length === 0">
+                  No Sub Categories Added
+                </div>
+                <div class="list-group" *ngIf="this.subCategoriesData.length > 0">
+                  <a type="button" (click)="onSubCategorySelect(subCatObj)"
+                    [ngClass]="this.selectedSubCategory['name'] === subCatObj['name'] ? 'list-group-item list-group-item-action active': 'list-group-item list-group-item-action'"
+                    *ngFor="let subCatObj of this.subCategoriesData">
+                    {{subCatObj['name']}}
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="tab-pane fade"
-          id="nav-category"
-          role="tabpanel"
-          aria-labelledby="nav-category-tab"
-        >
-          <div class="d-flex justify-content-center mt-5">
-            <div class="row">
-              <div class="col-9 p-0">
-                <form [formGroup]="this.categoryForm">
-                  <input
-                    type="text"
-                    id="category"
-                    class="form-control my-3"
-                    placeholder="Enter Category Name"
-                    formControlName="category_name"
-                    [class.is-invalid]="
-                      this.categoryForm.get('category_name').touched &&
-                      this.categoryForm.get('category_name').invalid
-                    "
-                  />
-                </form>
-              </div>
-              <div style="text-align: end" class="col-3 p-0 mt-3">
-                <button
-                  type="submit"
-                  class="btn btn-success btn-sm mt-1"
-                  [disabled]="this.categoryForm.invalid"
-                  (click)="onClickAddCategoryBtn()"
-                >
-                  Add Category
-                </button>
-              </div>
-              <div class="statePage p-3">
-                <div
-                  class="border rounded border-dark d-flex justify-content-between p-1"
-                >
-                  <div>
-                    <span><i class="bi bi-caret-down-fill"></i></span>
-                    <span class="ms-2">Category</span>
-                  </div>
-                  <div>
-                    <span
-                      ><button type="button" class="btn btn-success btn-sm">
-                        <i class="bi bi-plus"></i>City
-                      </button></span
-                    ><span class="mx-1"
-                      ><button type="button" class="btn btn-secondary btn-sm">
-                        <i class="bi bi-pencil-square"></i></button></span
-                    ><span
-                      ><button type="button" class="btn btn-danger btn-sm">
-                        <i class="bi bi-archive"></i></button
-                    ></span>
-                  </div>
+            class="modal"
+            id="editModal"
+            tabindex="-1"
+          >
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content p-4">
+                <div><b>Edit State</b></div>
+                <div class="mt-4">
+                  <input type="text" class="form-control" placeholder="Enter New State" [(ngModel)]="this.newState">
                 </div>
-                <div
-                  class="border rounded border-dark border-top-0 d-flex justify-content-between p-1 ms-2"
-                >
-                  <div>
-                    <span><i class="bi bi-caret-right-fill"></i></span>
-                    <span class="ms-2">Sub Category</span>
-                  </div>
-                  <div>
-                    <span class="mx-1"
-                      ><button type="button" class="btn btn-secondary btn-sm">
-                        <i class="bi bi-pencil-square"></i></button></span
-                    ><span
-                      ><button type="button" class="btn btn-danger btn-sm">
-                        <i class="bi bi-archive"></i></button
-                    ></span>
-                  </div>
+                <div class="mt-5 d-flex justify-content-end gap-2">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    data-bs-dismiss="modal"
+                    #closeModal
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    (click)="editModal()"
+                  >
+                    OK
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
 </div>
-
-<!--<div class="row page-container">
-  <div class="col-12 page-header">
-    <div class="col-12 nav-block">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="row" style="width: 100%; padding: 0px; margin: 0px">
-          <div class="col-6 d-flex align-items-center">
-            <div class="breadcrumbs" style="width: 100%">Reports</div>
-          </div>
-        </div>
-      </nav>
-    </div>
-  </div>
-  <div class="row m-4 page-container">
-    <div class="col-12 my-4 page-content">
-      <div class="row justify-content-around me-3">
-        <div class="col-2 text-center border rounded px-2 py-4">
-          <div class="reportInfoBlockType">All Payments</div>
-          <div class="mt-3 reportInfoBlockType" style="color: #0404fb">100</div>
-        </div>
-        <div class="col-2 text-center border rounded px-2 py-4">
-          <div class="reportInfoBlockType">Pending Payments</div>
-          <div class="mt-3 reportInfoBlockType" style="color: #ffa500">50</div>
-        </div>
-        <div class="col-2 text-center border rounded px-2 py-4">
-          <div class="reportInfoBlockType">Closed Payments</div>
-          <div class="mt-3 reportInfoBlockType" style="color: #ff0000">50</div>
-        </div>
-      </div>
-    </div>
-    <form>
-      <div class="col-12 d-flex gap-4">
-        <div class="col-2 form-group">
-          <label for="startDate" class="form-label">Start Date</label>
-          <input type="date" id="startDate" class="form-control" />
-        </div>
-        <div class="col-2 form-group">
-          <label for="endDate" class="form-label">End Date</label>
-          <input type="date" id="endDate" class="form-control" />
-        </div>
-      </div>
-    </form>
-    <div class="col-12 mt-3">
-      <table class="table">
-        <thead class="table-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Project Name</th>
-            <th scope="col">City</th>
-            <th scope="col">Ward</th>
-            <th scope="col">Payment Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>abc</td>
-            <td>Hyderabad</td>
-            <td>Ward-1</td>
-            <td>Closed</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Pqr</td>
-            <td>Hyderabad</td>
-            <td>Ward-2</td>
-            <td>Pending</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>xyz</td>
-            <td>Hyderabad</td>
-            <td>Ward-3</td>
-            <td>Closed</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>-->
-
-<!--<div class="row page-container">
-  <div class="col-12 page-header">
-    <div class="col-12 nav-block">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="row" style="width: 100%; padding: 0px; margin: 0px">
-          <div class="col-6 d-flex align-items-center">
-            <div class="breadcrumbs" style="width: 100%">Change Password</div>
-          </div>
-        </div>
-      </nav>
-    </div>
-  </div>
-  <div class="row m-4 page-container">
-    <div class="col-12 mt-4">
-      <div class="col-6">
-        <div class="form-group">
-          <label for="currentPassword" class="form-label"
-            >Current Password</label
-          >
-          <input
-            type="text"
-            id="currentPassword"
-            class="form-control"
-            placeholder="Enter Current Password"
-          />
-        </div>
-      </div>
-      <div class="col-6 my-3">
-        <div class="form-group">
-          <label for="newPassword" class="form-label">New Password</label>
-          <input
-            type="text"
-            id="newPassword"
-            class="form-control"
-            placeholder="Enter New Password"
-          />
-        </div>
-      </div>
-      <div class="col-6 my-3">
-        <div class="form-group">
-          <label for="confirmPassword" class="form-label"
-            >Confirm Password</label
-          >
-          <input
-            type="text"
-            id="confirmPassword"
-            class="form-control"
-            placeholder="Re-Enter Password"
-          />
-        </div>
-      </div>
-      <div class="col-6 d-flex justify-content-end">
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div>
-</div>-->

@@ -18,9 +18,10 @@
     <div class="content-block"><router-outlet></router-outlet></div>
   </div>
 </div>
-<div class="container-fluid login-container" *ngIf="this.authService.getAuthStatus() === false">
-  <div class="p-2 main-content">
-    <div class="content-block"><router-outlet></router-outlet></div>
-  </div>
+<div class="container-fluid login-container" *ngIf="this.authService.getAuthStatus() === false && this.appData.isResetPasswordView === false">
+  <app-login></app-login>
+</div>
+<div class="container-fluid login-container" *ngIf="this.authService.getAuthStatus() === false && this.appData.isResetPasswordView === true">
+  <app-resetpassword></app-resetpassword>
 </div>
 
