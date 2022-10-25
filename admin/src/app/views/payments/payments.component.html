@@ -1,1 +1,101 @@
-<p>payments works!</p>
+<div class="row page-container">
+  <div class="col-12 page-header">
+    <div class="col-12 nav-block">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="row" style="width: 100%; padding: 0px; margin: 0px">
+          <div class="col-6 d-flex align-items-center">
+            <div class="breadcrumbs" style="width: 100%">Payments</div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="col-12 my-4 ">
+    <div class="row d-flex my-2">
+      <div class="col-12 d-flex gap-2">
+        <div class="form-group">
+          <select class="form-select" [(ngModel)]="this.searchData.project" (change)="onSearchProjectSelect()">
+            <option value="">Select Project</option>
+            <option value="{{this.projectObj['project_id']}}" *ngFor="let projectObj of this.projectsData">
+              {{this.projectObj['project_name']}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-select" [(ngModel)]="this.searchData.ward" (change)="searchDataChange()">
+            <option value="">Select Ward</option>
+            <ng-container *ngFor="let wardObj of this.wardsSearchData">
+              <option value="{{this.wardObj['project_ward_id']}}">
+                {{this.wardObj['ward_name']}}</option>
+            </ng-container>
+          </select>
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="date" placeholder="Start Date"
+            [(ngModel)]="this.searchData.sDate" (keyup)="searchDataChange()" />
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="date" placeholder="End Date"
+            [(ngModel)]="this.searchData.eDate" (keyup)="searchDataChange()" />
+        </div>
+        <!-- <div class="form-group">
+          <select class="form-select" [(ngModel)]="this.searchData.customerType" (change)="onSearchCustTypeSelect()">
+            <option value="">Select Customer Type</option>
+            <option value="{{this.custObj['customer_type_id']}}" *ngFor="let custObj of this.searchCustTypesData">
+              {{this.custObj['customer_type']}}</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="this.searchData.customerType !== '' && this.searchCatsData.length > 0">
+          <select class="form-select" [(ngModel)]="this.searchData.category" (change)="onSearchCatSelect()">
+            <option value="">Select Category</option>
+            <option value="{{this.catObj['category_id']}}" *ngFor="let catObj of this.searchCatsData">
+              {{this.catObj['category_name']}}</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="this.searchData.customerType !== '' && this.searchData.category !== '' && this.searchSubCatsData.length > 0">
+          <select class="form-select" [(ngModel)]="this.searchData.subcategory">
+            <option value="">Select SubCategory</option>
+            <option value="{{this.subCatObj['sub_category_id']}}" *ngFor="let subCatObj of this.searchSubCatsData">
+              {{this.subCatObj['sub_category_name']}}</option>
+          </select>
+        </div>-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="table-dark">
+              <th>Date</th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Door No</th>
+              <th>Customer Type</th>
+              <th>Project</th>
+              <th>Ward</th>
+              <th>Supervisor</th>
+              <th>Paid Amount</th>
+              <th>Pending Amount</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="paymentsData.length > 0">
+            <tr *ngFor="let custObj of paymentsData">
+              <td>{{custObj['created_at'] | date:'dd MMM, YYYY'}}</td>
+              <td>{{custObj['payment_id']}}</td>
+              <td>{{custObj['customer_name']}}</td>
+              <td>{{custObj['house_no']}}</td>
+              <td>{{custObj['customer_type_name']}}</td>
+              <td>{{custObj['project_name']}}</td>
+              <td>{{custObj['project_ward_name']}}</td>
+              <td>{{custObj['supervisor_name']}}</td>
+              <td>{{custObj['amount']}}</td>
+              <td>{{custObj['pending_amount']}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="w-100 alert alert-secondary text-center" role="alert" *ngIf="paymentsData.length === 0">
+          No records Found
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

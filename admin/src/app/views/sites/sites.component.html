@@ -1,1 +1,204 @@
-<p>sites works!</p>
+<div class="row page-container">
+  <div class="col-12 page-header">
+    <div class="col-12 nav-block">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="row" style="width: 100%; padding: 0px; margin: 0px">
+          <div class="col-6 d-flex align-items-center">
+            <div class="breadcrumbs" style="width: 100%">Project Management</div>
+          </div>
+          <div class="col-6 d-flex align-items-center justify-content-end">
+            <button class="btn btn-dark" type="button" (click)="initiateProjectCreation()">Add New Project</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="row m-2 page-container">
+    <div class="col-12 my-4 page-content" *ngIf="currentView === 'projects'">
+      <div class="row">
+        <div class="col-12">
+          <table class="table table-bordered">
+            <thead>
+              <tr class="table-dark">
+                <th>SNo</th>
+                <th>Name</th>
+                <th>Project Type</th>
+                <th>Wards Count</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="projectsData.length > 0">
+              <tr *ngFor="let projectObj of projectsData; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{projectObj['project_name']}}</td>
+                <td>{{projectObj['project_type_name']}}</td>
+                <td>{{projectObj['wards_count']}}</td>
+                <td class="text-center"><button class="btn btn-sm btn-dark" (click)="editProject(projectObj)"><i
+                      class="bi bi-pencil-square"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="w-100 alert alert-secondary text-center" role="alert" *ngIf="projectsData.length === 0">
+            No Records Found
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 my-4 page-content" *ngIf="currentView === 'projectForm'">
+      <div class="row">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+          <span class="fw-bold">Create/Edit Project</span>
+        </div>
+        <form [formGroup]="projectForm" (ngSubmit)="submitProject()">
+          <div class="col-12">
+            <div class="row my-2">
+              <div class="col-6 my-1">
+                <div class="form-group">
+                  <label for="projecttype" class="form-label">Project Type:</label>
+                  <select class="form-select" formControlName="projecttype"
+                    [class.is-invalid]="this.projectForm.get('projecttype').touched && this.projectForm.get('projecttype').invalid"
+                    [(ngModel)]="this.projectObj.projecttype">
+                    <option value="">Select Project Type</option>
+                    <option value="{{this.projectTypeObj['project_type_id']}}" *ngFor="let projectTypeObj of this.projectTypeData">
+                      {{this.projectTypeObj['project_type_name']}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-6 my-1">
+                <div class="form-group">
+                  <label for="projname" class="form-label">Project Name*:</label>
+                  <input class="form-control" type="text" name="projname" formControlName="projname"
+                    placeholder="Enter Project Name"
+                    [class.is-invalid]="this.projectForm.get('projname').touched && this.projectForm.get('projname').invalid"
+                    [(ngModel)]="this.projectObj.projname" (keypress)="onValueChange($event)" name="projname"/>
+                </div>
+              </div>
+              <div class="col-12 my-1">
+                <div class="form-group">
+                  <label for="desc" class="form-label">Description*:</label>
+                  <textarea class="form-control" name="desc" formControlName="desc" rows="2" [class.is-invalid]="this.projectForm.get('desc').touched && this.projectForm.get('desc').invalid"
+                  [(ngModel)]="this.projectObj.desc"  (keypress)="onValueChange($event)" name="desc"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row my-2">
+              <div class="col-12 my-1">
+                <div class="form-group d-flex justify-content-end gap-2">
+                  <button class="btn btn-dark mx-2" (click)="cancelForm()" *ngIf="this.formAct === 'create'">Cancel</button>
+                  <button class="btn btn-success" type="submit" [disabled]="!this.projectForm.valid">
+                    <span *ngIf="this.formAct === 'create'">Create</span>
+                    <span *ngIf="this.formAct === 'edit'">Update</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="row" *ngIf="this.formAct === 'edit'">
+        <div class="col-12 d-flex justify-content-between align-items-center my-2">
+          <span class="fw-bold">Project Wards</span>
+          <button class="btn btn-dark mx-2" data-bs-toggle="modal" data-bs-target="#wardModalWin"  (click)="initiateCreateWard()">Add New</button>
+        </div>
+        <div class="col-12">
+          <table class="table table-bordered">
+            <thead>
+              <tr class="table-dark">
+                <th>Ward No</th>
+                <th>Ward Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="wardsData.length > 0">
+               <tr *ngFor="let wardObj of wardsData">
+                <td>{{wardObj['ward_number']}}</td>
+                <td>{{wardObj['ward_name']}}</td>
+                <td>{{wardObj['city_name']}}</td>
+                <td>{{wardObj['state_name']}}</td>
+                <td class="text-center"><button class="btn btn-sm btn-dark" data-bs-toggle="modal"
+                    data-bs-target="#wardModalWin" (click)="initiateEditWard(wardObj)"><i
+                      class="bi bi-pencil-square"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="w-100 alert alert-secondary text-center" role="alert" *ngIf="wardsData.length === 0">
+            No Wards Found
+          </div>
+        </div>
+        <div class="col-12 text-center my-4 mx-auto">
+          <button class="btn btn-dark" (click)="cancelForm()">Cancel</button>
+        </div>
+        <div  class="modal modal-xl" id="wardModalWin" tabindex="-1" aria-labelledby="wardModalWinLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4">
+              <div>
+                <b *ngIf="this.wardFormAct === 'create'">Add Ward</b>
+                <b *ngIf="this.wardFormAct === 'edit'">Edit Ward</b>
+              </div>
+              <form [formGroup]="wardForm" (ngSubmit)="submitWard()">
+                <div>
+                  <div class="row my-2">
+                    <div class="col-6 my-1">
+                      <div class="form-group">
+                        <label for="name" class="form-label">Ward Name*:</label>
+                        <input class="form-control" type="text" formControlName="wardname" placeholder="Enter Ward Name"
+                          [class.is-invalid]="this.wardForm.get('wardname').touched && this.wardForm.get('wardname').invalid"
+                          [(ngModel)]="this.wardObj.wardname" (keypress)="onValueChange($event)" name="wardname"/>
+                      </div>
+                    </div>
+                    <div class="col-6 my-1">
+                      <div class="form-group">
+                        <label for="wardno" class="form-label">Ward No*:</label>
+                        <input class="form-control" type="text" (keypress)="onValueChange($event)" name="wardno"
+                          formControlName="wardno" placeholder="Enter Ward Number"
+                          [class.is-invalid]="this.wardForm.get('wardno').touched && this.wardForm.get('wardno').invalid"
+                          [(ngModel)]="this.wardObj.wardno" />
+                      </div>
+                    </div>
+                    <div class="col-6 my-1">
+                      <div class="form-group">
+                        <label for="state" class="form-label">State*:</label>
+                        <select class="form-select" formControlName="state"
+                          [class.is-invalid]="this.wardForm.get('state').touched && this.wardForm.get('state').invalid"
+                          [(ngModel)]="this.wardObj.state" (change)="onStateSelect()">
+                          <option value="">Select State</option>
+                          <option value="{{this.stateObj['state_id']}}" *ngFor="let stateObj of this.statesData">
+                            {{this.stateObj['state_name']}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-6 my-1">
+                      <div class="form-group">
+                        <label for="city" class="form-label">City*:</label>
+                        <select class="form-select" formControlName="city"
+                          [class.is-invalid]="this.wardForm.get('city').touched && this.wardForm.get('city').invalid"
+                          [(ngModel)]="this.wardObj.city">
+                          <option value="">Select City</option>
+                          <option value="{{this.cityObj['city_id']}}" *ngFor="let cityObj of this.citiesData">
+                            {{this.cityObj['city_name']}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row my-2">
+                    <div class="col-12 my-1">
+                      <div class="form-group d-flex justify-content-end gap-2">
+                        <button class="btn btn-dark" type="button" data-bs-dismiss="modal" #closeModal>Cancel</button>
+                        <button class="btn btn-success" type="submit" [disabled]="!this.wardForm.valid"><span
+                            *ngIf="this.wardFormAct === 'create'">Create Ward
+                            User</span><span *ngIf="this.wardFormAct === 'edit'">Edit Ward</span></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

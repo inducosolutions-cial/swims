@@ -20,6 +20,55 @@ export class AuthServiceService {
     logout: this.rootPath + 'logout',
     getProfile: this.rootPath + 'getProfile',
     changePassword: this.rootPath + 'changePassword',
+
+    getStates: this.rootPath + 'getStates',
+    addState: this.rootPath + 'addState',
+    updateState: this.rootPath + 'updateState',
+    getCities: this.rootPath + 'getCities',
+    addCity: this.rootPath + 'addCity',
+    updateCity: this.rootPath + 'updateCity',
+
+
+    getUsers: this.rootPath + 'getUsers',
+    userRoles: this.rootPath + 'userRoles',
+    addUserRole: this.rootPath + 'addRole',
+    updateUserRole: this.rootPath + 'updateRole',
+    addUser: this.rootPath + 'addUser',
+    updateUser: this.rootPath + 'updateUser',
+
+
+    getCharges: this.rootPath + 'getCharges',
+    addCharge: this.rootPath + 'addCharge',
+    updateCharge: this.rootPath + 'updateCharge',
+
+
+    getProjects: this.rootPath + 'getProjects',
+    addProject: this.rootPath + 'addProject',
+    updateProject: this.rootPath + 'updateProject',
+
+    getWardsByProjectId: this.rootPath + 'getWardsByProjectId',
+    addProjectWard: this.rootPath + 'addProjectWard',
+    updateProjectWard: this.rootPath + 'updateProjectWard',
+
+    getProjectTypes: this.rootPath + 'getProjectTypes',
+    addProjectType: this.rootPath + 'addProjectType',
+    updateProjectType: this.rootPath + 'updateProjectType',
+
+    getCustomerTypes: this.rootPath + 'getCustomerTypes',
+    addCustomerType: this.rootPath + 'addCustomerType',
+    updateCustomerType: this.rootPath + 'updateCustomerType',
+    getCategories: this.rootPath + 'getCategories',
+    addCategory: this.rootPath + 'addCategory',
+    updateCategory: this.rootPath + 'updateCategory',
+    addSubCategory: this.rootPath + 'addSubCategory',
+    getSubCategories: this.rootPath + 'getSubCategories',
+    updateSubCategory: this.rootPath + 'updateSubCategory',
+
+    getCustomers: this.rootPath + 'getCustomers',
+    addCustomer: this.rootPath + 'addCustomer',
+    updateCustomer: this.rootPath + 'updateCustomer',
+
+    getPayments: this.rootPath + 'getPayments',
   }
   tokenVal = 'fasdfas';
   headerContent = {

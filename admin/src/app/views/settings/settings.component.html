@@ -15,23 +15,28 @@
       <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
           <button class="nav-link active" id="nav-state-tab" data-bs-toggle="tab" data-bs-target="#nav-state"
-            type="button" role="tab" aria-controls="nav-state" aria-selected="true">
-            State, City and Wards
+            type="button" role="tab" aria-controls="nav-state" aria-selected="true" (click)="onTabSelect('state')">
+            States and Cities
           </button>
-          <button class="nav-link" id="nav-category-tab" data-bs-toggle="tab" data-bs-target="#nav-category"
-            type="button" role="tab" aria-controls="nav-category" aria-selected="false">
-            Category
+          <button class="nav-link" id="nav-category-tab" data-bs-toggle="tab" data-bs-target="#nav-projects"
+            type="button" role="tab" aria-controls="nav-category" aria-selected="false" (click)="onTabSelect('projects')">
+            Project Types
+          </button>
+          <button class="nav-link" id="nav-category-tab" data-bs-toggle="tab" data-bs-target="#nav-customertype"
+            type="button" role="tab" aria-controls="nav-category" aria-selected="false"  (click)="onTabSelect('customertype')">
+            Customer Types
+          </button>
+          <button class="nav-link" id="nav-category-tab" data-bs-toggle="tab" data-bs-target="#nav-userroles"
+            type="button" role="tab" aria-controls="nav-category" aria-selected="false"  (click)="onTabSelect('userroles')">
+            User Roles
           </button>
         </div>
       </nav>
-      <div class="alert alert-info my-2" role="alert">
-        Note
-      </div>
       <div class="tab-content" id="nav-tabContent">
         <!-- States cities and wards -->
         <div class="tab-pane fade show active" id="nav-state" role="tabpanel" aria-labelledby="nav-state-tab">
           <div class="row d-flex my-3">
-            <div class="col-4 block">
+            <div class="col-5 block">
               <div class="block-title mb-2">States</div>
               <div class="block-form d-flex mb-2">
                 <input type="text" class="form-control" placeholder="Enter New State" [(ngModel)]="this.newState">
@@ -39,22 +44,27 @@
                   [disabled]="this.newState.trim() === ''">Add</button>
               </div>
               <div class="block-content">
-                <div class="alert alert-light text-center" role="alert" *ngIf="this.statesData.length === 0">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.showStateLoader === false && this.statesData.length === 0">
                   No States Added
                 </div>
-                <div class="list-group" *ngIf="this.statesData.length > 0">
+                <div class="d-flex justify-content-center align-items-center" *ngIf="this.showStateLoader === true">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;&nbsp;Loading...
+                </div>
+                <div class="list-group" *ngIf="this.showStateLoader === false && this.statesData.length > 0">
                   <a type="button" (click)="onStateSelect(stateObj)"
-                    [ngClass]="this.selectedState['name'] === stateObj['name'] ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action'"
+                    [ngClass]="this.selectedState['state_id'] === stateObj['state_id'] ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action'"
                     *ngFor="let stateObj of this.statesData">
                     <div class="d-flex justify-content-between align-items-center">
-                      {{stateObj['name']}} <button type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal"
-                      data-bs-target="#editModal" (click)="showEditModal(); $event.stopPropagation()"><i class="bi bi-pencil-square"></i></button>
+                      {{stateObj['state_name']}} <button type="button" class="btn btn-sm btn-dark"
+                        data-bs-toggle="modal" data-bs-target="#editModal"
+                        (click)="showEditModal(stateObj, 'state'); $event.stopPropagation()"><i
+                          class="bi bi-pencil-square"></i></button>
                     </div>
                   </a>
                 </div>
               </div>
             </div>
-            <div class="col-4">
+            <div class="col-5">
               <div class="block-title mb-2">Cities/Towns</div>
               <div class="block-form d-flex mb-2">
                 <input type="text" class="form-control" placeholder="Enter New City/Town" [(ngModel)]="this.newCity">
@@ -62,19 +72,27 @@
                   [disabled]="this.selectedState === null || this.newCity.trim() === ''">Add</button>
               </div>
               <div class="block-content">
-                <div class="alert alert-light text-center" role="alert" *ngIf="this.citiesData.length === 0">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.showCityLoader === false && this.citiesData.length === 0">
                   No Cities/Towns Added
                 </div>
-                <div class="list-group" *ngIf="this.citiesData.length > 0">
+                <div class="d-flex justify-content-center align-items-center" *ngIf="this.showCityLoader === true">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;&nbsp;Loading...
+                </div>
+                <div class="list-group" *ngIf="this.showCityLoader === false && this.citiesData.length > 0">
                   <a type="button" (click)="onCitySelect(cityObj)"
-                    [ngClass]="this.selectedCity['name'] === cityObj['name'] ? 'list-group-item list-group-item-action active':'list-group-item list-group-item-action'"
+                    [ngClass]="this.selectedCity['city_id'] === cityObj['city_id'] ? 'list-group-item list-group-item-action active':'list-group-item list-group-item-action'"
                     *ngFor="let cityObj of this.citiesData">
-                    {{cityObj['name']}}
+                    <div class="d-flex justify-content-between align-items-center">
+                      {{cityObj['city_name']}} <button type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal"
+                        data-bs-target="#editModal"
+                        (click)="showEditModal(cityObj, 'city'); $event.stopPropagation()"><i
+                          class="bi bi-pencil-square"></i></button>
+                    </div>
                   </a>
                 </div>
               </div>
             </div>
-            <div class="col-4">
+            <!--<div class="col-4">
               <div class="block-title mb-2">Wards</div>
               <div class="block-form d-flex mb-2">
                 <input type="text" class="form-control" placeholder="Enter New Ward" [(ngModel)]="this.newWard">
@@ -82,97 +100,204 @@
                   [disabled]="this.selectedState === null || this.selectedCity === null || this.newWard.trim() === ''">Add</button>
               </div>
               <div class="block-content">
-                <div class="alert alert-light text-center" role="alert" *ngIf="this.wardsData.length === 0">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.showWardLoader === false && this.wardsData.length === 0">
                   No Wards Added
                 </div>
-                <div class="list-group" *ngIf="this.wardsData.length > 0">
-                  <a type="button" (click)="onWardSelect(wardObj)"
-                    [ngClass]="this.selectedWard['name'] === wardObj['name'] ? 'list-group-item list-group-item-action active': 'list-group-item list-group-item-action'"
+                <div class="d-flex justify-content-center align-items-center" *ngIf="this.showWardLoader === true">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;&nbsp;Loading...
+                </div>
+                <div class="list-group" *ngIf="this.showWardLoader === false && this.wardsData.length > 0">
+                  <a type="button" (click)="onWardSelect(wardObj)" class="list-group-item list-group-item-action"
                     *ngFor="let wardObj of this.wardsData">
-                    {{wardObj['name']}}
+                    <div class="d-flex justify-content-between align-items-center">
+                      {{wardObj['ward_name']}} <button type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal"
+                        data-bs-target="#editModal"
+                        (click)="showEditModal(wardObj, 'ward'); $event.stopPropagation()"><i
+                          class="bi bi-pencil-square"></i></button>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>-->
+          </div>
+        </div>
+         <!-- Project -->
+         <div class="tab-pane fade" id="nav-projects" role="tabpanel" aria-labelledby="nav-category-tab">
+          <div class="row d-flex my-3">
+            <div class="col-6">
+              <div class="block-title mb-2">Project Types</div>
+              <div class="block-form d-flex mb-2">
+                <input type="text" class="form-control" placeholder="Enter New Project Type" [(ngModel)]="this.newProject">
+                <button type="button" class="btn btn-dark" (click)="createProject()"
+                  [disabled]="this.newProject.trim() === ''">Add</button>
+              </div>
+              <div class="block-content">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.showProjectLoader === false && this.projectsData.length === 0">
+                  No ProjectTypes Added
+                </div>
+                <div class="d-flex justify-content-center align-items-center" *ngIf="this.showProjectLoader === true">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;&nbsp;Loading...
+                </div>
+                <div class="list-group" *ngIf="this.showProjectLoader === false && this.projectsData.length > 0">
+                  <a type="button" (click)="onProjectSelect(projectObj)" class="list-group-item list-group-item-action"
+                    *ngFor="let projectObj of this.projectsData">
+                    <div class="d-flex justify-content-between align-items-center">
+                      {{projectObj['project_type_name']}} <button type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal"
+                        data-bs-target="#editModal"
+                        (click)="showEditModal(projectObj, 'project'); $event.stopPropagation()"><i
+                          class="bi bi-pencil-square"></i></button>
+                    </div>
                   </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- Categories and Sub Catigories -->
-        <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">
+         <!-- User Roles -->
+         <div class="tab-pane fade" id="nav-userroles" role="tabpanel" aria-labelledby="nav-category-tab">
           <div class="row d-flex my-3">
-            <div class="col-5 block">
-              <div class="block-title mb-2">Categories</div>
+            <div class="col-6">
+              <div class="block-title mb-2">User Roles</div>
+              <div class="block-form d-flex mb-2">
+                <input type="text" class="form-control" placeholder="Enter New User Role" [(ngModel)]="this.newUserRole">
+                <button type="button" class="btn btn-dark" (click)="createUserRole()"
+                  [disabled]="this.newUserRole.trim() === ''">Add</button>
+              </div>
+              <div class="block-content">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.showUserRoleLoader === false && this.userRolesData.length === 0">
+                  No User Roles Added
+                </div>
+                <div class="d-flex justify-content-center align-items-center" *ngIf="this.showUserRoleLoader === true">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;&nbsp;Loading...
+                </div>
+                <div class="list-group" *ngIf="this.showUserRoleLoader === false && this.userRolesData.length > 0">
+                  <a type="button" (click)="onUserRoleSelect(userRoleObj)" class="list-group-item list-group-item-action"
+                    *ngFor="let userRoleObj of this.userRolesData">
+                    <div class="d-flex justify-content-between align-items-center">
+                      {{userRoleObj['role_name']}} <button type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal"
+                        data-bs-target="#editModal"
+                        (click)="showEditModal(userRoleObj, 'userRole'); $event.stopPropagation()"><i
+                          class="bi bi-pencil-square"></i></button>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Customer Types, Categories and Sub Catigories -->
+        <div class="tab-pane fade" id="nav-customertype" role="tabpanel" aria-labelledby="nav-category-tab">
+          <div class="row d-flex my-3">
+            <div class="col-4 block">
+              <div class="block-title mb-2">Customer Type</div>
+              <div class="block-form d-flex mb-2">
+                <input type="text" class="form-control" placeholder="Enter New Customer Type" [(ngModel)]="this.newCustomerType">
+                <button type="button" class="btn btn-dark" (click)="createCustomerType()"
+                  [disabled]="this.newCustomerType.trim() === ''">Add</button>
+              </div>
+              <div class="block-content">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.showCustomerTypesLoader === false && this.customerTypesData.length === 0">
+                  No Customer Types Added
+                </div>
+                <div class="d-flex justify-content-center align-items-center" *ngIf="this.showCustomerTypesLoader === true">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;&nbsp;Loading...
+                </div>
+                <div class="list-group" *ngIf="this.showCustomerTypesLoader === false && this.customerTypesData.length > 0">
+                  <a type="button" (click)="onCustomerTypeSelect(custTypeObj)"
+                    [ngClass]="this.selectedCustomerType['customer_type_id'] === custTypeObj['customer_type_id'] ? 'list-group-item list-group-item-action active' : 'list-group-item list-group-item-action'"
+                    *ngFor="let custTypeObj of this.customerTypesData">
+                    <div class="d-flex justify-content-between align-items-center">
+                      {{custTypeObj['customer_type']}} <button type="button" class="btn btn-sm btn-dark"
+                        data-bs-toggle="modal" data-bs-target="#editModal"
+                        (click)="showEditModal(custTypeObj, 'customertype'); $event.stopPropagation()"><i
+                          class="bi bi-pencil-square"></i></button>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="block-title mb-2">Category</div>
               <div class="block-form d-flex mb-2">
                 <input type="text" class="form-control" placeholder="Enter New Category" [(ngModel)]="this.newCategory">
                 <button type="button" class="btn btn-dark" (click)="createCategory()"
-                  [disabled]="this.newCategory.trim() === ''">Add</button>
+                  [disabled]="this.selectedCustomerType === null || this.newCategory.trim() === ''">Add</button>
               </div>
               <div class="block-content">
-                <div class="alert alert-light text-center" role="alert" *ngIf="this.categoriesData.length === 0">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.showCatLoader === false && this.categoriesData.length === 0">
                   No Categories Added
                 </div>
-                <div class="list-group" *ngIf="this.categoriesData.length > 0">
+                <div class="d-flex justify-content-center align-items-center" *ngIf="this.showCatLoader === true">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;&nbsp;Loading...
+                </div>
+                <div class="list-group" *ngIf="this.showCatLoader === false && this.categoriesData.length > 0">
                   <a type="button" (click)="onCategorySelect(catObj)"
-                    [ngClass]="this.selectedCategory['name'] === catObj['name'] ? 'list-group-item list-group-item-action active': 'list-group-item list-group-item-action'"
+                    [ngClass]="this.selectedCategory['category_id'] === catObj['category_id'] ? 'list-group-item list-group-item-action active':'list-group-item list-group-item-action'"
                     *ngFor="let catObj of this.categoriesData">
-                    {{catObj['name']}}
+                    <div class="d-flex justify-content-between align-items-center">
+                      {{catObj['category_name']}} <button type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal"
+                        data-bs-target="#editModal"
+                        (click)="showEditModal(catObj, 'category'); $event.stopPropagation()"><i
+                          class="bi bi-pencil-square"></i></button>
+                    </div>
                   </a>
                 </div>
               </div>
             </div>
-            <div class="col-5">
-              <div class="block-title mb-2">Sub Catigories</div>
+            <div class="col-4">
+              <div class="block-title mb-2">Sub Category</div>
               <div class="block-form d-flex mb-2">
-                <input type="text" class="form-control" placeholder="Enter New Sub Category"
-                  [(ngModel)]="this.newSubCategory">
+                <input type="text" class="form-control" placeholder="Enter New SubCategory" [(ngModel)]="this.newSubCategory">
                 <button type="button" class="btn btn-dark" (click)="createSubCategory()"
-                  [disabled]="this.selectedCategory === null ||  this.newSubCategory.trim() === ''">Add</button>
+                  [disabled]="this.selectedCustomerType === null || this.selectedCategory === null || this.newSubCategory.trim() === ''">Add</button>
               </div>
               <div class="block-content">
-                <div class="alert alert-light text-center" role="alert" *ngIf="this.subCategoriesData.length === 0">
+                <div class="alert alert-light text-center" role="alert" *ngIf="this.showSubCatLoader === false && this.subCategoriesData.length === 0">
                   No Sub Categories Added
                 </div>
-                <div class="list-group" *ngIf="this.subCategoriesData.length > 0">
-                  <a type="button" (click)="onSubCategorySelect(subCatObj)"
-                    [ngClass]="this.selectedSubCategory['name'] === subCatObj['name'] ? 'list-group-item list-group-item-action active': 'list-group-item list-group-item-action'"
+                <div class="d-flex justify-content-center align-items-center" *ngIf="this.showSubCatLoader === true">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;&nbsp;Loading...
+                </div>
+                <div class="list-group" *ngIf="this.showSubCatLoader === false && this.subCategoriesData.length > 0">
+                  <a type="button" (click)="onWardSelect(subCatObj)" class="list-group-item list-group-item-action"
                     *ngFor="let subCatObj of this.subCategoriesData">
-                    {{subCatObj['name']}}
+                    <div class="d-flex justify-content-between align-items-center">
+                      {{subCatObj['sub_category_name']}} <button type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal"
+                        data-bs-target="#editModal"
+                        (click)="showEditModal(subCatObj, 'subcategory'); $event.stopPropagation()"><i
+                          class="bi bi-pencil-square"></i></button>
+                    </div>
                   </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div
-            class="modal"
-            id="editModal"
-            tabindex="-1"
-          >
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content p-4">
-                <div><b>Edit State</b></div>
-                <div class="mt-4">
-                  <input type="text" class="form-control" placeholder="Enter New State" [(ngModel)]="this.newState">
-                </div>
-                <div class="mt-5 d-flex justify-content-end gap-2">
-                  <button
-                    type="button"
-                    class="btn btn-success"
-                    data-bs-dismiss="modal"
-                    #closeModal
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-success"
-                    (click)="editModal()"
-                  >
-                    OK
-                  </button>
-                </div>
+        <div class="modal" id="editModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4">
+              <div *ngIf="this.editType === 'state'"><b>Edit State</b></div>
+              <div *ngIf="this.editType === 'city'"><b>Edit City</b></div>
+              <div *ngIf="this.editType === 'ward'"><b>Edit Ward</b></div>
+              <div *ngIf="this.editType === 'category'"><b>Edit Category</b></div>
+              <div *ngIf="this.editType === 'subcategory'"><b>Edit Sub Category</b></div>
+              <div *ngIf="this.editType === 'customertype'"><b>Edit Customer Type</b></div>
+              <div *ngIf="this.editType === 'project'"><b>Edit Project</b></div>
+              <div *ngIf="this.editType === 'userRole'"><b>Edit User Role</b></div>
+              <div class="mt-4">
+                <input type="text" class="form-control" placeholder="Enter label" [(ngModel)]="this.editValue">
+              </div>
+              <div class="mt-5 d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" #closeModal>
+                  Cancel
+                </button>
+                <button type="button" class="btn btn-success" (click)="editSubmit()">
+                  OK
+                </button>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>

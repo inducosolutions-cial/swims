@@ -88,7 +88,18 @@ ul, li{
   list-style-type: none;
   padding-inline-start: 5px !important;
 }
-
-
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+th{
+  font-size: 14px;
+  font-weight: 500;
+}
+td{
+  font-size: 14px;
+  font-weight: 400;
+  vertical-align: middle;
+}
+.modal-backdrop {
+  //display: none !important;
+}
+.offcanvas-backdrop{
+  display: none !important;
+}

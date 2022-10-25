@@ -1,44 +1,68 @@
+/* eslint-disable object-shorthand */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/member-ordering */
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
-import { Platform } from '@ionic/angular';
+import { LoadingController, Platform } from '@ionic/angular';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HTTP } from '@awesome-cordova-plugins/http/ngx';
+import { BehaviorSubject } from 'rxjs';
+import { AppdataService } from './appdata.service';
+
 const TOKEN_KEY = 'auth-token';
 const USER_DATA = 'user-data';
+
 @Injectable({
   providedIn: 'root',
 })
 export class ApicommunicatorService {
   @Output() isLocalDataAvailable: EventEmitter<any> = new EventEmitter();
-  rootPath = 'http://dev.thegiftbank.in/public/api/';
+  private _storage: Storage | null = null;
+  rootPath = 'http://cubebioapi.inducosolutions.com/';
   apiservices = {
-    login: this.rootPath + 'login',
+   login: this.rootPath + 'login',
+    sendForgetPassword: this.rootPath + 'sendForgetPassword',
+    resetPassword: this.rootPath + 'resetPassword',
+    logout: this.rootPath + 'logout',
+    getProfile: this.rootPath + 'getProfile',
+    changePassword: this.rootPath + 'changePassword',
+
+    getStates: this.rootPath + 'getStates',
+    getCities: this.rootPath + 'getCities',
+    getUsers: this.rootPath + 'getUsers',
+    getCustomerTypes: this.rootPath + 'getCustomerTypes',
+    getCategories: this.rootPath + 'getCategories',
+    getSubCategories: this.rootPath + 'getSubCategories',
+    getCustomers: this.rootPath + 'getCustomers',
+    addCustomer: this.rootPath + 'addCustomer',
+
+    getCustomerAddress: this.rootPath + 'getCustomerAddress',
+    confirmPayment: this.rootPath + 'confirmPayment',
   };
   isDesktop = false;
   isUserLoggedIn = false;
-  isAdminRole = false;
-  loginData = {
-    'admin@cubebioenergy.co.in': { role: 'admin', password: '123456' },
-    'ashokalluri@cubebioenergy.co.in': {
-      role: 'supervisor',
-      password: '123456',
-    },
-    'umamaheswar@cubebioenergy.co.in': {
-      role: 'supervisor',
-      password: '123456',
-    },
-    'ram@cubebioenergy.co.in': {
-      role: 'supervisor',
-      password: '123456',
-    },
-    'srinadha@cubebioenergy.co.in': {
-      role: 'supervisor',
-      password: '123456',
-    },
+  isMobileUser = false;
+  authenticationState = new BehaviorSubject(false);
+
+  headerContent = {
+    'Content-Type': 'application/json',
   };
+  headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Accept', 'application/json')
+    .set('responseType', 'text');
+
   constructor(
     private storage: Storage,
     private network: Network,
-    public plt: Platform
+    public plt: Platform,
+    public loadingController: LoadingController,
+    private httpClient: HttpClient,
+    public http: HTTP,
+    private appData: AppdataService,
   ) {
     this.plt.ready().then(() => {
       if (this.plt.is('cordova')) {
@@ -47,7 +71,6 @@ export class ApicommunicatorService {
           console.log('network was disconnected :-(');
         });
         this.network.onConnect().subscribe(() => {
-          console.log('network connected!');
           setTimeout(() => {
             console.log('Internet Connection : ' + this.network.type);
             this.createLocalStorageInstance();
@@ -63,10 +86,14 @@ export class ApicommunicatorService {
     });
   }
   async createLocalStorageInstance() {
-    await this.storage.create();
+    this._storage = await this.storage.create();
     this.checkToken();
   }
   async checkToken() {
+    const loading = await this.loadingController.create({
+      message: 'Checking local Data',
+    });
+    loading.present();
     this.storage.length().then((res) => {
       console.log(res);
       if (res === 0) {
@@ -74,41 +101,88 @@ export class ApicommunicatorService {
       } else {
         this.storage.get(USER_DATA).then((uData) => {
           if (uData) {
+            this.appData.userData = uData;
+            this.authenticationState.next(true);
             this.isLocalDataAvailable.emit(true);
           }
         });
       }
+      loading.dismiss();
     });
   }
-  login(username, password) {
-    console.log(this.loginData[username]);
-    if (this.loginData[username] === undefined) {
-      return { success: false, message: 'Invalid UserID' };
-    } else if (this.loginData[username].password !== password) {
-      return { success: false, message: 'Incorrect Username / Password' };
-    } else {
-      if (
-        this.loginData[username].role === 'admin' &&
-        this.isDesktop === false
-      ) {
-        return { success: false, message: 'Admin can login in desktop only' };
-      } else if (
-        this.loginData[username].role === 'supervisor' &&
-        this.isDesktop === true
-      ) {
-        return {
-          success: false,
-          message: 'Supervisor can login in Device only',
-        };
-      } else {
-        this.isAdminRole = this.isDesktop;
-        this.isUserLoggedIn = true;
-        this.isLocalDataAvailable.emit(true);
-        return { success: true };
-      }
-    }
+  storValuetoDevice(keyStr, valueStr) {
+    this.storage.set(keyStr, valueStr);
   }
-  checkSession() {
-    console.log('Checking session');
+  isAuthenticated() {
+    return this.authenticationState.value;
+  }
+  logout() {
+    this.storage.remove(USER_DATA);
+    return this.storage.remove(TOKEN_KEY).then(() => {
+      this.storage.clear();
+      this.authenticationState.next(false);
+    });
+  }
+
+  async login(dataObj: any): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      const url = this.apiservices.login;
+      this.httpClient
+        .post<any>(url, dataObj, { headers: this.headers })
+        .subscribe({
+          next: (responseData) => {
+            console.log('login Response : ', JSON.stringify(responseData));
+            if (responseData.success === false) {
+              this.authenticationState.next(false);
+              resolve(responseData);
+            } else {
+              this.appData.userData = responseData.data;
+              this.headers.set('Authorization','Bearer ' + this.appData.userData.token),
+              this.storValuetoDevice(TOKEN_KEY, this.appData.userData.token);
+              this.storValuetoDevice(USER_DATA, this.appData.userData);
+              this.isLocalDataAvailable.emit(true);
+              this.authenticationState.next(true);
+              resolve(responseData);
+            }
+          },
+          error: (error) => {
+            this.authenticationState.next(false);
+            reject(false);
+          },
+        });
+    });
+  }
+  async apiCommunication(apiStr, dataObj) {
+    //dataObj['auth_id'] = this.appData.userData['id'];
+    return new Promise((resolve, reject) => {
+      const url = this.apiservices[apiStr];
+      console.log(url+':'+JSON.stringify(dataObj));
+      this.httpClient
+        .post<any>(url, dataObj, { headers: this.headers })
+        .subscribe({
+          next: (responseData) => {
+            console.log(JSON.stringify(responseData));
+            resolve(responseData);
+          },
+          error: (error) => {
+            console.log('Error ' + JSON.stringify(error));
+            reject(false);
+          },
+        });
+    });
+  }
+  public getAPICommun(apiStr): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      const url = this.apiservices[apiStr];
+      this.httpClient.get<any>(url, { headers: this.headers }).subscribe({
+        next: (responseData) => {
+          resolve(responseData);
+        },
+        error: (error) => {
+          console.log('GetAPICommun : ', JSON.stringify(error));
+          reject(false);
+        },
+      });
+    });
   }
 }

@@ -19,7 +19,7 @@ export class AppComponent {
       value: 'dashboard',
     },
     {
-      menuTitle: 'Site Management',
+      menuTitle: 'Project Management',
       icon: '<i class="bi bi-geo-alt-fill"></i>',
       value: 'sites',
     },

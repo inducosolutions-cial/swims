@@ -10,24 +10,32 @@
     <ion-col size="12">
       <table class="userinfo">
         <tr>
-          <td class="title">First Name</td>
-          <td class="value">AshoK Alluri</td>
+          <td class="title">User ID</td>
+          <td class="value">{{this.appData.profileData.user_id}}</td>
+        </tr>
+        <tr>
+          <td class="title">Role</td>
+          <td class="value">{{this.appData.profileData.role_name}}</td>
+        </tr>
+        <tr>
+          <td class="title">Name</td>
+          <td class="value">{{this.appData.profileData.name}}</td>
         </tr>
         <tr>
           <td class="title">Email</td>
-          <td class="value">ashokalluri@gmail.com</td>
+          <td class="value">{{this.appData.profileData.email}}</td>
         </tr>
         <tr>
           <td class="title">Mobile</td>
-          <td class="value">9999999999</td>
+          <td class="value">{{this.appData.profileData.mobile}}</td>
         </tr>
         <tr>
           <td class="title">Site Location</td>
-          <td class="value">Corprate Office, Hyderabad</td>
+          <td class="value">{{this.appData.profileData.mobile}}</td>
         </tr>
         <tr>
-          <td class="title">Allocated Project</td>
-          <td class="value">Corprate Office, Hyderabad</td>
+          <td class="title">Allocated Projects</td>
+          <td class="value">{{this.appData.profileData.mobile}}</td>
         </tr>
       </table>
     </ion-col>
@@ -37,28 +45,46 @@
           Change Password
         </ion-col>
         <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating">Old Password*</ion-label>
-            <ion-input type="password"></ion-input>
-          </ion-item>
+          <form [formGroup]="submitForm" (submit)="submitPassword()">
+            <ion-item>
+              <ion-label position="floating">Old Password</ion-label>
+              <ion-input formControlName="oldPass" type="password"></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of errorMessages.oldPass">
+                <div class="error-message" *ngIf="submitForm.get('oldPass').hasError(validation.type) && (submitForm.get('oldPass').dirty || submitForm.get('oldPass').touched)">
+                  {{validation.message}}
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+              <ion-label position="floating">New Password</ion-label>
+              <ion-input formControlName="newPass" type="password"></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of errorMessages.newPass">
+                <div class="error-message" *ngIf="submitForm.get('newPass').hasError(validation.type) && (submitForm.get('newPass').dirty || submitForm.get('newPass').touched)">
+                  {{validation.message}}
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+              <ion-label position="floating">Confirm Password</ion-label>
+              <ion-input formControlName="conPass" type="text"></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of errorMessages.conPass">
+                <div class="error-message" *ngIf="submitForm.get('conPass').hasError(validation.type) && (submitForm.get('conPass').dirty || submitForm.get('conPass').touched)">
+                  {{validation.message}}
+                </div>
+              </ng-container>
+            </div>
+            <ion-row class="navSec">
+              <ion-button type="submit" color="success" disabled="{{!submitForm.valid}}">Submit</ion-button>
+            </ion-row>
+          </form>
         </ion-col>
-        <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating">New Password*</ion-label>
-            <ion-input type="password"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating">Confirm Password*</ion-label>
-            <ion-input type="password"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col size="12" style="text-align: center;">
-          <ion-button type="button" color="primary">
-            Change Password
-          </ion-button>
-        </ion-col>
+
       </ion-row>
     </ion-col>
   </ion-row>

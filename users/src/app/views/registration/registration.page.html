@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-row>
+  <ion-row class="px-2">
     <ion-col size="6" class="title">
       <ion-button class="transparent-but-start" color="light" type="button" size="small" (click)="onBackBtnClick()">
         <ion-icon name="arrow-back"></ion-icon>
@@ -8,4 +8,189 @@
     <ion-col size="6" style="text-align: right;">
     </ion-col>
   </ion-row>
+  <form [formGroup]="customerForm" (submit)="submitCustomer()">
+    <ion-row class="px-2">
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Customer Type*</ion-label>
+          <ion-select formControlName="customerType" (ionChange)="onCustTypeSelect()" [(ngModel)]="this.customerObj.customerType">
+            <ion-select-option value="{{this.custObj['customer_type_id']}}" *ngFor="let custObj of this.custTypesData">{{this.custObj['customer_type']}}</ion-select-option>
+          </ion-select>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of errorMessages.customerType">
+              <div class="error-message"
+                *ngIf="customerForm.get('customerType').hasError(validation.type) && (customerForm.get('customerType').dirty || customerForm.get('customerType').touched)">
+                {{validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" *ngIf="this.customerObj.customerType !== '' && this.catsData.length > 0">
+        <ion-item>
+          <ion-label position="floating">Category*</ion-label>
+          <ion-select formControlName="category" (ionChange)="onCatSelect()" [(ngModel)]="this.customerObj.category">
+            <ion-select-option value="{{this.catObj['category_id']}}" *ngFor="let catObj of this.catsData">{{this.catObj['category_name']}}</ion-select-option>
+          </ion-select>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of errorMessages.category">
+              <div class="error-message"
+                *ngIf="customerForm.get('category').hasError(validation.type) && (customerForm.get('category').dirty || customerForm.get('category').touched)">
+                {{validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" *ngIf="this.customerObj.customerType !== '' && this.customerObj.category !== '' &&  this.subCatsData.length > 0">
+        <ion-item>
+          <ion-label position="floating">SubCategory*</ion-label>
+          <ion-select formControlName="subcategory" [(ngModel)]="this.customerObj.subcategory">
+            <ion-select-option value="{{this.subCatObj['sub_category_id']}}" *ngFor="let subCatObj of this.subCatsData">{{this.subCatObj['sub_category_name']}}</ion-select-option>
+          </ion-select>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of errorMessages.subcategory">
+              <div class="error-message"
+                *ngIf="customerForm.get('subcategory').hasError(validation.type) && (customerForm.get('subcategory').dirty || customerForm.get('subcategory').touched)">
+                {{validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Name*</ion-label>
+          <ion-input formControlName="name" type="text" [(ngModel)]="this.customerObj.name"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of errorMessages.name">
+            <div class="error-message"
+              *ngIf="customerForm.get('name').hasError(validation.type) && (customerForm.get('name').dirty || customerForm.get('name').touched)">
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Mobile*</ion-label>
+          <ion-input formControlName="mobile" type="text"  maxlength="10"  [(ngModel)]="this.customerObj.mobile" name="mobile" (keypress)="onValueChange($event)"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of errorMessages.mobile">
+            <div class="error-message"
+              *ngIf="customerForm.get('mobile').hasError(validation.type) && (customerForm.get('mobile').dirty || customerForm.get('mobile').touched)">
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" type="text" [(ngModel)]="this.customerObj.email"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of errorMessages.email">
+            <div class="error-message"
+              *ngIf="customerForm.get('email').hasError(validation.type) && (customerForm.get('email').dirty || customerForm.get('email').touched)">
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Door No*</ion-label>
+          <ion-input formControlName="door" type="text" [(ngModel)]="this.customerObj.house_no"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of errorMessages.door">
+            <div class="error-message"
+              *ngIf="customerForm.get('door').hasError(validation.type) && (customerForm.get('door').dirty || customerForm.get('door').touched)">
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Locality*</ion-label>
+          <ion-input formControlName="locality" type="text" [(ngModel)]="this.customerObj.locality"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of errorMessages.locality">
+            <div class="error-message"
+              *ngIf="customerForm.get('locality').hasError(validation.type) && (customerForm.get('locality').dirty || customerForm.get('locality').touched)">
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Address*</ion-label>
+          <ion-input formControlName="address" type="text" [(ngModel)]="this.customerObj.address"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of errorMessages.address">
+            <div class="error-message"
+              *ngIf="customerForm.get('address').hasError(validation.type) && (customerForm.get('address').dirty || customerForm.get('address').touched)">
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">State*</ion-label>
+          <ion-select formControlName="state" (ionChange)="onStateSelect()" [(ngModel)]="this.customerObj.state">
+            <ion-select-option value="{{this.stateObj['state_id']}}" *ngFor="let stateObj of this.statesData">{{this.stateObj['state_name']}}</ion-select-option>
+          </ion-select>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of errorMessages.state">
+              <div class="error-message"
+                *ngIf="customerForm.get('state').hasError(validation.type) && (customerForm.get('state').dirty || customerForm.get('state').touched)">
+                {{validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">City</ion-label>
+          <ion-select formControlName="city" [(ngModel)]="this.customerObj.city">
+            <ion-select-option value="{{this.cityObj['city_id']}}" *ngFor="let cityObj of this.citiesData">{{this.cityObj['city_name']}}</ion-select-option>
+          </ion-select>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of errorMessages.city">
+              <div class="error-message"
+                *ngIf="customerForm.get('city').hasError(validation.type) && (customerForm.get('city').dirty || customerForm.get('city').touched)">
+                {{validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Pincode</ion-label>
+          <ion-input formControlName="pincode" type="text" maxlength="6" [(ngModel)]="this.customerObj.postalcode" name="postalcode" (keypress)="onValueChange($event)"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of errorMessages.pincode">
+            <div class="error-message"
+              *ngIf="customerForm.get('pincode').hasError(validation.type) && (customerForm.get('pincode').dirty || customerForm.get('pincode').touched)">
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+      <ion-col class="text-end" size="12">
+        <ion-button type="submit" color="success" disabled="{{!customerForm.valid}}">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>

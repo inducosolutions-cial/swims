@@ -1,1 +1,219 @@
-<p>users works!</p>
+<div class="row page-container">
+  <div class="col-12 page-header">
+    <div class="col-12 nav-block">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="row" style="width: 100%; padding: 0px; margin: 0px">
+          <div class="col-6 d-flex align-items-center">
+            <div class="breadcrumbs" style="width: 100%">User Management</div>
+          </div>
+          <div class="col-6 d-flex align-items-center justify-content-end">
+            <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#userModalWin"
+              (click)="onAddUser()">Add New User</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="col-12 mt-4">
+    <div class="row d-flex my-2">
+      <div class="col-12 d-flex gap-2">
+        <!--<div class="form-group">
+          <input class="form-control" type="text" placeholder="Enter Customer Name"
+            [(ngModel)]="this.searchObj.searchStr" (keyup)="searchDataChange()" />
+        </div>-->
+        <div class="form-group">
+          <select class="form-select" [(ngModel)]="this.searchObj.project" (change)="onSearchProjectSelect()">
+            <option value="">Select Project</option>
+            <option value="{{this.projectObj['project_id']}}" *ngFor="let projectObj of this.projectsData">
+              {{this.projectObj['project_name']}}</option>
+          </select>
+        </div>
+        <!--<div class="form-group">
+          <select class="form-select" [(ngModel)]="this.searchObj.ward" (change)="searchDataChange()">
+            <option value="">Select Ward</option>
+            <ng-container *ngFor="let wardObj of this.wardsSearchData">
+              <option value="{{this.wardObj['project_ward_id']}}">
+                {{this.wardObj['ward_name']}}</option>
+            </ng-container>
+          </select>
+        </div>-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="table-dark">
+              <th>Name</th>
+              <th>Mobile</th>
+              <th>Email</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Pincode</th>
+              <th>Role</th>
+              <th>Project</th>
+              <th>Ward</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="usersData.length > 0">
+            <tr *ngFor="let userObj of usersData">
+              <td>{{userObj['name']}}</td>
+              <td>{{userObj['mobile']}}</td>
+              <td>{{userObj['email']}}</td>
+              <td>{{userObj['city_name']}}</td>
+              <td>{{userObj['state_name']}}</td>
+              <td>{{userObj['postalcode']}}</td>
+              <td>{{userObj['role_name']}}</td>
+              <td>{{userObj['project_name']}}</td>
+              <td>{{userObj['ward_name']}}</td>
+              <td class="text-center"><button class="btn btn-sm btn-dark" data-bs-toggle="modal"
+                  data-bs-target="#userModalWin" (click)="editUser(userObj)"><i
+                    class="bi bi-pencil-square"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="w-100 alert alert-secondary text-center" role="alert" *ngIf="usersData.length === 0">
+          No records Found
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal modal-xl" id="userModalWin" tabindex="-1" aria-labelledby="userModalWinLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-4">
+        <div><b *ngIf="this.formAct === 'create'">Add User</b><b *ngIf="this.formAct === 'edit'">Edit User</b></div>
+        <form [formGroup]="userForm" (ngSubmit)="submitUser()">
+          <div class="row my-2">
+            <div class="col-4 my-1">
+              <div class="form-group">
+                <label for="role_id" class="form-label">User Role*:</label>
+                <select class="form-select" formControlName="role_id"
+                  [class.is-invalid]="this.userForm.get('role_id').touched && this.userForm.get('role_id').invalid"
+                  [(ngModel)]="this.userObj.role_id">
+                  <option value="">Select User Role</option>
+                  <ng-container *ngFor="let roleObj of this.userRoles">
+                    <option value="{{this.roleObj['role_id']}}"
+                      *ngIf="roleObj['role_id'] !== 3 && roleObj['role_id'] !== 1">
+                      {{this.roleObj['role_name']}}</option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+            <div class="col-4 my-1" >
+              <div class="form-group">
+                <label for="project" class="form-label">Project*:</label>
+                <select class="form-select" formControlName="project"
+                  [class.is-invalid]="this.userForm.get('project').touched && this.userForm.get('project').invalid"
+                  [(ngModel)]="this.userObj.project" (change)="onProjectSelect()">
+                  <option value="">Select Project</option>
+                  <option value="{{this.projectObj['project_id']}}" *ngFor="let projectObj of this.projectsData">
+                    {{this.projectObj['project_name']}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-4 my-1">
+              <div class="form-group">
+                <label for="ward" class="form-label">Ward*:</label>
+                <select class="form-select" formControlName="ward"
+                  [class.is-invalid]="this.userForm.get('ward').touched && this.userForm.get('ward').invalid"
+                  [(ngModel)]="this.userObj.ward" (change)="onWardSelect()">
+                  <option value="">Select Ward</option>
+                  <option value="{{this.wardObj['project_ward_id']}}" *ngFor="let wardObj of this.wardsData">
+                    {{this.wardObj['ward_name']}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="chargeAmt" class="form-label">Name*:</label>
+                <input class="form-control" type="text" formControlName="name" placeholder="Enter User Name"
+                  [class.is-invalid]="this.userForm.get('name').touched && this.userForm.get('name').invalid"
+                  [(ngModel)]="this.userObj.name" />
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="email" class="form-label">Email*:</label>
+                <input class="form-control" type="email" name="email" formControlName="email"
+                  placeholder="Enter User Email"
+                  [class.is-invalid]="this.userForm.get('email').touched && this.userForm.get('email').invalid"
+                  [(ngModel)]="this.userObj.email" />
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="mobile" class="form-label">Mobile*:</label>
+                <input class="form-control" type="text" (keypress)="onValueChange($event)" name="mobile"
+                  formControlName="mobile" placeholder="Enter Mobile Number"
+                  [class.is-invalid]="this.userForm.get('mobile').touched && this.userForm.get('mobile').invalid"
+                  [(ngModel)]="this.userObj.mobile" />
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="address" class="form-label">Address*:</label>
+                <input class="form-control" type="text" formControlName="address" placeholder="Enter Address"
+                  [class.is-invalid]="this.userForm.get('address').touched && this.userForm.get('address').invalid"
+                  [(ngModel)]="this.userObj.address" />
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="locality" class="form-label">Locality*:</label>
+                <input class="form-control" type="text" formControlName="locality" placeholder="Enter Locality"
+                  [class.is-invalid]="this.userForm.get('locality').touched && this.userForm.get('locality').invalid"
+                  [(ngModel)]="this.userObj.locality" />
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="state" class="form-label">State*:</label>
+                <select class="form-select" formControlName="state"
+                  [class.is-invalid]="this.userForm.get('state').touched && this.userForm.get('state').invalid"
+                  [(ngModel)]="this.userObj.state" (change)="onStateSelect()">
+                  <option value="">Select State</option>
+                  <option value="{{this.stateObj['state_id']}}" *ngFor="let stateObj of this.statesData">
+                    {{this.stateObj['state_name']}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="city" class="form-label">City*:</label>
+                <select class="form-select" formControlName="city"
+                  [class.is-invalid]="this.userForm.get('city').touched && this.userForm.get('city').invalid"
+                  [(ngModel)]="this.userObj.city">
+                  <option value="">Select City</option>
+                  <option value="{{this.cityObj['city_id']}}" *ngFor="let cityObj of this.citiesData">
+                    {{this.cityObj['city_name']}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="postalcode" class="form-label">PostalCode*:</label>
+                <input class="form-control" type="text" (keypress)="onValueChange($event)" name="postalcode"
+                  formControlName="postalcode" placeholder="Enter PostalCode"
+                  [class.is-invalid]="this.userForm.get('postalcode').touched && this.userForm.get('postalcode').invalid"
+                  [(ngModel)]="this.userObj.postalcode" />
+              </div>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-12 my-1">
+              <div class="form-group d-flex justify-content-end gap-2">
+                <button class="btn btn-dark" type="button" data-bs-dismiss="modal" #closeModal>Cancel</button>
+                <button class="btn btn-success" type="submit" [disabled]="!this.userForm.valid"><span
+                    *ngIf="this.formAct === 'create'">Create New
+                    User</span><span *ngIf="this.formAct === 'edit'">Edit User</span></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,6 +23,10 @@ import { SettingsComponent } from './views/settings/settings.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ResetpasswordComponent } from './sharedComponents/resetpassword/resetpassword.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ProfileComponent } from './views/profile/profile.component';
+import { ChargeComponent } from './sharedComponents/charge/charge.component';
+import { UserComponent } from './sharedComponents/user/user.component';
+import { CustomerComponent } from './sharedComponents/customer/customer.component';
 
 const routes: Routes = [
   //{ path: 'login', component: LoginComponent },
@@ -70,6 +74,11 @@ const routes: Routes = [
     component: SettingsComponent,
     canActivate: [AuthgaurdGuard],
   },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthgaurdGuard],
+  },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
@@ -89,6 +98,10 @@ const routes: Routes = [
     PaymentsComponent,
     ComplaintsComponent,
     SettingsComponent,
+    ProfileComponent,
+    ChargeComponent,
+    UserComponent,
+    CustomerComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,96 @@
+<div class="row page-container">
+  <div class="col-12 page-header">
+    <div class="col-12 nav-block">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="row" style="width: 100%; padding: 0px; margin: 0px">
+          <div class="col-6 d-flex align-items-center">
+            <div class="breadcrumbs" style="width: 100%">Profile</div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="col-6 my-4">
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td class="col-4 table-danger p-2">User ID</td>
+          <td class="col-8 table-light p-2">{{this.profileData.user_id}}</td>
+        </tr>
+        <tr>
+          <td class="col-4 table-danger p-2">Role</td>
+          <td class="col-8 table-light p-2">{{this.profileData.role_name}}</td>
+        </tr>
+        <tr>
+          <td class="col-4 table-danger p-2">Project Assigned</td>
+          <td class="col-8 table-light p-2">{{this.profileData.name}}</td>
+        </tr>
+        <tr>
+          <td class="col-4 table-danger p-2">Ward Assigned</td>
+          <td class="col-8 table-light p-2">{{this.profileData.email}}</td>
+        </tr>
+        <tr>
+          <td class="col-4 table-success p-2">Name</td>
+          <td class="col-8 table-light p-2">{{this.profileData.name}}</td>
+        </tr>
+        <tr>
+          <td class="col-4 table-success p-2">Email</td>
+          <td class="col-8 table-light p-2">{{this.profileData.email}}</td>
+        </tr>
+        <tr>
+          <td class="col-4 table-success p-2">Mobile</td>
+          <td class="col-8 table-light p-2">{{this.profileData.mobile}}</td>
+        </tr>
+        <tr>
+          <td class="col-4 table-success p-2">Address 1</td>
+          <td class="col-8 table-light p-2">{{this.profileData.address}}</td>
+        </tr>
+        <tr>
+          <td class="col-4 table-success p-2">Address 2</td>
+          <td class="col-8 table-light p-2">{{this.profileData.locality}}</td>
+        </tr>
+        <tr>
+          <td class="col-4 table-success p-2">City</td>
+          <td class="col-8 table-light p-2">{{this.profileData.city}}</td>
+        </tr>
+        <tr>
+          <td class="col-4 table-success p-2">State</td>
+          <td class="col-8 table-light p-2">{{this.profileData.state}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-6 my-4 d-flex justify-content-center align-items-center">
+    <div class="border rounded border-success p-5">
+      <form [formGroup]="changeForm" (ngSubmit)="changePassword()">
+        <div class="row">
+          <div class="col-12 my-2">Change Password</div>
+          <div class="col-12 my-2">
+            <div class="form-group">
+              <input formControlName="oldPassword"
+                [class.is-invalid]="formObj('oldPassword').touched && formObj('oldPassword').invalid" type="password"
+                class="form-control" placeholder="Enter Current Password">
+            </div>
+          </div>
+          <div class="col-12 my-2">
+            <div class="form-group">
+              <input formControlName="newPassword"
+                [class.is-invalid]="formObj('newPassword').touched && formObj('newPassword').invalid" type="password"
+                class="form-control" placeholder="Enter New Password">
+            </div>
+          </div>
+          <div class="col-12 my-2">
+            <div class="form-group">
+              <input formControlName="confirmPassword"
+                [class.is-invalid]="formObj('confirmPassword').touched && formObj('confirmPassword').invalid"
+                type="password" class="form-control" placeholder="Enter Password again">
+            </div>
+          </div>
+          <div class="col-12 text-end">
+            <button type="s" class="btn btn-secondary btn-block" [disabled]="!this.changeForm.valid">Change Password</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,268 @@
-<p>customers works!</p>
+<div class="row page-container">
+  <div class="col-12 page-header">
+    <div class="col-12 nav-block">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="row" style="width: 100%; padding: 0px; margin: 0px">
+          <div class="col-6 d-flex align-items-center">
+            <div class="breadcrumbs" style="width: 100%">Customers Management</div>
+          </div>
+          <div class="col-6 d-flex align-items-center justify-content-end">
+
+            <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#userModalWin"
+              (click)="onAddCustomer()">Add New Customer</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="col-12 my-4">
+    <div class="row d-flex my-2">
+      <div class="col-12 d-flex gap-2">
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Enter Customer Name"
+            [(ngModel)]="this.searchObj.searchStr" (keyup)="searchDataChange()" />
+        </div>
+        <div class="form-group">
+          <select class="form-select" [(ngModel)]="this.searchObj.project" (change)="onSearchProjectSelect()">
+            <option value="">Select Project</option>
+            <option value="{{this.projectObj['project_id']}}" *ngFor="let projectObj of this.projectsData">
+              {{this.projectObj['project_name']}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-select" [(ngModel)]="this.searchObj.ward" (change)="searchDataChange()">
+            <option value="">Select Ward</option>
+            <ng-container *ngFor="let wardObj of this.wardsSearchData">
+              <option value="{{this.wardObj['project_ward_id']}}">
+                {{this.wardObj['ward_name']}}</option>
+            </ng-container>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-select" [(ngModel)]="this.searchObj.customerType" (change)="searchDataChange()">
+            <option value="">Select Customer Type</option>
+            <option value="{{this.custObj['customer_type_id']}}" *ngFor="let custObj of this.custTypesData">
+              {{this.custObj['customer_type']}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="table-dark">
+              <th>Name</th>
+              <th>Mobile</th>
+              <th>Door No</th>
+              <th>Supervisor</th>
+              <th>Project</th>
+              <th>Ward</th>
+              <th>Customer Type</th>
+              <th>Category</th>
+              <th>Sub Category</th>
+              <th>Pending Amount</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="customersData.length > 0">
+            <tr *ngFor="let custObj of customersData">
+              <td>{{custObj['name']}}</td>
+              <td>{{custObj['mobile']}}</td>
+              <td>{{custObj['house_no']}}</td>
+              <td>{{custObj['supervisor_name']}}</td>
+              <td>{{custObj['project_name']}}</td>
+              <td>{{custObj['ward_name']}}</td>
+              <td>{{custObj['customer_type_name']}}</td>
+              <td>{{custObj['category_name']}}</td>
+              <td>{{custObj['sub_category_name']}}</td>
+              <td>{{custObj['pending_amount']}}</td>
+              <td class="text-center">
+                <button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#userModalWin"
+                  (click)="editCustomer(custObj)"><i class="bi bi-pencil-square"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="w-100 alert alert-secondary text-center" role="alert" *ngIf="customersData.length === 0">
+          No records Found
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal modal-xl" id="userModalWin" tabindex="-1" aria-labelledby="userModalWinLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-4">
+        <div><b *ngIf="this.formAct === 'create'">Add Customer</b><b *ngIf="this.formAct === 'edit'">Edit Customer</b>
+        </div>
+        <form [formGroup]="customerForm" (ngSubmit)="submitCustomer()">
+          <div class="row my-2">
+            <div class="col-4 my-1">
+              <div class="form-group">
+                <label for="project" class="form-label">Project*:</label>
+                <select class="form-select" formControlName="project"
+                  [class.is-invalid]="this.customerForm.get('project').touched && this.customerForm.get('project').invalid"
+                  [(ngModel)]="this.customerObj.project" (change)="onProjectSelect()">
+                  <option value="">Select Project</option>
+                  <option value="{{this.projectObj['project_id']}}" *ngFor="let projectObj of this.projectsData">
+                    {{this.projectObj['project_name']}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-4 my-1">
+              <div class="form-group">
+                <label for="supervisor" class="form-label">Supervisor*:</label>
+                <select class="form-select" formControlName="supervisor"
+                  [class.is-invalid]="this.customerForm.get('supervisor').touched && this.customerForm.get('supervisor').invalid"
+                  [(ngModel)]="this.customerObj.supervisor" (change)="onWardSelect()">
+                  <option value="">Select Supervisor</option>
+                  <ng-container *ngFor="let wardObj of this.wardsData">
+                    <option value="{{this.wardObj['supervisor_id']}}" *ngIf="this.wardObj['supervisor_name'] !== ''">
+                      {{this.wardObj['supervisor_name']}}[{{this.wardObj['ward_name']}}]</option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-4 my-1">
+              <div class="form-group">
+                <label for="customerType" class="form-label">Customer Type*:</label>
+                <select class="form-select" aria-label="Default select example" formControlName="customerType"
+                  [class.is-invalid]="this.customerForm.get('customerType').touched && this.customerForm.get('customerType').invalid"
+                  [(ngModel)]="this.customerObj.customerType" (change)="onCustTypeSelect()">
+                  <option value="">Select Customer Type</option>
+                  <option value="{{this.custObj['customer_type_id']}}" *ngFor="let custObj of this.custTypesData">
+                    {{this.custObj['customer_type']}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-4 my-1" *ngIf="this.customerObj.customerType !== '' && this.catsData.length > 0">
+              <div class="form-group">
+                <label for="category" class="form-label">Category*:</label>
+                <select class="form-select" aria-label="Default select example" formControlName="category"
+                  [class.is-invalid]="this.customerForm.get('category').touched && this.customerForm.get('category').invalid"
+                  [(ngModel)]="this.customerObj.category" (change)="onCatSelect()">
+                  <option value="">Select Category</option>
+                  <option value="{{this.catObj['category_id']}}" *ngFor="let catObj of this.catsData">
+                    {{this.catObj['category_name']}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-4 my-1"
+              *ngIf="this.customerObj.customerType !== '' && this.customerObj.category !== '' &&  this.subCatsData.length > 0">
+              <div class="form-group">
+                <label for="subcategory" class="form-label">Sub Category*:</label>
+                <select class="form-select" aria-label="Default select example" formControlName="subcategory"
+                  [class.is-invalid]="this.customerForm.get('subcategory').touched && this.customerForm.get('subcategory').invalid"
+                  [(ngModel)]="this.customerObj.subcategory">
+                  <option value="">Select Sub Category</option>
+                  <option value="{{this.subCatObj['sub_category_id']}}" *ngFor="let subCatObj of this.subCatsData">
+                    {{this.subCatObj['sub_category_name']}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="chargeAmt" class="form-label">Name*:</label>
+                <input class="form-control" type="text" formControlName="name" placeholder="Enter Customer Name"
+                  [class.is-invalid]="this.customerForm.get('name').touched && this.customerForm.get('name').invalid"
+                  [(ngModel)]="this.customerObj.name" />
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="email" class="form-label">Email:</label>
+                <input class="form-control" type="email" name="email" formControlName="email"
+                  placeholder="Enter User Email"
+                  [class.is-invalid]="this.customerForm.get('email').touched && this.customerForm.get('email').invalid"
+                  [(ngModel)]="this.customerObj.email" />
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="mobile" class="form-label">Mobile*:</label>
+                <input class="form-control" type="text" (keypress)="onValueChange($event)" name="mobile"
+                  formControlName="mobile" placeholder="Enter Mobile Number"
+                  [class.is-invalid]="this.customerForm.get('mobile').touched && this.customerForm.get('mobile').invalid"
+                  [(ngModel)]="this.customerObj.mobile" />
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="house_no" class="form-label">Door No*:</label>
+                <input class="form-control" type="text" formControlName="house_no" placeholder="Enter Address"
+                  [class.is-invalid]="this.customerForm.get('house_no').touched && this.customerForm.get('house_no').invalid"
+                  [(ngModel)]="this.customerObj.house_no" />
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="address" class="form-label">Address*:</label>
+                <input class="form-control" type="text" formControlName="address" placeholder="Enter Address"
+                  [class.is-invalid]="this.customerForm.get('address').touched && this.customerForm.get('address').invalid"
+                  [(ngModel)]="this.customerObj.address" />
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="locality" class="form-label">Locality*:</label>
+                <input class="form-control" type="text" formControlName="locality" placeholder="Enter Locality"
+                  [class.is-invalid]="this.customerForm.get('locality').touched && this.customerForm.get('locality').invalid"
+                  [(ngModel)]="this.customerObj.locality" />
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="state" class="form-label">State*:</label>
+                <select class="form-select" formControlName="state"
+                  [class.is-invalid]="this.customerForm.get('state').touched && this.customerForm.get('state').invalid"
+                  [(ngModel)]="this.customerObj.state" (change)="onStateSelect()">
+                  <option value="">Select State</option>
+                  <option value="{{this.stateObj['state_id']}}" *ngFor="let stateObj of this.statesData">
+                    {{this.stateObj['state_name']}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="city" class="form-label">City*:</label>
+                <select class="form-select" formControlName="city"
+                  [class.is-invalid]="this.customerForm.get('city').touched && this.customerForm.get('city').invalid"
+                  [(ngModel)]="this.customerObj.city">
+                  <option value="">Select City</option>
+                  <option value="{{this.cityObj['city_id']}}" *ngFor="let cityObj of this.citiesData">
+                    {{this.cityObj['city_name']}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6 my-1">
+              <div class="form-group">
+                <label for="postalcode" class="form-label">PostalCode*:</label>
+                <input class="form-control" type="text" (keypress)="onValueChange($event)" name="postalcode"
+                  formControlName="postalcode" placeholder="Enter PostalCode"
+                  [class.is-invalid]="this.customerForm.get('postalcode').touched && this.customerForm.get('postalcode').invalid"
+                  [(ngModel)]="this.customerObj.postalcode" />
+              </div>
+            </div>
+          </div>
+          <div class="row my-2">
+            <div class="col-12 my-1">
+              <div class="form-group d-flex justify-content-end gap-2">
+                <button class="btn btn-dark" type="button" data-bs-dismiss="modal" #closeModal>Cancel</button>
+                <button class="btn btn-success" type="submit" [disabled]="!this.customerForm.valid"
+                  *ngIf="this.formAct === 'create'">
+                  Create New Customer
+                </button>
+                <button class="btn btn-success" type="submit" *ngIf="this.formAct === 'edit'">
+                  Edit Customer
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

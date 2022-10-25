@@ -1,1 +1,162 @@
-<p>charges works!</p>
+<div class="row page-container">
+  <div class="col-12 page-header">
+    <div class="col-12 nav-block">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="row" style="width: 100%; padding: 0px; margin: 0px">
+          <div class="col-6 d-flex align-items-center">
+            <div class="breadcrumbs" style="width: 100%">Charges</div>
+          </div>
+          <div class="col-6 d-flex align-items-center justify-content-end">
+            <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#chargeModalWin"
+              (click)="onAddCharge()">Add New Charge</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="col-12 my-4">
+    <div class="row d-flex my-2">
+      <div class="col-3">
+        <label>Project :</label>
+        <select class="form-select" [(ngModel)]="this.searchData.project">
+          <option value="">Select Category</option>
+          <option value="{{this.projObj['project_id']}}" *ngFor="let projObj of this.searchProjectsData">
+            {{this.projObj['project_name']}}</option>
+        </select>
+      </div>
+      <div class="col-3">
+        <label>Customer Type :</label>
+        <select class="form-select" [(ngModel)]="this.searchData.customerType" (change)="onSearchCustTypeSelect()">
+          <option value="">Select Customer Type</option>
+          <option value="{{this.custObj['customer_type_id']}}" *ngFor="let custObj of this.searchCustTypesData">
+            {{this.custObj['customer_type']}}</option>
+        </select>
+      </div>
+      <div class="col-3" *ngIf="this.searchData.customerType !== '' && this.searchCatsData.length > 0">
+        <label>Category :</label>
+        <select class="form-select" [(ngModel)]="this.searchData.category" (change)="onSearchCatSelect()">
+          <option value="">Select Category</option>
+          <option value="{{this.catObj['category_id']}}" *ngFor="let catObj of this.searchCatsData">
+            {{this.catObj['category_name']}}</option>
+        </select>
+      </div>
+      <div class="col-3"
+        *ngIf="this.searchData.customerType !== '' && this.searchData.category !== '' && this.searchSubCatsData.length > 0">
+        <label>Sub Category :</label>
+        <select class="form-select" [(ngModel)]="this.searchData.subcategory">
+          <option value="">Select SubCategory</option>
+          <option value="{{this.subCatObj['sub_category_id']}}" *ngFor="let subCatObj of this.searchSubCatsData">
+            {{this.subCatObj['sub_category_name']}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="table-dark">
+              <th>Project</th>
+              <th>Customer Type</th>
+              <th>Category</th>
+              <th>Sub Category</th>
+              <th>Charge</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="chargesData.length > 0">
+            <tr *ngFor="let chargeObj of chargesData">
+              <td>{{chargeObj['project_name']}}</td>
+              <td>{{chargeObj['customer_type_name']}}</td>
+              <td>{{chargeObj['category_name']}}</td>
+              <td>{{chargeObj['sub_category_name']}}</td>
+              <td>{{chargeObj['charges']}}</td>
+              <td class="text-center"><button class="btn btn-sm btn-dark"  data-bs-toggle="modal" data-bs-target="#chargeModalWin" (click)="editCharge(chargeObj)"><i class="bi bi-pencil-square"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="w-100 alert alert-secondary text-center" role="alert" *ngIf="chargesData.length === 0">
+          No records Found
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="modal" id="chargeModalWin" tabindex="-1" aria-labelledby="chargeBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4">
+      <div><b *ngIf="this.formAct === 'create'">Add Charge</b><b *ngIf="this.formAct === 'edit'">Edit Charge</b></div>
+      <form [formGroup]="chargeForm" (ngSubmit)="submitCharge()">
+          <div>
+            <div class="row my-2">
+              <div class="col-12 my-2">
+                <div class="form-group">
+                  <label for="project" class="form-label">Project*:</label>
+                  <select class="form-select" aria-label="Default select example" formControlName="project"
+                    [class.is-invalid]="this.chargeForm.get('project').touched && this.chargeForm.get('project').invalid"
+                    [(ngModel)]="this.selectedCharge.project">
+                    <option value="">Select Project</option>
+                    <option value="{{this.projObj['project_id']}}" *ngFor="let projObj of this.projectsData">
+                      {{this.projObj['project_name']}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12 my-2">
+                <div class="form-group">
+                  <label for="customerType" class="form-label">Customer Type*:</label>
+                  <select class="form-select" aria-label="Default select example" formControlName="customerType"
+                    [class.is-invalid]="this.chargeForm.get('customerType').touched && this.chargeForm.get('customerType').invalid"
+                    [(ngModel)]="this.selectedCharge.customerType" (change)="onCustTypeSelect()">
+                    <option value="">Select Customer Type</option>
+                    <option value="{{this.custObj['customer_type_id']}}" *ngFor="let custObj of this.custTypesData">
+                      {{this.custObj['customer_type']}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12 my-2" *ngIf="this.selectedCharge.customerType !== '' && this.catsData.length > 0">
+                <div class="form-group">
+                  <label for="category" class="form-label">Category*:</label>
+                  <select class="form-select" aria-label="Default select example" formControlName="category"
+                    [class.is-invalid]="this.chargeForm.get('category').touched && this.chargeForm.get('category').invalid"
+                    [(ngModel)]="this.selectedCharge.category" (change)="onCatSelect()">
+                    <option value="">Select Category</option>
+                    <option value="{{this.catObj['category_id']}}" *ngFor="let catObj of this.catsData">
+                      {{this.catObj['category_name']}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12 my-2"
+                *ngIf="this.selectedCharge.customerType !== '' && this.selectedCharge.category !== '' &&  this.subCatsData.length > 0">
+                <div class="form-group">
+                  <label for="subcategory" class="form-label">Sub Category*:</label>
+                  <select class="form-select" aria-label="Default select example" formControlName="subcategory"
+                    [class.is-invalid]="this.chargeForm.get('subcategory').touched && this.chargeForm.get('subcategory').invalid"
+                    [(ngModel)]="this.selectedCharge.subcategory">
+                    <option value="">Select Sub Category</option>
+                    <option value="{{this.subCatObj['sub_category_id']}}" *ngFor="let subCatObj of this.subCatsData">
+                      {{this.subCatObj['sub_category_name']}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12 my-2">
+                <div class="form-group">
+                  <label for="chargeAmt" class="form-label">Charge Amount*:</label>
+                  <input class="form-control" type="number" formControlName="chargeAmt"
+                    placeholder="Enter Charge Amount"
+                    [class.is-invalid]="this.chargeForm.get('chargeAmt').touched && this.chargeForm.get('chargeAmt').invalid"
+                    [(ngModel)]="this.selectedCharge.chargeAmt" />
+                </div>
+              </div>
+              <div class="col-12 my-2">
+                <div class="form-group d-flex justify-content-end gap-2">
+                  <button class="btn btn-dark" type="button" data-bs-dismiss="modal" #closeModal (click)="onCancelForm()">Cancel</button>
+                  <button class="btn btn-success" type="submit" [disabled]="!this.chargeForm.valid"><span *ngIf="this.formAct === 'create'">Create New
+                    Charge</span><span *ngIf="this.formAct === 'edit'">Edit Charge</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>

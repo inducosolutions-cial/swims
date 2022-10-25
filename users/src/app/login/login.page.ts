@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable max-len */
 import { Component, OnInit } from '@angular/core';
@@ -10,6 +11,7 @@ import {
 import { AlertController, NavController } from '@ionic/angular';
 import { ApicommunicatorService } from '../services/apicommunicator.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -62,9 +64,7 @@ export class LoginPage implements OnInit {
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => {
-            console.log('Confirm Cancel');
-          },
+          handler: () => {},
         },
         {
           text: 'Ok',
@@ -76,6 +76,20 @@ export class LoginPage implements OnInit {
                 '<b style="color: red;">Enter valid email id.</b>';
               return false;
             } else {
+              var dataObj = {
+                email: data.email,
+              };
+              this.apiService
+                .apiCommunication('sendForgetPassword', dataObj)
+                .then((responseObj: any) => {
+                  console.log(JSON.stringify(responseObj));
+                  if (responseObj['success']) {
+                    window.alert('Change Password Link was sent to your mail');
+                  } else {
+                    window.alert(responseObj['message']);
+                  }
+                })
+                .catch((error) => {});
             }
           },
         },
@@ -87,13 +101,21 @@ export class LoginPage implements OnInit {
   onSubmit() {
     if (this.loginForm.valid) {
       this.isInvalid = false;
-      const response = this.apiService.login(
-        this.loginForm.get('userId').value,
-        this.loginForm.get('password').value
-      );
-      if (response['success'] === false) {
-        this.showAlert(response['message']);
-      }
+      const dataObj = {
+        username: this.loginForm.get('userId').value,
+        password: this.loginForm.get('password').value,
+      };
+      this.apiService
+        .login(dataObj)
+        .then((responseObj: any) => {
+          console.log(JSON.stringify(responseObj));
+          if (responseObj['success']) {
+            this.loginForm.reset();
+          } else {
+            this.showAlert(responseObj['message']);
+          }
+        })
+        .catch((error) => {});
     }
   }
   async showAlert(messagestr) {
