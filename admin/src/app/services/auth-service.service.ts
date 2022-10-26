@@ -12,7 +12,7 @@ const headers = new HttpHeaders()
 export class AuthServiceService {
   @Output() invalidToken: EventEmitter<string> = new EventEmitter();
   @Output() isAuthenticated: EventEmitter<string> = new EventEmitter();
-  rootPath = 'http://cubebioapi.inducosolutions.com/';
+  rootPath = 'https://cubebioapi.inducosolutions.com/';
   apiservices: any = {
     login: this.rootPath + 'login',
     sendForgetPassword: this.rootPath + 'sendForgetPassword',

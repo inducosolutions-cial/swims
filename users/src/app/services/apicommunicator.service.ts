@@ -21,7 +21,7 @@ const USER_DATA = 'user-data';
 export class ApicommunicatorService {
   @Output() isLocalDataAvailable: EventEmitter<any> = new EventEmitter();
   private _storage: Storage | null = null;
-  rootPath = 'http://cubebioapi.inducosolutions.com/';
+  rootPath = 'https://cubebioapi.inducosolutions.com/';
   apiservices = {
    login: this.rootPath + 'login',
     sendForgetPassword: this.rootPath + 'sendForgetPassword',
@@ -41,6 +41,8 @@ export class ApicommunicatorService {
 
     getCustomerAddress: this.rootPath + 'getCustomerAddress',
     confirmPayment: this.rootPath + 'confirmPayment',
+
+    getPayments: this.rootPath + 'getPayments',
   };
   isDesktop = false;
   isUserLoggedIn = false;
