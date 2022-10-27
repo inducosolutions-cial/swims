@@ -69,22 +69,14 @@ export class ApicommunicatorService {
     this.plt.ready().then(() => {
       if (this.plt.is('cordova')) {
         this.isDesktop = false;
-        this.network.onDisconnect().subscribe(() => {
-          console.log('network was disconnected :-(');
-        });
-        this.network.onConnect().subscribe(() => {
-          setTimeout(() => {
-            console.log('Internet Connection : ' + this.network.type);
-            this.createLocalStorageInstance();
-          }, 3000);
-        });
       } else {
         this.isDesktop = true;
         if (this.plt.width() <= 820) {
           this.isDesktop = false;
         }
-        this.createLocalStorageInstance();
+
       }
+      this.createLocalStorageInstance();
     });
   }
   async createLocalStorageInstance() {
