@@ -110,14 +110,14 @@
             </div>
             <div class="col-4 my-1">
               <div class="form-group">
-                <label for="supervisor" class="form-label">Supervisor*:</label>
+                <label for="supervisor" class="form-label">Ward*:</label>
                 <select class="form-select" formControlName="supervisor"
                   [class.is-invalid]="this.customerForm.get('supervisor').touched && this.customerForm.get('supervisor').invalid"
                   [(ngModel)]="this.customerObj.supervisor" (change)="onWardSelect()">
-                  <option value="">Select Supervisor</option>
+                  <option value="">Select Ward</option>
                   <ng-container *ngFor="let wardObj of this.wardsData">
                     <option value="{{this.wardObj['supervisor_id']}}" *ngIf="this.wardObj['supervisor_name'] !== ''">
-                      {{this.wardObj['supervisor_name']}}[{{this.wardObj['ward_name']}}]</option>
+                      {{this.wardObj['ward_name']}}</option>
                   </ng-container>
                 </select>
               </div>

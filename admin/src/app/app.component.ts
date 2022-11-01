@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppDataService } from './services/app-data.service';
 import { AuthServiceService } from './services/auth-service.service';
@@ -10,6 +10,12 @@ import { LocalstorageService } from './services/localstorage.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  @ViewChild('mySidenav')
+  mySidenav!: ElementRef;
+  @ViewChild('main')
+  main!: ElementRef;
+  public innerWidth: any;
+  public isMenuViewSideBySide = true;
   title = 'admin';
   selectedMenu = 'dashboard';
   menuData = [
@@ -92,6 +98,7 @@ export class AppComponent {
           const currentURL = window.location.href;
           const urlData = currentURL.split('/');
           this.selectedMenu = urlData[urlData.length - 1];
+          this.onResize()
         }, 500);
       },
     });
@@ -115,12 +122,62 @@ export class AppComponent {
       if (window.location.pathname.split('/')[1] === '') {
 
       }
+      setTimeout(() => {
+        this.onResize()
+      }, 200);
+    }
+  }
+  onResize() {
+    this.innerWidth =  window.innerWidth;
+    this.isMenuViewSideBySide = false;
+    if(this.innerWidth < 450){
+      console.log("100%")
+      this.mySidenav.nativeElement.style.width = "100%"
+      this.closeNav()
+    }else if(this.innerWidth > 450 && this.innerWidth < 760){
+      console.log("70%")
+      this.closeNav()
+      this.mySidenav.nativeElement.style.width = "70%"
+    }else if(this.innerWidth > 760 && this.innerWidth < 820){
+      console.log("50%")
+      this.closeNav()
+      this.mySidenav.nativeElement.style.width = "50%"
+    }else if(this.innerWidth > 820 && this.innerWidth < 1024){
+      console.log("30%")
+      this.closeNav()
+      this.mySidenav.nativeElement.style.width = "30%"
+    }else{
+      console.log("25%")
+      this.isMenuViewSideBySide = true;
+      this.mySidenav.nativeElement.style.width = "300px"
+      this.main.nativeElement.style.marginLeft = "300px";
+      this.openNav()
+    }
+    console.log("Resize - "+this.innerWidth)
+  }
+   openNav() {
+    this.mySidenav.nativeElement.style.display = "block";
+    if(this.isMenuViewSideBySide === true){
+      this.main.nativeElement.style.marginLeft = "300px";
+    }else{
+      this.main.nativeElement.style.marginLeft = "0";
+    }
+  }
+  closeNav() {
+    this.mySidenav.nativeElement.style.display = "none";
+    if(this.isMenuViewSideBySide === true){
+      this.main.nativeElement.style.marginLeft = "300px";
+    }else{
+      this.main.nativeElement.style.marginLeft = "0";
     }
   }
   onMenuClick(menuItem: any) {
     if(menuItem !== 'logout'){
       this.selectedMenu = menuItem;
       this.router.navigate(['/' + menuItem]);
+      if(this.isMenuViewSideBySide === false){
+        this.closeNav()
+      }
     }else{
       if(confirm("Are you sure you want to logout")) {
        this.logoutConfirmed()

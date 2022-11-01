@@ -1,20 +1,29 @@
 
-<div class="container-fluid app-container" *ngIf="this.authService.getAuthStatus() === true">
-  <div class="menu-block">
-    <div class="logo-container">
-      <img src="assets/cubebioEnergy.jpeg" />
-    </div>
-    <div class="menu-container">
-      <ul>
-        <ng-container *ngFor="let menuObj of this.menuData">
-          <li [ngClass]="{'menu-item-active':this.selectedMenu === menuObj.value,  'menu-item':this.selectedMenu !== menuObj.value}"  (click)="onMenuClick(menuObj.value)">
-            <div [innerHtml]="menuObj.icon"></div>&nbsp;&nbsp;<div class="title">{{menuObj.menuTitle}}</div>
-          </li>
-        </ng-container>
-      </ul>
+<div class="container-fluid app-container" (window:resize)="onResize()" *ngIf="this.authService.getAuthStatus() === true">
+  <div #mySidenav class="sidenav">
+    <div class="menu-block">
+      <div class="logo-container">
+        <img src="assets/cubebioEnergy.jpeg" />
+        <a *ngIf="this.isMenuViewSideBySide === false" href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+      </div>
+      <div class="menu-container">
+        <ul>
+          <ng-container *ngFor="let menuObj of this.menuData">
+            <li [ngClass]="{'menu-item-active':this.selectedMenu === menuObj.value,  'menu-item':this.selectedMenu !== menuObj.value}"  (click)="onMenuClick(menuObj.value)">
+              <div [innerHtml]="menuObj.icon"></div>&nbsp;&nbsp;<div class="title">{{menuObj.menuTitle}}</div>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
     </div>
   </div>
-  <div class="main-content">
+  <div class="w-100" #main>
+    <div class="d-flex gap-2 align-items-center p-2" *ngIf="this.isMenuViewSideBySide === false">
+      <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776;</span>
+      <div class="logo-container">
+        <img style="height: 50px; width:auto" src="assets/cubebioEnergy.jpeg" />
+      </div>
+    </div>
     <div class="content-block"><router-outlet></router-outlet></div>
   </div>
 </div>
